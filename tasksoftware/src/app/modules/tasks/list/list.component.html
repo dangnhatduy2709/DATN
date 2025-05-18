@@ -1,0 +1,210 @@
+<div class="content">
+  <div class="container-fluid scrollable-table">
+    <div class="container-right">
+      <div class="search">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input type="text" nz-input placeholder="Danh sách tìm kiếm" [(ngModel)]="searchTask" (ngModelChange)="onSearchChange()" /></nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+      </div>
+      <div class="role-team">
+        <nz-avatar-group>
+          <nz-avatar style="color:#f56a00; background-color:#fde3cf;" *ngFor="let member of teamData"
+            [nzIcon]="member.picture ? 'user' : undefined" [nzSrc]="member.picture"
+            title="{{member.fullName}}"></nz-avatar>
+        </nz-avatar-group>
+        <div class="team-avatar">
+          <span nz-icon nzType="user-add" nzTheme="outline"></span>
+        </div>
+      </div>
+    </div>
+    <div class="container-left">
+
+      <button nz-button *ngIf="filterApplied" (click)="resetFilters()">Đặt lại bộ lọc</button>
+
+      <!-- Chia sẻ -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="share">
+        <span nz-icon nzType="share-alt" nzTheme="outline"></span>
+        Chia sẻ
+      </button>
+      <nz-dropdown-menu #share="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <li nz-menu-item class="nz-menu-li" (click)="copyUrlToClipboard()">
+            <span nz-icon nzType="link" nzTheme="outline"></span>
+            Sao chép liên kết
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+      <!-- Bộ lọc -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="filter">
+        <span nz-icon nzType="align-center" nzTheme="outline"></span>
+        Bộ lọc
+      </button>
+      <nz-dropdown-menu #filter="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <div class="css-xhdqsk">Lọc theo trạng thái công việc</div>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus(1)">
+            <img src="/assets/icon/task/lowest.svg" width="24px" height="24px" alt="">
+            Lowest
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus(2)">
+            <img src="/assets/icon/task/low.svg" width="24px" height="24px" alt="">
+            Low
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus(3)">
+            <img src="/assets/icon/task/medium.svg" width="24px" height="24px" alt="">
+            Medium
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus(4)">
+            <img src="/assets/icon/task/high.svg" width="24px" height="24px" alt="">
+            High
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus(5)">
+            <img src="/assets/icon/task/highest.svg" width="24px" height="24px" alt="">
+            Highest
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <!-- Nhóm theo -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="group">
+        <span nz-icon nzType="menu" nzTheme="outline"></span>
+        Nhóm theo
+      </button>
+      <nz-dropdown-menu #group="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <div class="css-xhdqsk">Lọc theo bảng công việc</div>
+          <li nz-menu-item class="nz-menu-li" (click)="filterTasks('alphabetical-asc')">
+            <span nz-icon nzType="file-unknown" nzTheme="outline"></span>
+            Bảng chữ cái (A-Z)
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterTasks('alphabetical-desc')">
+            <span nz-icon nzType="file-text" nzTheme="outline"></span>
+            Bảng chữ cái (Z-A)
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterTasks('updated-latest')">
+            <span nz-icon nzType="file-sync" nzTheme="outline"></span>
+            Cập nhật lần cuối (Mới nhất)
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterTasks('updated-oldest')">
+            <span nz-icon nzType="file-protect" nzTheme="outline"></span>
+            Cập nhật lần cuối (Cũ nhất)
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <!-- Hơn -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="hon">
+        <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+        Tùy chọn
+      </button>
+      <nz-dropdown-menu #hon="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <div class="css-xhdqsk">Chọn chức năng</div>
+          <li nz-menu-item class="nz-menu-li" (click)="downloadExcel()">
+            <span nz-icon nzType="file-jpg" nzTheme="outline" class="drop-span"></span>
+            Xuất dạng CSV
+          </li>
+          <li nz-menu-item class="nz-menu-li">
+            <span nz-icon nzType="file-excel" nzTheme="outline"></span>
+            Xuất dạng JSON
+          </li>
+          <li nz-menu-item class="nz-menu-li">
+            <span nz-icon nzType="qrcode" nzTheme="outline"></span>
+            Hiển thị mã QR
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+    </div>
+  </div>
+  <div class="container-body">
+    <nz-table #rowSelectionTable nzShowSizeChanger [nzData]="filteredTasks" [nzShowPagination]="null"
+      [nzScroll]="{ x: '1780px', y: '310px' }">
+      <thead>
+        <tr>
+          <th nzWidth="50px" [(nzChecked)]="checked" [nzIndeterminate]="indeterminate" nzLeft></th>
+          <th>Kiểu</th>
+          <th>
+            <span nz-icon nzType="number" nzTheme="outline"></span>
+            Khóa
+          </th>
+          <th>Tóm tắt</th>
+          <th>
+            <span nz-icon nzType="right-circle" nzTheme="outline"></span>
+            Trạng thái
+          </th>
+          <th>Loại</th>
+          <th>Công việc</th>
+          <th>
+            <span nz-icon nzType="calendar" nzTheme="outline"></span>
+            Giờ thực hiện
+          </th>
+          <th>
+            <span nz-icon nzType="up-circle" nzTheme="outline"></span>
+            Sự ưu tiên
+          </th>
+          <th>
+            <span nz-icon nzType="calendar" nzTheme="outline"></span>
+            Ngày tạo
+          </th>
+          <th>
+            <span nz-icon nzType="calendar" nzTheme="outline"></span>
+            Ngày cập nhật
+          </th>
+          <th>
+            <span nz-icon nzType="team" nzTheme="outline"></span>
+            Quản lý
+          </th>
+          <th nzWidth="100px"> Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data" style="cursor: pointer;">
+          <td nzLeft [nzChecked]="setOfCheckedId.has(data.id)"></td>
+          <td>{{ data.taskType }}</td>
+          <td>TS-{{ data.projectID }}</td>
+          <td>{{ data.summary }}</td>
+          <td> <nz-tag nzColor="success">{{ data.status }}</nz-tag> </td>
+          <td>{{ data.age }}</td>
+          <td> {{ data.description }}</td>
+          <td>{{ data.actualHoursSpent }}</td>
+          <td>{{ priorityMap[data.priority] }}</td>
+          <td>{{ data.createdDate | date:'dd - MM - yyyy' }}</td>
+          <td>{{ data.endDate | date:'dd - MM - yyyy'  }}</td>
+          <td>{{ data.fullName }}</td>
+          <td>
+            <span style="margin: 5px; cursor: pointer;" nz-icon nzType="delete" nzTheme="outline" (click)="showDelete(data.taskID)"></span>
+            <span style="margin: 5px; cursor: pointer;" nz-icon nzType="form" nzTheme="outline"></span>
+            <span style="cursor: pointer;" nz-icon nzType="copy" nzTheme="outline">
+            </span>
+          </td>
+
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal Delete -->
+<nz-modal [(nzVisible)]="isDelete" [nzFooter]="null" nzWidth="480px">
+  <ng-container *nzModalContent>
+    <div class="deleteModal">
+      <div class="warring" style="margin-bottom: 10px;">
+        <img src="/assets/icon/project/icon-warring.svg" alt="">
+      </div>
+      <h5>Xóa công việc</h5>
+      <p>Công việc bị xóa sẽ biến mất khỏi hệ thống bao gồm tất cả các thông tin đã lưu và các tài nguyên mà công việc đó đang
+        sở hữu. Bạn chắc chắn muốn xóa công việc?</p>
+    </div>
+    <div class="footer">
+      <button (click)="isDelete = false" class="footer-cancel">Hủy</button>
+      <button class="footer-add" (click)="OkDelete()">Xác nhận</button>
+    </div>
+  </ng-container>
+</nz-modal>

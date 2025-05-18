@@ -1,0 +1,227 @@
+<div class="bg-title">
+  <div class="header-location">
+    <p>
+      <span routerLink="/project/dashboard"> Trang chủ</span>
+      <span style="margin: 8px;">
+        <img src="/assets/icon/project/Icon-arrow.svg" alt="">
+      </span>
+      <a routerLink="/project/project-view">Xem tất cả dự án</a>
+    </p>
+  </div>
+  <div class="bg-header-text">
+
+    <div class="header-text">
+      <h5>Xem tất cả dự án</h5>
+    </div>
+    <div class="bg-header-text-button">
+      <button routerLink="/project/project-list">Tạo dự án</button>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="header-map">
+    <h6>
+      <span>
+        <img src="/assets/icon/project/light-bulb.svg" width="24px" height="24px" alt="">
+      </span>
+      Các mẫu được đề xuất cho các nhóm như của bạn
+    </h6>
+    <button (click)="toggleLibrary()">
+      {{ isLibraryHidden ? 'Hiện thư viện' : 'Ẩn thư viện' }}
+      <span nz-icon [nzType]="isLibraryHidden ? 'caret-up' : 'caret-down'" nzTheme="outline"></span>
+    </button>
+  </div>
+
+  <div class="container-map" *ngIf="!isLibraryHidden">
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/kanban.svg" alt="">
+        <p>KanBan</p>
+        <h6>Task SoftWare</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/scrum.svg" alt="">
+        <p>Scrum</p>
+        <h6>Task SoftWare</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/bug.svg" alt="">
+        <p>Theo dõi lỗi</p>
+        <h6>Task SoftWare</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/blank-project.svg" alt="">
+        <p>Quản lý dự án</p>
+        <h6>Task SoftWare</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/personal-task-planner.svg" alt="">
+        <p>Người lập kế hoạch nhiệm vụ</p>
+        <h6>Task SoftWare</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <div class="thumbail">
+          <img src="/assets/icon/project/arrow-right-1.svg" alt="">
+        </div>
+        <p>Xem tất cả các mẫu</p>
+      </div>
+    </button>
+
+  </div>
+
+</div>
+
+<div class="content-body">
+  <div class="header-map">
+    <h6></h6>
+    <p>
+      <img src="/assets/icon/project/Icon.svg" alt="">
+    </p>
+  </div>
+
+  <nz-table [nzShowPagination]="false" [nzData]="projects">
+    <thead>
+      <tr>
+        <th>Tên dự án</th>
+        <th>Mã dự án</th>
+        <th>Tên khách hàng</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th>Ngày bắt đầu</th>
+        <th>Ngày kết thúc</th>
+        <th>Trạng thái</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects">
+        <td>
+          <nz-avatar nzText="{{ project.projectName.substring(0, 2).toUpperCase() }}" class="avatar-user"
+            style="margin-right: 5px;">
+          </nz-avatar>
+          {{ project.projectName }}
+        </td>
+        <td>TSP-{{ project.projectID }}</td>
+        <td>{{ project.clientContactName }}</td>
+        <td>{{ project.clientContactEmail }}</td>
+        <td>{{ project.clientContactPhone }}</td>
+        <td>{{ project.createdDate | date: 'dd-MM-yyyy'}}</td>
+        <td>{{ project.endDate | date: 'dd-MM-yyyy'}}</td>
+        <td></td>
+        <td style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; height: 55px;">
+          <span nz-icon nzType="delete" nzTheme="outline" (click)="showDelete(project)"></span>
+          <span nz-icon nzType="form" nzTheme="outline" (click)="showUpdate(project)"></span>
+          <span nz-icon nzType="copy" nzTheme="outline"></span>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<!-- Modal Delete -->
+<nz-modal [(nzVisible)]="isDelete" [nzFooter]="null" nzWidth="480px">
+  <ng-container *nzModalContent>
+    <div class="deleteModal">
+      <div class="warring" style="margin-bottom: 10px;">
+        <img src="/assets/icon/project/icon-warring.svg" alt="">
+      </div>
+      <h5>Xóa dự án</h5>
+      <p>Dự án bị xóa sẽ biến mất khỏi hệ thống bao gồm tất cả các thông tin đã lưu và các tài nguyên mà dự án đó đang
+        sở hữu. Bạn chắc chắn muốn xóa dự án?</p>
+    </div>
+    <div class="footer">
+      <button (click)="isDelete = false" class="footer-cancel">Hủy</button>
+      <button class="footer-add" (click)="OkDelete()">Xác nhận</button>
+    </div>
+  </ng-container>
+</nz-modal>
+
+
+<!-- Modal Update -->
+<nz-modal [(nzVisible)]="isUpdate" [nzFooter]="null" nzTitle="Chỉnh sửa thông tin hợp đồng dự án " nzWidth="800px">
+  <ng-container *nzModalContent>
+    <div class="form-project">
+      <form>
+        <div class="scrollable-table-form-project">
+          <div class="block-form">
+            <label for=""> Tên dự án :</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="projectName" name="projectName"
+              [(ngModel)]="editedProject.projectName" />
+          </div>
+          <div class="block-form">
+            <label for=""> Quản lý dự án :</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="leadFullName" name="leadFullName"
+              [(ngModel)]="editedProject.leadFullName" />
+          </div>
+          <div class="block-form">
+            <label for=""> Nhóm dự án :</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="projectLead" name="projectLead"
+              [(ngModel)]="editedProject.teamFullName" />
+          </div>
+          <div class="block-form">
+            <label for=""> Tiến trình :</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="progress" name="progress"
+              [(ngModel)]="editedProject.progress" />
+          </div>
+          <div class="block-form">
+            <label for=""> Mô tả dự án</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="projectDescription" name="projectDescription"
+              [(ngModel)]="editedProject.projectDescription" />
+          </div>
+          <div class="block-form">
+            <label for="">Ngày khởi tạo</label>
+            <nz-date-picker nzSize="large" style="width: 97%;" [nzFormat]="dateFormat"
+              [(ngModel)]="editedProject.createdDate" id="createdDate" name="createdDate"></nz-date-picker>
+          </div>
+          <div class="block-form">
+            <label for="">Ngày hết hạn</label> <br>
+            <nz-date-picker nzSize="large" style="width: 97%;" [nzFormat]="dateFormat"
+              [(ngModel)]="editedProject.endDate" id="endDate" name="endDate"></nz-date-picker>
+          </div>
+
+          <!-- Tên khánh hàng -->
+          <div class="block-form">
+            <label for="">Tên khách hàng</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="clientContactName" name="clientContactName"
+              [(ngModel)]="editedProject.clientContactName" />
+          </div>
+          <!-- Email khách hàng -->
+          <div class="block-form">
+            <label for="">Email liên hệ</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="clientContactEmail" name="clientContactEmail"
+              [(ngModel)]="editedProject.clientContactEmail" />
+          </div>
+          <!-- Số điện thoại -->
+          <div class="block-form">
+            <label for="">Số điện thoại</label>
+            <input style="width: 97%;" nz-input nzSize="large" id="clientContactPhone" name="clientContactPhone"
+              [(ngModel)]="editedProject.clientContactPhone" />
+          </div>
+        </div>
+        <div class="footer">
+          <button (click)="isUpdate = false" class="footer-cancel">Hủy</button>
+          <button class="footer-add" (click)="OkUpdate()">Xác nhận</button>
+        </div>
+
+      </form>
+    </div>
+  </ng-container>
+</nz-modal>

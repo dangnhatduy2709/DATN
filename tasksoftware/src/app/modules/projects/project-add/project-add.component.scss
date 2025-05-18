@@ -1,0 +1,31 @@
+.main-app-projectadd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  border-radius: 12px;
+  background-color: #FFF;
+  padding: 24px;
+
+  .container-project {
+    width: 50%;
+
+    .header-text {
+      h5 {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .form-project {
+      form {
+        height: auto !important;
+      }
+    }
+  }
+}

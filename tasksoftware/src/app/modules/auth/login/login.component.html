@@ -1,0 +1,34 @@
+<div class="css-321lzd">
+  <h5>Đăng nhập để tiếp tục</h5>
+</div>
+
+<form #userForm="ngForm" class="css-r44k6v">
+  <div class="css-env1z2">
+    <div class="css-cnfgt3">
+      <div class="css-q5x77e">
+        <div class="css-1s25hsw">
+          <input nz-input placeholder="Nhập email của bạn" [(ngModel)]="user.emailAddress" name="email" type="text" require />
+        </div>
+      </div>
+    </div>
+
+    <!-- Nhập Mật Khẩu -->
+    <div class="css-cnfgt3">
+      <div class="css-xcejzt">
+        <div class="css-q5x77e">
+          <div class="css-1s25hsw">
+            <nz-input-group [nzSuffix]="suffixTemplate">
+              <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Nhập mật khẩu của bạn" name="password" [(ngModel)]="user.password" require />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="css-1w9zxjf css-1edgkow" (click)="login()" type="submit">
+    <span class="css-178ag6o">Tiếp tục</span>
+  </button>
+</form>

@@ -1,0 +1,585 @@
+<nz-layout class="app-layout">
+  <nz-header class="app-header">
+    <nav
+      class="navbar navigation-container navbar-expand-sm navbar-white bg-white top-navigation sticky site-header"
+    >
+      <div class="container-fluid m-0 p-0">
+        <a
+          class="navbar-brand"
+          style="
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+          "
+          routerLink="/project/dashboard"
+        >
+          <img src="/assets/logo/logo-auth.png" width="158px" />
+        </a>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav me-auto">
+            <li
+              class="nav-item two-columns"
+              nz-button
+              nz-dropdown
+              nzTrigger="click"
+              [nzDropdownMenu]="task"
+            >
+              <a class="nav-link">Công việc</a>
+              <img
+                src="/assets/icon/intro/chevron-down-arrow.svg"
+                width="12px"
+                height="20px"
+                alt=""
+              />
+            </li>
+
+            <nz-dropdown-menu #task="nzDropdownMenu">
+              <ul nz-menu>
+                <h5 style="padding: 8px; font-size: 16px; font-weight: 700">
+                  Công việc gần đây
+                </h5>
+                <li nz-menu-item routerLink="/project/project-user">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 12px;
+                    "
+                  >
+                    <img src="/assets/logo/5.png" width="24px" height="24px" />
+                    <span>
+                      <h6 style="font: 14px; margin: 0; font-weight: 500">
+                        Đặng Nhật Duy
+                      </h6>
+                      <p
+                        style="
+                          font: 12px;
+                          margin: 0;
+                          font-weight: 500;
+                          color: #74808b;
+                        "
+                      >
+                        nhatduy27092003*gmail.com
+                      </p>
+                    </span>
+                  </div>
+                </li>
+
+                <li nz-menu-divider></li>
+
+                <li nz-menu-item routerLink="/project/project-user">
+                  <span
+                    nz-icon
+                    nzType="reconciliation"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Danh sách người dùng
+                </li>
+                <li nz-menu-item routerLink="/project/project-team">
+                  <span
+                    nz-icon
+                    nzType="solution"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Tạo công việc
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+
+            <li
+              class="nav-item"
+              nz-button
+              nz-dropdown
+              nzTrigger="click"
+              [nzDropdownMenu]="project"
+            >
+              <a class="nav-link">Dự án</a>
+              <img
+                src="/assets/icon/intro/chevron-down-arrow.svg"
+                width="12px"
+                height="20px"
+                alt=""
+              />
+            </li>
+
+            <nz-dropdown-menu #project="nzDropdownMenu">
+              <ul nz-menu>
+                <h5 style="padding: 8px; font-size: 16px; font-weight: 700">
+                  Dự án gần đây
+                </h5>
+                <li nz-menu-item routerLink="/project/project-user">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 12px;
+                    "
+                  >
+                    <img src="/assets/logo/5.png" width="24px" height="24px" />
+                    <span>
+                      <h6 style="font: 14px; margin: 0; font-weight: 500">
+                        Đặng Nhật Duy
+                      </h6>
+                      <p
+                        style="
+                          font: 12px;
+                          margin: 0;
+                          font-weight: 500;
+                          color: #74808b;
+                        "
+                      >
+                        nhatduy27092003*gmail.com
+                      </p>
+                    </span>
+                  </div>
+                </li>
+
+                <li nz-menu-divider></li>
+
+                <li nz-menu-item routerLink="/project/project-view">
+                  <span
+                    nz-icon
+                    nzType="file-protect"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Xem tất cả dự án
+                </li>
+                <li nz-menu-item routerLink="/project/project-list">
+                  <span
+                    nz-icon
+                    nzType="project"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Tạo dự án
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+
+            <li class="nav-item">
+              <a class="nav-link">Bộ lọc</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Tổng quan</a>
+            </li>
+            <li
+              class="nav-item"
+              nz-button
+              nz-dropdown
+              nzTrigger="click"
+              [nzDropdownMenu]="users"
+            >
+              <a class="nav-link">Đội nhóm</a>
+              <img
+                src="/assets/icon/intro/chevron-down-arrow.svg"
+                width="12px"
+                height="20px"
+                alt=""
+              />
+            </li>
+
+            <nz-dropdown-menu #users="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item routerLink="/project/project-user">
+                  <span
+                    nz-icon
+                    nzType="user-add"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Thêm thành viên vào nhóm
+                </li>
+                <li nz-menu-item routerLink="/project/project-team">
+                  <span
+                    nz-icon
+                    nzType="usergroup-add"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Tạo dội nhóm
+                </li>
+
+                <li nz-menu-divider></li>
+
+                <li nz-menu-item>
+                  <span
+                    nz-icon
+                    nzType="file-search"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Tìm kiếm người và đội nhóm
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+
+            <li
+              class="nav-item"
+              nz-button
+              nz-dropdown
+              nzTrigger="click"
+              [nzDropdownMenu]="app"
+            >
+              <a class="nav-link">Ứng dụng</a>
+              <img
+                src="/assets/icon/intro/chevron-down-arrow.svg"
+                width="12px"
+                height="20px"
+                alt=""
+              />
+            </li>
+
+            <nz-dropdown-menu #app="nzDropdownMenu">
+              <ul nz-menu>
+                <h5 style="padding: 8px; font-size: 16px; font-weight: 700">
+                  Được đề xuất cho nhóm của bạn
+                </h5>
+                <li nz-menu-item routerLink="/project/project-user">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 12px;
+                    "
+                  >
+                    <img
+                      src="/assets/image/intro/timesheet.e35a9455.png"
+                      width="24px"
+                      height="24px"
+                    />
+                    <span>
+                      <h6 style="font: 14px; margin: 0; font-weight: 500">
+                        Theo dõi bảng chấm công
+                      </h6>
+                    </span>
+                  </div>
+                </li>
+
+                <li nz-menu-item routerLink="/project/project-user">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 12px;
+                    "
+                  >
+                    <img
+                      src="/assets/image/intro/circleCI.a4fabf69.png"
+                      width="24px"
+                      height="24px"
+                    />
+                    <span>
+                      <h6 style="font: 14px; margin: 0; font-weight: 500">
+                        Vòng tròn CI (CI - CD)
+                      </h6>
+                    </span>
+                  </div>
+                </li>
+
+                <li nz-menu-item routerLink="/project/project-user">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      gap: 12px;
+                    "
+                  >
+                    <img
+                      src="/assets/image/intro/xray.4a45f47c.png"
+                      width="24px"
+                      height="24px"
+                    />
+                    <span>
+                      <h6 style="font: 14px; margin: 0; font-weight: 500">
+                        X - Quang (Thử nghiệm)
+                      </h6>
+                    </span>
+                  </div>
+                </li>
+
+                <li nz-menu-divider></li>
+
+                <li nz-menu-item routerLink="/project/project-user">
+                  <span
+                    nz-icon
+                    nzType="security-scan"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Khám phá trên ứng dụng
+                </li>
+                <li nz-menu-item routerLink="/project/project-team">
+                  <span
+                    nz-icon
+                    nzType="profile"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Quản lý ứng dụng của bạn
+                </li>
+
+                <li nz-menu-item routerLink="/project/project-team">
+                  <span
+                    nz-icon
+                    nzType="file-exclamation"
+                    nzTheme="outline"
+                    style="font-size: 18px"
+                  ></span>
+                  Xem yêu cầu ứng dụng
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+          </ul>
+        </div>
+
+        <div class="card-header-tabs">
+          <div class="header-item">
+            <div class="header-search">
+              <nz-input-group
+                [nzSuffix]="suffixIconSearch"
+                style="width: 225px; border-radius: 8px; height: 33px"
+              >
+                <input
+                  type="text"
+                  nz-input
+                  placeholder="Tìm kiếm thông tin của bạn"
+                />
+              </nz-input-group>
+              <ng-template #suffixIconSearch>
+                <span nz-icon nzType="search"></span>
+              </ng-template>
+            </div>
+
+            <div
+              class="header-item-notification"
+              nz-dropdown
+              nzTrigger="click"
+              [nzDropdownMenu]="notification"
+            >
+              <nz-badge [nzDot]="dot">
+                <span
+                  nz-icon
+                  nzType="bell"
+                  style="font-size: 22px"
+                  nzTheme="outline"
+                ></span>
+              </nz-badge>
+              <nz-dropdown-menu #notification="nzDropdownMenu">
+                <ul nz-menu>
+                  <h5 style="padding: 8px; font-size: 16px; font-weight: 700">
+                    Thông báo của bạn
+                  </h5>
+                  <li nz-menu-item routerLink="/project/project-user">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 12px;
+                      "
+                    >
+                      <img
+                        src="/assets/image/intro/timesheet.e35a9455.png"
+                        width="24px"
+                        height="24px"
+                      />
+                      <span>
+                        <h6 style="font: 14px; margin: 0; font-weight: 500">
+                          Theo dõi bảng chấm công
+                        </h6>
+                      </span>
+                    </div>
+                  </li>
+
+                  <li nz-menu-item routerLink="/project/project-user">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 12px;
+                      "
+                    >
+                      <img
+                        src="/assets/image/intro/circleCI.a4fabf69.png"
+                        width="24px"
+                        height="24px"
+                      />
+                      <span>
+                        <h6 style="font: 14px; margin: 0; font-weight: 500">
+                          Vòng tròn CI (CI - CD)
+                        </h6>
+                      </span>
+                    </div>
+                  </li>
+
+                  <li nz-menu-item routerLink="/project/project-user">
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 12px;
+                      "
+                    >
+                      <img
+                        src="/assets/image/intro/xray.4a45f47c.png"
+                        width="24px"
+                        height="24px"
+                      />
+                      <span>
+                        <h6 style="font: 14px; margin: 0; font-weight: 500">
+                          X - Quang (Thử nghiệm)
+                        </h6>
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </nz-dropdown-menu>
+            </div>
+
+            <div
+              class="header-item-message"
+              routerLink="/project/project-setting"
+            >
+              <span
+                nz-icon
+                nzType="setting"
+                style="font-size: 22px"
+                nzTheme="outline"
+              ></span>
+            </div>
+
+            <div
+              class="header-item-avatar"
+              nz-button
+              nz-dropdown
+              nzTrigger="click"
+              [nzDropdownMenu]="users"
+              *ngFor="let member of userData"
+            >
+              <nz-avatar
+                nzText="{{ member.fullName.substring(0, 2).toUpperCase() }}"
+                class="avatar-user"
+              >
+              </nz-avatar>
+              <nz-dropdown-menu #users="nzDropdownMenu">
+                <ul nz-menu>
+                  <li
+                    nz-menu-item
+                    [routerLink]="['/project/user-details/' + member.userID]"
+                  >
+                    <span
+                      nz-icon
+                      nzType="user-switch"
+                      nzTheme="outline"
+                      style="font-size: 18px"
+                    ></span>
+                    Quản lý tài khoản
+                  </li>
+                  <li nz-menu-item>
+                    <span
+                      nz-icon
+                      nzType="bulb"
+                      nzTheme="outline"
+                      style="font-size: 18px"
+                    ></span>
+                    Chế độ : Sáng
+                  </li>
+                  <li nz-menu-item (click)="showModal()">
+                    <span
+                      nz-icon
+                      nzType="logout"
+                      nzTheme="outline"
+                      style="font-size: 18px"
+                    ></span>
+                    Đăng xuất
+                  </li>
+                  <nz-modal
+                    [(nzVisible)]="isVisible"
+                    [nzFooter]="null"
+                    (nzOnCancel)="handleCancel()"
+                    nzWidth="420px"
+                  >
+                    <ng-container *nzModalContent>
+                      <div class="bg-modal-body" style="height: 420px">
+                        <div class="bg-background"></div>
+                        <div class="bg-avatar">
+                          <div>
+                            <nz-avatar
+                              nzText="{{
+                                member.fullName.substring(0, 2).toUpperCase()
+                              }}"
+                              style="
+                                color: #0f80de;
+                                background-color: #e4f4fe;
+                                display: flex;
+                                width: 100px;
+                                height: 100px;
+                                padding: 8px;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 8px;
+                                font-size: 34px !important;
+                                font-weight: 700;
+                                transform: none !important;
+                              "
+                            >
+                            </nz-avatar>
+                          </div>
+                          <div class="bd-info">
+                            <h5 class="bd-info-name">{{ member.fullName }}</h5>
+                            <p class="bd-info-email">
+                              {{ member.emailAddress }}
+                            </p>
+                          </div>
+                          <button class="bg-button" (click)="logout()">
+                            Đăng xuất khỏi hệ thống
+                          </button>
+
+                          <div
+                            style="
+                              height: 1px;
+                              align-self: stretch;
+                              width: 100%;
+                              border: 1px solid #ebebeb;
+                              margin-bottom: 24px;
+                            "
+                          ></div>
+
+                          <div class="bd-logout">
+                            <h5 class="bd-logout-text">
+                              Đăng nhập bằng tài khoản khác
+                            </h5>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </nz-modal>
+                </ul>
+              </nz-dropdown-menu>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </nz-header>
+
+  <nz-content>
+    <div class="inner-content">
+      <router-outlet> </router-outlet>
+    </div>
+  </nz-content>
+</nz-layout>

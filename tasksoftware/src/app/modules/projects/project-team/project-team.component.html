@@ -1,0 +1,345 @@
+<div class="bg-title">
+  <div class="header-location">
+    <p>
+      <span routerLink="/project/dashboard"> Trang chủ </span>
+      <span style="margin: 8px">
+        <img src="/assets/icon/project/Icon-arrow.svg" alt="" />
+      </span>
+      <a>Danh sách nhóm</a>
+    </p>
+  </div>
+  <div class="bg-header-text">
+    <div class="header-text">
+      <h5>Danh sách Nhóm</h5>
+    </div>
+    <div class="bg-header-text-button">
+      <button (click)="showAddTeam()">Tạo nhóm</button>
+    </div>
+  </div>
+</div>
+
+<div class="content-body">
+  <div class="header-map">
+    <h6>Danh sách các nhóm</h6>
+
+    <div class="action-content">
+      <div class="text-button-export">
+        <button nz-dropdown nzTrigger="click" [nzDropdownMenu]="export">
+          Xuất tập tin
+          <span>
+            <img src="/assets/icon/project/arrow-down.svg" alt="" />
+          </span>
+        </button>
+      </div>
+      <nz-dropdown-menu #export="nzDropdownMenu">
+        <div nz-menu>
+          <div class="css-xhdqsk">Chọn chức năng</div>
+          <button class="css-1m7bkbm" type="button" nz-menu-item>
+            <span class="css-12dc8u4">
+              <span nz-icon nzType="file-jpg" nzTheme="outline"></span>
+              <span class="css-1uww2tp">
+                <span class="css-5mekwu">Xuất dạng JSON</span>
+              </span>
+            </span>
+          </button>
+          <button class="css-1m7bkbm" type="button" nz-menu-item>
+            <span class="css-12dc8u4">
+              <span nz-icon nzType="file-excel" nzTheme="outline"></span>
+              <span class="css-1uww2tp">
+                <span class="css-5mekwu">Xuất dạng CSV</span>
+              </span>
+            </span>
+          </button>
+          <button class="css-1m7bkbm" type="button" nz-menu-item>
+            <span class="css-12dc8u4">
+              <span nz-icon nzType="qrcode" nzTheme="outline"></span>
+              <span class="css-1uww2tp">
+                <span class="css-5mekwu">Hiển thị mã QR</span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </nz-dropdown-menu>
+      <div class="text-button-import">
+        <button nz-dropdown nzTrigger="click" [nzDropdownMenu]="import">
+          Nhập tập tin
+          <span>
+            <img src="/assets/icon/project/arrow-down.svg" alt="" />
+          </span>
+        </button>
+      </div>
+      <nz-dropdown-menu #import="nzDropdownMenu">
+        <div nz-menu>
+          <div class="css-xhdqsk">Chọn chức năng</div>
+          <button class="css-1m7bkbm" type="button" nz-menu-item>
+            <span class="css-12dc8u4">
+              <span nz-icon nzType="file-jpg" nzTheme="outline"></span>
+              <span class="css-1uww2tp">
+                <span class="css-5mekwu">Nhập dạng JSON</span>
+              </span>
+            </span>
+          </button>
+          <button class="css-1m7bkbm" type="button" nz-menu-item>
+            <span class="css-12dc8u4">
+              <span nz-icon nzType="file-excel" nzTheme="outline"></span>
+              <span class="css-1uww2tp">
+                <span class="css-5mekwu">Nhập dạng CSV</span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </nz-dropdown-menu>
+    </div>
+  </div>
+
+  <nz-table
+    [nzShowPagination]="false"
+    #nzTable
+    [nzData]="filteredTeams"
+    nzTableLayout="fixed"
+    class="scrollable-table"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="200px">
+          <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input
+              type="text"
+              nz-input
+              placeholder="Tìm kiếm nhóm và thành viên nhóm"
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="onSearchChange()"
+            />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <img
+              src="/assets/icon/project/search-normal.svg"
+              width="18px"
+              height="18px"
+              nz-icon
+              alt=""
+            />
+          </ng-template>
+        </th>
+        <th style="text-align: center">Tên nhóm</th>
+        <th style="text-align: center">Số lượng thành viên</th>
+        <th style="text-align: center">Ngày tạo</th>
+        <th style="text-align: center">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let team of filteredTeams">
+        <tr>
+          <td
+            style="text-align: center"
+            [nzExpand]="expandSet.has(team.teamID)"
+            [nzExpandIcon]="expandIcon"
+          ></td>
+          <td style="text-align: center">{{ team.teamName }}</td>
+          <td style="text-align: center">{{ getMemberCount(team) }}</td>
+          <td style="text-align: center">
+            {{ team.createdDate | date : "dd/MM/yyyy" }}
+          </td>
+          <td
+            style="
+              display: flex;
+              justify-content: space-evenly;
+              align-items: center;
+              cursor: pointer;
+              height: 55px;
+            "
+          >
+            <span
+              nz-icon
+              nzType="delete"
+              nzTheme="outline"
+              (click)="showDelete(team)"
+            ></span>
+            <span
+              nz-icon
+              nzType="form"
+              nzTheme="outline"
+              (click)="showUpdate(team)"
+            ></span>
+            <span nz-icon nzType="copy" nzTheme="outline"></span>
+          </td>
+        </tr>
+        <tr
+          *ngFor="let member of team.members"
+          [nzExpand]="expandSet.has(team.teamID)"
+        >
+          <td
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div>
+              - MNV : {{ member.userID }} <br />
+              - Họ và tên : {{ member.fullName }} <br />
+              - Ngày vào nhóm : {{ member.joinDate | date : "dd/MM/yyyy" }}
+            </div>
+            <div>
+              <span
+                nz-icon
+                nzType="delete"
+                nzTheme="outline"
+                (click)="showDeleteMember(team, member)"
+              ></span>
+            </div>
+          </td>
+        </tr>
+
+        <ng-template #expandIcon>
+          <span
+            nz-icon
+            *ngIf="!expandSet.has(team.teamID)"
+            nzType="plus-circle"
+            nzTheme="outline"
+            (click)="onExpandChange(team.teamID, true)"
+          ></span>
+          <span
+            nz-icon
+            *ngIf="expandSet.has(team.teamID)"
+            nzType="minus-circle"
+            nzTheme="outline"
+            (click)="onExpandChange(team.teamID, false)"
+          ></span>
+        </ng-template>
+      </ng-container>
+    </tbody>
+  </nz-table>
+</div>
+
+<!-- Modal Delete -->
+<nz-modal [(nzVisible)]="isDelete" [nzFooter]="null" nzWidth="480px">
+  <ng-container *nzModalContent>
+    <div class="deleteModal">
+      <div class="warring" style="margin-bottom: 10px">
+        <img src="/assets/icon/project/icon-warring.svg" alt="" />
+      </div>
+      <h5>Xóa nhóm</h5>
+      <p>
+        Nhóm của bạn bị xóa sẽ biến mất khỏi hệ thống bao gồm tất cả các thông
+        tin đã lưu và các tài nguyên mà dự án đó đang sở hữu. Bạn chắc chắn muốn
+        xóa dự án?
+      </p>
+    </div>
+    <div class="footer">
+      <button (click)="isDelete = false" class="footer-cancel">Hủy</button>
+      <button class="footer-add" (click)="okDelete()">Xác nhận</button>
+    </div>
+  </ng-container>
+</nz-modal>
+
+<!-- Modal Sửa -->
+<nz-modal
+  [(nzVisible)]="isUpdate"
+  [nzFooter]="null"
+  nzTitle="Chỉnh sửa thông tin hợp đồng dự án "
+  nzWidth="800px"
+>
+  <ng-container *nzModalContent>
+    <div class="form-project">
+      <form>
+        <div class="scrollable-table-form-project">
+          <div class="block-form">
+            <label for=""> Tên nhóm</label>
+            <input
+              style="width: 100%"
+              nz-input
+              id="teamName"
+              name="teamName"
+              nzSize="large"
+              [(ngModel)]="editedTeam.teamName"
+            />
+          </div>
+          <div class="block-form">
+            <label for="">Ngày khởi tạo</label>
+            <nz-date-picker
+              nzSize="large"
+              nzPlaceHolder="Chọn ngày tháng năm"
+              style="width: 100%"
+              [nzFormat]="dateFormat"
+              id="createdDate"
+              name="createdDate"
+              [(ngModel)]="editedTeam.createdDate"
+              required
+            ></nz-date-picker>
+          </div>
+        </div>
+        <div class="footer">
+          <button (click)="isUpdate = false" class="footer-cancel">Hủy</button>
+          <button class="footer-add" (click)="OkUpdate()">Xác nhận</button>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</nz-modal>
+
+<!-- Modal Thêm -->
+<nz-modal
+  [(nzVisible)]="isAddTeam"
+  [nzFooter]="null"
+  nzTitle="Chỉnh sửa thông tin hợp đồng dự án "
+  nzWidth="800px"
+>
+  <ng-container *nzModalContent>
+    <div class="form-project">
+      <form>
+        <div class="scrollable-table-form-project">
+          <div class="block-form">
+            <label for=""> Tên nhóm</label>
+            <input
+              style="width: 100%"
+              nz-input
+              nzSize="large"
+              id="teamName"
+              name="teamName"
+              [(ngModel)]="teamName"
+            />
+          </div>
+          <div class="block-form">
+            <label for="">Ngày khởi tạo</label>
+            <nz-date-picker
+              nzSize="large"
+              nzPlaceHolder="Chọn ngày tháng năm"
+              style="width: 100%"
+              [nzFormat]="dateFormat"
+              name="createdDate"
+              required
+            ></nz-date-picker>
+          </div>
+        </div>
+        <div class="footer">
+          <button (click)="isAddTeam = false" class="footer-cancel">Hủy</button>
+          <button class="footer-add" (click)="okAddTeam()">Xác nhận</button>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</nz-modal>
+
+<!-- Modal Delete thành viên nhóm -->
+<nz-modal [(nzVisible)]="isDeleteMenber" [nzFooter]="null" nzWidth="480px">
+  <ng-container *nzModalContent>
+    <div class="deleteModal">
+      <div class="warring" style="margin-bottom: 10px">
+        <img src="/assets/icon/project/icon-warring.svg" alt="" />
+      </div>
+      <h5>Xóa thành viên</h5>
+      <p>
+        Thành viên trong nhóm của bạn bị xóa sẽ biến mất khỏi hệ thống bao gồm
+        tất cả các thông tin đã lưu và các tài nguyên mà dự án đó đang sở hữu.
+        Bạn chắc chắn muốn xóa thành viên này không?
+      </p>
+    </div>
+    <div class="footer">
+      <button (click)="isDeleteMenber = false" class="footer-cancel">
+        Hủy
+      </button>
+      <button class="footer-add" (click)="okDeleteMember()">Xác nhận</button>
+    </div>
+  </ng-container>
+</nz-modal>

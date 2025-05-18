@@ -1,0 +1,48 @@
+<div class="content">
+  <div class="container-fluid scrollable-table">
+    <div class="container-right">
+      <div class="search">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input type="text" nz-input placeholder="Dòng thời gian tìm kiếm" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+      </div>
+      <div class="role-team">
+        <nz-avatar-group>
+          <nz-avatar style="background-color: #f56a00" nzText="A"></nz-avatar>
+          <nz-avatar style="background-color: #0cd254" nzText="B"></nz-avatar>
+          <nz-avatar style="background-color: #7128de" nzText="C"></nz-avatar>
+        </nz-avatar-group>
+        <div class="team-avatar">
+          <span nz-icon nzType="user-add" nzTheme="outline"></span>
+        </div>
+      </div>
+    </div>
+    <div class="container-left">
+      <button style="background-color: #FFFFFF; border: 1px solid #E5E8EB;">
+        Hôm nay
+      </button>
+      <button>
+        <span nz-icon nzType="share-alt" nzTheme="outline"></span>
+        Chia sẻ
+      </button>
+      <button>
+        <span nz-icon nzType="cloud-upload" nzTheme="outline"></span>
+        Xuất File
+      </button>
+      <button>
+        <span nz-icon nzType="align-center" nzTheme="outline"></span>
+        Bộ lọc
+      </button>
+      <button>
+        <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+        Hơn
+      </button>
+    </div>
+  </div>
+  <div class="container-body">
+
+  </div>
+</div>

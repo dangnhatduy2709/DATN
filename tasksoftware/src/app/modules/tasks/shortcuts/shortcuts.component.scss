@@ -1,0 +1,124 @@
+.content {
+  .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 20px;
+
+    .container-right {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+
+      nz-input-group.ant-input-affix-wrapper {
+        border-radius: 6px;
+      }
+
+      .role-team {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .team-avatar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 32px;
+          height: 32px;
+          background-color: lightgray;
+          border-radius: 100px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .container-left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        height: 40px;
+        padding: 10px 16px 10px 16px;
+        border: none;
+        background-color: #F5F8FA;
+        color: #272D37;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .container-body {
+    .folder-item {
+      width: 14pc;
+      background-color: #fff;
+      box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 1rem;
+
+      .folder-thumbail {
+        background: linear-gradient(to bottom, #F5CD47 48px, #F1F2F4 48px);
+        height: 10pc;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .folder-text {
+          box-shadow: 0 4px 8px -2px #091e4240, 0 0 1px #091e424f;
+          border-radius: 8px;
+          background-color: #fff;
+        }
+      }
+
+      p {
+        color: #172b4d;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 600;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      .text {
+        color: #091e4299;
+        text-overflow: ellipsis;
+        font-size: 11px;
+        white-space: nowrap;
+        font-weight: 600;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin-bottom: 5px;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 500;
+        color: #091e4299;
+      }
+    }
+  }
+}
+
+.container-body {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 12px;
+}

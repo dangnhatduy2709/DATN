@@ -1,0 +1,451 @@
+<div class="bg-title">
+  <div class="header-location">
+    <p>
+      Quản lý dự án
+      <span style="margin: 8px">
+        <img src="/assets/icon/project/Icon-arrow.svg" alt="" />
+      </span>
+      <a href="">Chi tiết dự án</a>
+    </p>
+  </div>
+  <div class="bg-header-text">
+    <div class="header-text">
+      <h5>Task SoftWare</h5>
+    </div>
+    <div class="bg-header-text-button">
+      <button (click)="showAddTask()">Thêm công việc</button>
+    </div>
+  </div>
+  <div class="bg-header-tabs">
+    <nz-tabset [(nzSelectedIndex)]="statusView">
+      <nz-tab (nzClick)="updateStatusView(0)" nzTitle="Tổng quan"></nz-tab>
+      <nz-tab (nzClick)="updateStatusView(1)" nzTitle="Bảng"></nz-tab>
+      <nz-tab (nzClick)="updateStatusView(2)" nzTitle="Danh sách"></nz-tab>
+      <nz-tab (nzClick)="updateStatusView(3)" nzTitle="Lịch"></nz-tab>
+      <nz-tab (nzClick)="updateStatusView(4)" nzTitle="Tệp đính kèm"></nz-tab>
+      <nz-tab (nzClick)="updateStatusView(5)" nzTitle="Thời gian"></nz-tab>
+      <nz-tab (nzClick)="updateStatusView(6)" nzTitle="Hình thức"></nz-tab>
+      <nz-tab (nzClick)="updateStatusView(7)" nzTitle="Thiết lập"></nz-tab>
+    </nz-tabset>
+  </div>
+</div>
+
+<app-board *ngIf="statusView === 1"></app-board>
+<app-list *ngIf="statusView === 2"></app-list>
+<app-calendar *ngIf="statusView === 3"></app-calendar>
+<app-shortcuts *ngIf="statusView === 4"></app-shortcuts>
+<app-timline *ngIf="statusView === 5"></app-timline>
+<app-issues *ngIf="statusView === 6"></app-issues>
+<app-settings *ngIf="statusView === 7"></app-settings>
+
+<div class="content-body">
+  <ng-container *ngIf="statusView === 0">
+    <div class="content-filter">
+      <div class="content-filter-left">
+        <button class="filter-time">24 giờ</button>
+        <button class="filter-time">7 ngày</button>
+        <button class="filter-time">30 ngày</button>
+        <button class="filter-time">12 tháng</button>
+      </div>
+      <div class="content-filter-right">
+        <button class="filter-work">Lịch trình</button>
+        <button class="filter-work">Bộ lọc</button>
+      </div>
+    </div>
+    <div class="bg-card-app">
+      <div class="bg-card-app-sketch">
+        <h6>Dự án</h6>
+        <div class="chart-contact">
+          <div class="chart-progress">
+            <nz-progress
+              nzType="circle"
+              [nzPercent]="90"
+              [nzWidth]="100"
+              [nzStrokeColor]="{
+                '0%': '#108ee9',
+                '50%': '#2db7f5',
+                '100%': '#87d068'
+              }"
+            ></nz-progress>
+          </div>
+          <div class="contact-progress">
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 27.svg" alt="" />
+                Pass
+              </span>
+              <p>16%</p>
+            </div>
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 93.svg" alt="" />
+                Failure
+              </span>
+              <p>16%</p>
+            </div>
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 94.svg" alt="" />
+                Not test
+              </span>
+              <p>16%</p>
+            </div>
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 96.svg" alt="" />
+                Not started
+              </span>
+              <p>16%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-card-app-sketch">
+        <h6>Công việc</h6>
+        <div class="chart-contact">
+          <div class="chart-progress">
+            <nz-progress
+              nzType="circle"
+              [nzPercent]="90"
+              [nzWidth]="100"
+              [nzStrokeColor]="{
+                '0%': '#108ee9',
+                '50%': '#2db7f5',
+                '100%': '#87d068'
+              }"
+            ></nz-progress>
+          </div>
+          <div class="contact-progress">
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 27.svg" alt="" />
+                Pass
+              </span>
+              <p>16%</p>
+            </div>
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 93.svg" alt="" />
+                Failure
+              </span>
+              <p>16%</p>
+            </div>
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 94.svg" alt="" />
+                Not test
+              </span>
+              <p>16%</p>
+            </div>
+            <div class="contact-progress-flex">
+              <span>
+                <img src="/assets/icon/project/Frame 96.svg" alt="" />
+                Not started
+              </span>
+              <p>16%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-card-app-sketch">
+        <h6 style="margin: 0">Trạng thái</h6>
+        <div>
+          <canvas id="trangthai"></canvas>
+        </div>
+      </div>
+
+      <div class="bg-card-app-sketch">
+        <h6>Nhiệm vụ</h6>
+        <div class="sketch-GB">
+          <table>
+            <thead>
+              <tr>
+                <th>Kiểu</th>
+                <th>Phân bổ</th>
+                <th>Điểm</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center; margin-bottom: 5px">
+                <td>
+                  <img src="/assets/icon/project/check-true.svg" alt="" />
+                  Nhiệm vụ chủ
+                </td>
+                <td>100%</td>
+                <td>1</td>
+              </tr>
+              <tr style="text-align: center">
+                <td>
+                  <img src="/assets/icon/project/check-fail.svg" alt="" />
+                  Nhiệm vụ phụ
+                </td>
+                <td>0%</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="high-chart">
+      <div class="header-map">
+        <h6>Biểu đồ dữ liệu</h6>
+        <p>
+          <img src="/assets/icon/project/Icon.svg" alt="" />
+        </p>
+      </div>
+      <div>
+        <canvas id="myChart" width="400" height="150"></canvas>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<!-- Tạo công việc dự án -->
+<nz-modal
+  [(nzVisible)]="isTask"
+  [nzFooter]="null"
+  nzTitle="Tạo công việc mới cho dựa án của bạn"
+  [nzWidth]="850"
+>
+  <ng-container *nzModalContent>
+    <div class="header-modal">
+      <p>
+        Phần bắt buộc được đánh dấu bằng một dấu sao
+        <span style="color: red">*</span>
+      </p>
+      <div class="header-issue">
+        <p>Vấn đề</p>
+        <img
+          _ngcontent-ng-c3631520248=""
+          src="/assets/icon/project/Icon.svg"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="form-project">
+      <form>
+        <div class="scrollable-table-form-project">
+          <div class="block-form">
+            <label for=""
+              >Dự án của bạn <span style="color: red">*</span></label
+            >
+            <nz-select
+              id="userID"
+              name="userID"
+              [(ngModel)]="task.projectID"
+              style="width: 97%; color: #000000d9"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Chọn thành viên vào nhóm dự án ..."
+            >
+              <nz-option
+                *ngFor="let member of projectData"
+                [nzLabel]="member.projectName"
+                [nzValue]="member.projectID"
+              ></nz-option>
+            </nz-select>
+          </div>
+          <div class="block-form">
+            <label for=""
+              >Quản lý dự án <span style="color: red">*</span></label
+            >
+            <nz-select
+              id="userID"
+              name="userID"
+              [(ngModel)]="task.userID"
+              style="width: 97%; color: #000000d9"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Chọn thành viên vào nhóm dự án ..."
+            >
+              <nz-option
+                *ngFor="let member of projectData"
+                [nzLabel]="member.projectManagerName"
+                [nzValue]="member.userID"
+              ></nz-option>
+            </nz-select>
+          </div>
+          <div class="block-form">
+            <label for=""> Các loại vấn đề </label>
+            <input
+              style="width: 97%"
+              nz-input
+              id="taskType"
+              name="taskType"
+              nz-input
+              placeholder="Nhập vấn đề công việc ..."
+              [(ngModel)]="task.taskType"
+              nzSize="large"
+            />
+          </div>
+          <div class="block-form">
+            <label for=""> Tóm tắt <span style="color: red">*</span></label>
+            <textarea
+              rows="5"
+              style="width: 97%"
+              nz-input
+              id="summary"
+              name="summary"
+              nz-input
+              placeholder="Nhập mô tả tóm tắt công việc ..."
+              [(ngModel)]="task.summary"
+              nzSize="large"
+            ></textarea>
+          </div>
+          <div class="block-form">
+            <label for="">Ngày khởi tạo</label>
+            <nz-date-picker
+              nzSize="large"
+              style="width: 97%"
+              [nzPlaceHolder]="'Ngày bắt đầu công việc ...'"
+              [(ngModel)]="task.createdDate"
+              id="createdDate"
+              name="createdDate"
+            ></nz-date-picker>
+          </div>
+          <div class="block-form">
+            <label for="">Ngày hết hạn</label>
+            <nz-date-picker
+              nzSize="large"
+              style="width: 97%"
+              [nzPlaceHolder]="'Ngày hết hạn công việc ...'"
+              [(ngModel)]="task.endDate"
+              id="endDate"
+              name="endDate"
+            ></nz-date-picker>
+          </div>
+          <div class="block-form">
+            <label for="">Sự ưu tiên <span style="color: red">*</span></label>
+            <nz-select
+              id="priority"
+              name="priority"
+              [(ngModel)]="task.priority"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Chọn trạng thái công việc ..."
+              style="width: 97%"
+            >
+              <nz-option nzValue="1" nzLabel="Low"></nz-option>
+              <nz-option nzValue="2" nzLabel="Lowest"></nz-option>
+              <nz-option nzValue="3" nzLabel="Medium"></nz-option>
+              <nz-option nzValue="4" nzLabel="High"></nz-option>
+              <nz-option nzValue="5" nzLabel="Highest"></nz-option>
+            </nz-select>
+            <p
+              style="
+                margin-top: 5px;
+                color: #1890ff;
+                font-size: 13px;
+                font-weight: 500;
+                cursor: pointer;
+              "
+            >
+              Tìm hiểu về mức độ ưu tiên
+            </p>
+          </div>
+          <div class="block-form">
+            <label for="">
+              Mô tả chi tiết <span style="color: red">*</span></label
+            >
+            <textarea
+              rows="5"
+              style="width: 97%"
+              nz-input
+              id="description"
+              name="description"
+              nz-input
+              placeholder="Nhập mô tả chi tiết công việc ..."
+              [(ngModel)]="task.description"
+              nzSize="large"
+            ></textarea>
+          </div>
+          <div class="block-form">
+            <label for="">Tệp tin đính kèm</label>
+            <nz-upload
+              nzType="drag"
+              [nzMultiple]="true"
+              nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              (nzChange)="handleChange($event)"
+              [nzWithCredentials]="'97%'"
+            >
+              <p
+                class="ant-upload-hint"
+                style="
+                  color: #000000d9;
+                  display: flex;
+                  text-align: center;
+                  gap: 10px;
+                  justify-content: center;
+                "
+              >
+                <span nz-icon nzType="cloud-upload" nzTheme="outline"></span>
+                <span>Thả tập tin để đính kèm hoặc kéo qua</span>
+              </p>
+            </nz-upload>
+          </div>
+          <div class="block-form">
+            <label for=""
+              >Thời gian ước tính <span style="color: red">*</span></label
+            >
+            <input
+              style="width: 97%; color: #000000d9"
+              placeholder="Nhập thời gian hoàn thành công việc"
+              [(ngModel)]="task.actualHoursSpent"
+              nz-input
+              nzSize="large"
+              id="actualHoursSpent"
+              name="actualHoursSpent"
+            />
+          </div>
+          <p
+            style="
+              color: #707070;
+              font-size: 13px;
+              font-weight: 500;
+              cursor: pointer;
+              width: 350px;
+            "
+          >
+            Ước tính số lượng công việc còn lại cho đến khi vấn đề này được giải
+            quyết. <br />
+            <span>
+              Định dạng của nó là ' *w *d *h *m ' (biểu thị tuần, ngày, giờ và
+              phút - trong đó * có thể là bất kỳ số nào).
+            </span>
+            <br />
+            Ví dụ: 4d, 5h 30m, 60m và 3w.
+          </p>
+
+          <div class="block-form">
+            <label for=""
+              >Người được giao công việc
+              <span style="color: red">*</span></label
+            >
+            <nz-select
+              id="userID"
+              name="userID"
+              [(ngModel)]="task.taskManagerID"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Chọn thành viên hoặc nhóm cho dự án ..."
+              style="width: 97%"
+            >
+              <nz-option
+                *ngFor="let member of teamData"
+                [nzLabel]="member.fullName"
+                [nzValue]="member.userID"
+              ></nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div class="footer">
+          <button (click)="isTask = false" class="footer-cancel">Hủy</button>
+          <button class="footer-add" (click)="OkAddTask()">Xác nhận</button>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</nz-modal>

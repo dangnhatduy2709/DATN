@@ -1,0 +1,1527 @@
+<nz-layout>
+  <nz-header>
+    <nav
+      class="navbar navigation-container navbar-expand-sm navbar-white bg-white top-navigation sticky site-header"
+    >
+      <div class="container-fluid m-0 p-0">
+        <a class="navbar-brand" href="#">
+          <img src="/assets/logo/logo-auth.png" width="158px" />
+        </a>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item two-columns">
+              <a
+                class="nav-link"
+                nz-dropdown
+                nzTrigger="click"
+                [nzDropdownMenu]="product"
+                >Sản phẩm</a
+              >
+              <img
+                src="/assets/icon/intro/chevron-down-arrow.svg"
+                width="12px"
+                height="20px"
+                alt=""
+              />
+            </li>
+            <nz-dropdown-menu #product="nzDropdownMenu">
+              <div
+                id="product-dropdown"
+                class="popover active"
+                style="max-width: 100dvw; height: 80vh"
+              >
+                <ul class="sub-menu mega">
+                  <li>
+                    <div class="mega-heading"><span>Khám phá</span></div>
+                    <div>
+                      <ul class="mega-section two-columns">
+                        <li style="height: 100px">
+                          <div class="mega-icon-link">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-blue"
+                                width="24"
+                                height="24"
+                                src="/assets/icon/intro/Task-c4a.svg"
+                              />
+                              <div>
+                                <span class="heading mb-10">
+                                  Tại sao Task Software?
+                                  <span class="icon arrow grey500 ml-15">
+                                    <img
+                                      src="/assets/icon/intro/arrow-right.svg"
+                                      width="18"
+                                      height="16"
+                                      alt=""
+                                    />
+                                  </span>
+                                </span>
+                                <span class="description"
+                                  >Đơn giản. Trực giác. Chắc chắn.</span
+                                >
+                              </div>
+                            </a>
+                          </div>
+                        </li>
+                        <li style="height: 100px">
+                          <div class="mega-icon-link">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-orange"
+                                width="24"
+                                height="24"
+                                src="/assets/icon/intro/ProjectBoard.svg"
+                              />
+                              <div>
+                                <span class="heading mb-10">
+                                  Bảng Kanban
+                                  <span class="icon arrow grey500 ml-15">
+                                    <img
+                                      src="/assets/icon/intro/arrow-right.svg"
+                                      width="18"
+                                      height="16"
+                                      alt=""
+                                    />
+                                  </span>
+                                </span>
+                                <span class="description"
+                                  >Trực quan hóa quy trình công việc của
+                                  bạn.</span
+                                >
+                              </div>
+                            </a>
+                          </div>
+                        </li>
+                        <li style="height: 100px">
+                          <div class="mega-icon-link">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-navy"
+                                width="24"
+                                height="24"
+                                src="/assets/icon/intro/Checklist.svg"
+                              />
+                              <div>
+                                <span class="heading mb-10">
+                                  Đặc trưng
+                                  <span class="icon arrow grey500 ml-15">
+                                    <img
+                                      src="/assets/icon/intro/arrow-right.svg"
+                                      width="18"
+                                      height="16"
+                                      alt=""
+                                    />
+                                  </span>
+                                </span>
+                                <span class="description"
+                                  >Nhận được nhiều hơn từ quản lý tác vụ.</span
+                                >
+                              </div>
+                            </a>
+                          </div>
+                        </li>
+                        <li style="height: 100px">
+                          <div class="mega-icon-link">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-purple"
+                                width="24"
+                                height="24"
+                                src="/assets/icon/intro/Files.svg"
+                              />
+                              <div>
+                                <span class="heading mb-10">
+                                  Tài liệu dự án
+                                  <span class="icon arrow grey500 ml-15">
+                                    <img
+                                      src="/assets/icon/intro/arrow-right.svg"
+                                      width="18"
+                                      height="16"
+                                      alt=""
+                                    />
+                                  </span>
+                                </span>
+                                <span class="description"
+                                  >Xem hình ảnh lớn hơn.</span
+                                >
+                              </div>
+                            </a>
+                          </div>
+                        </li>
+                        <li style="height: 100px">
+                          <div class="mega-icon-link">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-yellow"
+                                width="24"
+                                height="24"
+                                src="/assets/icon/intro/Integration.svg"
+                              />
+                              <div>
+                                <span class="heading mb-10">
+                                  Tích hợp
+                                  <span class="icon arrow grey500 ml-15">
+                                    <img
+                                      src="/assets/icon/intro/arrow-right.svg"
+                                      width="18"
+                                      height="16"
+                                      alt=""
+                                    />
+                                  </span>
+                                </span>
+                                <span class="description"
+                                  >Làm việc với các công cụ bạn yêu thích.</span
+                                >
+                              </div>
+                            </a>
+                          </div>
+                        </li>
+                        <li style="height: 100px">
+                          <div class="mega-icon-link">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-green"
+                                width="24"
+                                height="24"
+                                src="/assets/icon/intro/Secure.svg"
+                              />
+                              <div>
+                                <span class="heading mb-10">
+                                  Bảo vệ
+                                  <span class="icon arrow grey500 ml-15">
+                                    <img
+                                      src="/assets/icon/intro/arrow-right.svg"
+                                      width="18"
+                                      height="16"
+                                      alt=""
+                                    />
+                                  </span>
+                                </span>
+                                <span class="description"
+                                  >Bảo vệ tài sản trí tuệ của bạn..</span
+                                >
+                              </div>
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="mega-heading">
+                      <span>Liên kết hữu ích</span>
+                    </div>
+                    <div>
+                      <ul class="mega-section">
+                        <li>
+                          <div class="mega-button">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-pink"
+                                width="20"
+                                height="20"
+                                src="/assets/icon/intro/chevron-right.svg"
+                              />
+                              Câu chuyện khách hàng
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="mega-button">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-navy"
+                                width="20"
+                                height="20"
+                                src="/assets/icon/intro/chevron-right.svg"
+                              />
+                              Hội thảo
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="mega-button">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-orange"
+                                width="20"
+                                height="20"
+                                src="/assets/icon/intro/chevron-right.svg"
+                              />
+                              Blog
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="mega-button">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-turquoise"
+                                width="20"
+                                height="20"
+                                src="/assets/icon/intro/chevron-right.svg"
+                              />
+                              Ứng dụng di động
+                            </a>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="mega-button">
+                            <a href="#">
+                              <img
+                                class="mr-15 filter-purple"
+                                width="20"
+                                height="20"
+                                src="/assets/icon/intro/chevron-right.svg"
+                              />
+                              Đối tác
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </nz-dropdown-menu>
+
+            <li class="nav-item">
+              <a class="nav-link">Sử dụng</a>
+              <img
+                src="/assets/icon/intro/chevron-down-arrow.svg"
+                width="12px"
+                height="20px"
+                alt=""
+              />
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Doanh nghiệp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Định giá</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">Liên hệ</a>
+            </li>
+          </ul>
+          <div class="top-right-wrapper">
+            <ul class="h-flex-grid top-right-menu" style="margin: 0">
+              <li
+                class="menu-item d-flex justify-content-between align-items-center"
+              >
+                <a
+                  class="td-none fs-l fw-medium cta-track-button"
+                  href="/auth/login"
+                  >Đăng nhập</a
+                >
+                <a href="/auth/signup" class="button blue large ml-15">
+                  Đăng ký
+                  <span class="icon arrow white ml-15">
+                    <img
+                      src="/assets/icon/intro/arrow-right.svg"
+                      width="18"
+                      height="16"
+                      alt=""
+                    />
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </nz-header>
+
+  <nz-content>
+    <main>
+      <section style="padding: 40px 0 0 0">
+        <div class="content text-center mt-3">
+          <h1 class="subheading display-1">Quản lý tác vụ phân hệ chính</h1>
+          <div class="h1 mb-30 display-2">
+            Thuộc bởi.
+            <span>NhatDuy.</span>
+          </div>
+        </div>
+
+        <div class="align-items-center mb-40">
+          <a
+            href="#"
+            class="button blue xlarge with-icon mb-20 cta-track-button"
+          >
+            <div
+              class="bg-white mr-15"
+              style="
+                display: flex;
+                padding: 6px;
+                height: 32px;
+                width: 32px;
+                border-radius: 16px;
+              "
+            >
+              <img
+                src="/assets/icon/intro/googleapps.svg"
+                width="20"
+                height="20"
+              />
+            </div>
+            Tiếp tục với Google
+          </a>
+          <a href="home/welcome" class="fs-l cta-track-button">
+            hoặc, đăng ký bằng tài khoản email của bạn
+          </a>
+        </div>
+      </section>
+
+      <section style="padding-top: 60px" class="container">
+        <div class="content">
+          <div class="row justify-content-center">
+            <div class="col-sm-6 col-md-3">
+              <div class="proof-box text-center">
+                <img
+                  class="mb-4"
+                  src="/assets/icon/intro/badge-ccpa.svg"
+                  width="64"
+                  height="64"
+                />
+                <h4><span>Chắc chắn</span> và tuân thủ</h4>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="proof-box text-center">
+                <img
+                  class="mt-3 mb-4"
+                  src="/assets/icon/intro/teams.svg"
+                  width="93"
+                  height="50"
+                />
+                <h4><span>Đội vui vẻ</span> thế giới</h4>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="proof-box text-center">
+                <img
+                  class="mb-2"
+                  src="/assets/icon/intro/award.svg"
+                  width="64"
+                  height="64"
+                />
+                <h4><span>Lựa chọn </span> Cửa hàng ứng dụng iOS</h4>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="proof-box text-center">
+                <img
+                  style="
+                    margin-top: 20px;
+                    margin-bottom: 32px;
+                    margin-left: 20px;
+                  "
+                  src="/assets/icon/intro/rating.svg"
+                  width="164"
+                  height="28"
+                />
+                <h4><span>4.7 đánh giá</span> Cửa hàng Google Play</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding: 0 0 40px 0">
+        <div class="content">
+          <h2 class="subheading display-1">
+            Sự cần thiết của việc quản lý công việc
+          </h2>
+          <div class="h2 mb-30">Đã đến lúc phải tổ chức.</div>
+          <p class="intro mb-0">
+            Quản lý công việc là mối liên kết giữa việc lập kế hoạch làm một
+            việc gì đó và hoàn thành nó. Phần mềm quản lý tác vụ của bạn phải
+            cung cấp cái nhìn tổng quan về công việc đang tiến hành để cho phép
+            theo dõi từ khi hình thành đến khi hoàn thành. Tham gia Task
+            Software: tham gia các nhóm ở khắp mọi nơi sử dụng bảng dự án kiểu
+            Kanban của chúng tôi để số hóa quy trình làm việc và có được cái
+            nhìn tổng quan rõ ràng về tiến độ nhiệm vụ. Hãy cùng nhau tổ chức
+            nhé!
+          </p>
+        </div>
+      </section>
+
+      <section
+        style="position: relative; z-index: -1; margin-top: calc(-25vw - 50px)"
+      >
+        <div>
+          <figure
+            style="margin-left: 50%; transform: translateX(-50%); width: 98.9vw"
+          >
+            <img
+              width="1440"
+              height="520"
+              style="width: 100%; max-width: 100%; height: auto"
+              class="js-lazy-image js-lazy-image-handled"
+              src="/assets/icon/intro/meister_wave_v2.svg"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <div id="lead-control" class="lead-variation" style="display: block">
+        <div
+          id="lead-var1"
+          class="split-wrapper fx-animate fx-done"
+          content=""
+          style="
+            padding-top: 0;
+            margin: -50px 5px 130px 5px;
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap-reverse;
+          "
+        >
+          <div
+            class="slide on-left"
+            style="padding-right: 4%; margin: 0; max-width: 596px"
+          >
+            <img
+              style="max-width: 530px; width: 100%"
+              class="js-lazy-image js-lazy-image-handled"
+              src="/assets/icon/intro/lead-magnet-1.svg"
+            />
+          </div>
+          <div class="content slide on-right" style="width: 560px; margin: 0">
+            <p
+              class="subheading display-1"
+              style="color: #8a9499; margin-bottom: 0; line-height: 1.29"
+            >
+              Làm quen với quản lý tác vụ
+            </p>
+            <p
+              class="h2"
+              style="
+                color: #3d474d;
+                line-height: 1.17;
+                letter-spacing: -1.5px;
+                margin-bottom: 24px;
+              "
+            >
+              Nói chuyện với chuyên gia năng suất.
+            </p>
+            <p
+              class="intro"
+              style="color: #8a9499; margin-bottom: 60px; width: 100%"
+            >
+              Công việc tốt không nhất thiết phải là công việc khó khăn. Quản lý
+              tác vụ giúp loại bỏ căng thẳng trong tổ chức, giúp nhóm của bạn
+              tập trung vào những vấn đề quan trọng. Đăng ký tư vấn miễn phí với
+              chuyên gia về năng suất của Task Software – bạn sẽ sớm sắp xếp
+              được nhiệm vụ của nhóm mình theo thứ tự.
+            </p>
+            <a
+              href="#"
+              id="book-consultation"
+              class="button blue with-icon cta-track-button"
+              style="
+                width: fit-content;
+                min-width: 215px;
+                height: 60px;
+                border-radius: 40px;
+                justify-content: center;
+                padding: 0 32px;
+              "
+              data-cta-name="book now"
+            >
+              <span style="font-size: 21px"> Bắt đầu </span>
+              <span class="icon arrow white ml-15">
+                <img
+                  src="/assets/icon/intro/arrow-right.svg"
+                  width="18"
+                  height="16"
+                  alt=""
+                />
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <section id="projects-section">
+        <div class="content">
+          <h2 class="subheading">Quản lý tác vụ với Task Software</h2>
+          <div class="h2 mb-30">Dự án hoạt động.</div>
+          <p class="intro">
+            Cho dù bạn đang quản lý dự án lớn tiếp theo hay số hóa việc quản lý
+            tác vụ cho hoạt động kinh doanh hàng ngày của nhóm, bạn cần biết ai
+            đang làm gì, khi nào. Task Software giúp bạn quản lý công việc trong
+            một môi trường đẹp mắt, có thể tùy chỉnh, thích ứng hoàn hảo với nhu
+            cầu của bạn.
+          </p>
+          <div class="d-flex resp-flex-row mt-5">
+            <div class="tabs" style="margin-right: 40px">
+              <a href="#" id="tab_dashboard" class="icon active">
+                <img src="/assets/icon/intro/dashboard-abea.svg" />
+                <div>
+                  <h4>Bảng điều khiển</h4>
+                  <span class="h-hidden-phone">Mọi thứ ở một nơi</span>
+                </div>
+              </a>
+              <a href="#" id="tab_project" class="icon orange">
+                <img src="/assets/icon/intro/project-e255.svg" />
+                <div>
+                  <h4>Dự án</h4>
+                  <span class="h-hidden-phone"
+                    >Tổng quan rõ ràng, hiệu quả trọn vẹn</span
+                  >
+                </div>
+              </a>
+              <a href="#" id="tab_task" class="icon">
+                <img src="/assets/icon/intro/checkmark.svg" />
+                <div>
+                  <h4>Công việc</h4>
+                  <span class="h-hidden-phone"
+                    >Nơi công việc được hoàn thành</span
+                  >
+                </div>
+              </a>
+              <a href="#" id="tab_agenda" class="icon">
+                <img src="/assets/icon/intro/agenda-2279f888ada.svg" />
+                <div>
+                  <h4>Chương trình</h4>
+                  <span class="h-hidden-phone">Bảng cá nhân của riêng bạn</span>
+                </div>
+              </a>
+            </div>
+
+            <div
+              class="tab-contents align-items-center justify-center"
+              style="
+                position: relative;
+                flex: 2;
+                background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'25\' height=\'25\' viewBox=\'0 0 25 25\'%3E%3Ccircle cx=\'1.5\' cy=\'1.5\' r=\'1.5\' fill=\'%23DCE2E6\' fill-rule=\'evenodd\'/%3E%3C/svg%3E%0A');
+                background-repeat: repeat;
+              "
+            >
+              <div id="tab_dashboard_content" class="active">
+                <img
+                  class="hero js-lazy-image js-lazy-image-handled"
+                  style="
+                    margin: 40px 0;
+                    border-radius: 18px;
+                    box-shadow: 0 6px 18px -2px rgba(0, 0, 0, 0.05);
+                  "
+                  src="//cdn4.meistertask.com/assets/content/home/2021/ui-dashboard-6436b3719af91b5b986dcb405055f008fe8d61b09b336e7da3d59581e8eeb7fd.svg"
+                  width="600"
+                  height="385"
+                />
+                <div class="mb-50 h-hidden h-show-phone"></div>
+                <div
+                  class="img-overlay bg-navy fx-animate parallax fx-done"
+                  data-factor="-0.05"
+                  style="
+                    position: absolute;
+                    bottom: 2%;
+                    right: 5%;
+                    max-width: 280px;
+                    transform: translateY(5px);
+                  "
+                  data-scroll-y="2900"
+                >
+                  <strong>Có được bức tranh lớn</strong>
+                  Trang tổng quan của bạn cung cấp cái nhìn tổng quan về các
+                  thông báo, dự án và nhiệm vụ sắp tới trong một giao diện đẹp
+                  mắt, có thể tùy chỉnh. Chuẩn bị cho một ngày quản lý công việc
+                  hiệu quả với Task Software.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding-top: 20px">
+        <div class="content align-items-center">
+          <div class="quote ta-center">
+            <img
+              class="rounded-circle mb-30 js-lazy-image js-lazy-image-handled"
+              src="assets/img/ava.jpg"
+              style="max-width: 250px"
+            />
+            <p class="subheading ta-center mb-40">
+              “Tính thân thiện với người dùng và tính linh hoạt của Task
+              Software khiến việc sử dụng nó trở nên dễ dàng hơn.”
+            </p>
+            <div class="fw-bold mb-10">Dang Nhat Duy</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-light" style="padding: 60px 0">
+        <div class="content align-items-center ta-center">
+          <h2 class="subheading">
+            Tham gia cùng hàng triệu người dùng hạnh phúc
+          </h2>
+          <div class="h2">Bắt đầu miễn phí.</div>
+          <div class="h2 mb-40">Nâng cấp bất cứ lúc nào.</div>
+          <a
+            href="#"
+            id="compare-plans"
+            class="button blue xxlarge"
+            data-cta-name="compare plans"
+          >
+            So sánh
+            <span class="icon arrow white ml-15">
+              <img
+                src="/assets/icon/intro/arrow-right.svg"
+                width="18"
+                height="16"
+                alt=""
+              />
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section style="padding-bottom: 20px">
+        <div class="content">
+          <h2 class="subheading">Lịch trình. Làm cho đồng bộ. Hợp lý hóa.</h2>
+          <div class="h2 mb-30">Mốc thời gian</div>
+          <p class="intro">
+            Tính năng Dòng thời gian kiểu Gantt của MeisterTask giúp người quản
+            lý dự án nâng cao hiệu quả và giữ cho các nhóm của họ được liên kết.
+            Phân công và lên lịch các nhiệm vụ trong chế độ xem lịch để dễ dàng
+            xác định vị trí tắc nghẽn và đảm bảo đúng thời hạn.
+          </p>
+          <img
+            class="hero mb-5 js-lazy-image js-lazy-image-handled"
+            style="width: 1160px; max-height: 430px"
+            src="/assets/icon/intro/timeline-6ecc.svg"
+          />
+          <div
+            class="d-flex justify-content-between align-items-start resp-flex-row"
+          >
+            <div style="width: 100%; flex: 0 0 29%">
+              <div class="feature-icon mb-3 mt-5">
+                <img
+                  class="js-lazy-image js-lazy-image-handled"
+                  src="/assets/icon/intro/automations.svg"
+                />
+              </div>
+              <h4 class="mb-2">Tự động hóa</h4>
+              <p>
+                Hãy để MeisterTask giúp bạn tiết kiệm thời gian — tự động hóa
+                các bước lặp lại trong quy trình quản lý tác vụ của bạn để tăng
+                hiệu quả và tính nhất quán.
+              </p>
+              <a
+                id="automations-learn_more"
+                class="h-flex align-items-center fw-medium mb-60 cta-track-button"
+                href="#"
+              >
+                Tìm hiểu
+                <span class="icon arrow blue ml-15">
+                  <img
+                    src="/assets/icon/intro/arrow-right.svg"
+                    width="18"
+                    height="16"
+                    alt=""
+                  />
+                </span>
+              </a>
+            </div>
+            <div style="width: 100%; flex: 0 0 29%">
+              <div class="feature-icon mb-3 mt-5">
+                <img
+                  data-lazy-effect="none"
+                  class="js-lazy-image js-lazy-image-handled"
+                  src="/assets/icon/intro/time_tracking.svg"
+                />
+              </div>
+              <h4 class="mb-2">Theo dõi thời gian</h4>
+              <p>
+                Duy trì năng suất cao và đúng thời hạn với công cụ theo dõi thời
+                gian tích hợp của chúng tôi. Xuất dữ liệu để hỗ trợ tính toán và
+                dự đoán của nhóm.
+              </p>
+              <a
+                id="time_tracking-learn_more"
+                class="h-flex align-items-center fw-medium mb-60 cta-track-button"
+                href="#"
+              >
+                Tìm hiểu
+                <span class="icon arrow blue ml-15">
+                  <img
+                    src="/assets/icon/intro/arrow-right.svg"
+                    width="18"
+                    height="16"
+                    alt=""
+                  />
+                </span>
+              </a>
+            </div>
+            <div style="width: 100%; flex: 0 0 29%">
+              <div class="feature-icon mb-3 mt-5">
+                <img
+                  data-lazy-effect="none"
+                  class="js-lazy-image js-lazy-image-handled"
+                  src="/assets/icon/intro/recurring_tasks.svg"
+                />
+              </div>
+              <h4 class="mb-2">Nhiệm vụ định kỳ</h4>
+              <p>
+                Thực hiện cùng một nhiệm vụ thường xuyên? Đừng bắt đầu lại từ
+                đầu mỗi lần! Thay vào đó, hãy thiết lập một mẫu cho một nhiệm vụ
+                định kỳ.
+              </p>
+              <a
+                id="recurring_tasks-learn_more"
+                class="h-flex align-items-center fw-medium mb-60 cta-track-button"
+                href="/assets/image/intro/logo-focus.png"
+              >
+                Tìm hiểu
+                <span class="icon arrow blue ml-15">
+                  <img
+                    src="/assets/icon/intro/arrow-right.svg"
+                    width="18"
+                    height="16"
+                    alt=""
+                  />
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding-bottom: 0">
+        <div class="content">
+          <h2 class="subheading">
+            Hiểu biết sâu sắc về năng suất của nhóm bạn
+          </h2>
+          <div class="h2 mb-30">Báo cáo</div>
+          <p class="intro">
+            Thêm thứ nguyên dựa trên thống kê vào quản lý nhiệm vụ và dự án của
+            bạn. Với những hiểu biết sâu sắc về năng suất, khối lượng công việc
+            và nhiều thông tin khác, Báo cáo MeisterTask cung cấp cái nhìn tổng
+            quan rõ ràng về trạng thái dự án và giúp bạn hành động sớm.
+          </p>
+        </div>
+      </section>
+
+      <section
+        style="
+          padding: 0;
+          margin-bottom: 120px;
+          background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'1\' height=\'80\' viewBox=\'0 0 1 80\'%3E%3Ccircle cx=\'.5\' cy=\'60.5\' r=\'1\' fill=\'%23EDF1F2\' fill-rule=\'evenodd\'/%3E%3C/svg%3E%0A');
+          background-repeat: repeat;
+        "
+      >
+        <div class="content">
+          <div class="text-center">
+            <img
+              class="hero js-lazy-image js-lazy-image-handled"
+              style="width: 1120px; max-height: 687px"
+              src="/assets/image/intro/reports-.png"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section style="padding-bottom: 20px">
+        <div class="content">
+          <h2 class="subheading">
+            Phần mềm quản lý tác vụ cho một tương lai linh hoạt
+          </h2>
+          <div class="h2 mb-5">Một công cụ. Trường hợp sử dụng vô tận.</div>
+          <div class="row">
+            <div class="col-12 mb-20">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link text-primary"
+                    id="home-tab"
+                    data-toggle="tab"
+                    href="#home"
+                    role="tab"
+                    aria-controls="home"
+                    >Quản lý tác vụ?</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="profile-tab"
+                    data-toggle="tab"
+                    href="#profile"
+                    role="tab"
+                    aria-controls="profile"
+                    >Dự án linh hoạt</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="contact-tab"
+                    data-toggle="tab"
+                    href="#contact"
+                    role="tab"
+                    aria-controls="contact"
+                    >Nhóm từ xa</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    id="contact-tab"
+                    data-toggle="tab"
+                    href="#contact"
+                    role="tab"
+                    aria-controls="contact"
+                    >Làm việc theo nhóm</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tab-contents mb-60">
+            <div id="tab_taskmanagement_content" class="active">
+              <div class="box-wrapper bg-light">
+                <div class="text">
+                  <div class="h3 mb-20 h-hidden-phone">Quản lý tác vụ?</div>
+                  <p class="mb-0">
+                    Năng suất. Có hiệu quả. Kịp thời. Phần mềm quản lý tác vụ
+                    giúp bạn hướng dẫn các công việc một cách dễ dàng từ việc
+                    cần làm, việc cần làm, việc cần làm. Mang lại trật tự cho
+                    hoạt động kinh doanh hàng ngày của nhóm bạn và tạo quy trình
+                    làm việc phù hợp trong tương lai với Task Software.
+                  </p>
+                  <a
+                    id="task_management-learn_more"
+                    class="h-flex align-items-center fw-medium mt-40 cta-track-button"
+                    data-cta-name="task management - learn more"
+                    href="#"
+                  >
+                    Tìm hiểu
+                    <span class="icon arrow white ml-15">
+                      <img
+                        src="/assets/icon/intro/arrow-right.svg"
+                        width="18"
+                        height="16"
+                        alt=""
+                      />
+                    </span>
+                  </a>
+                </div>
+                <div class="image">
+                  <img
+                    class="corner js-lazy-image js-lazy-image-handled"
+                    src="/assets/icon/intro/usecase-campaign.svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="content">
+          <h2 class="subheading">Câu hỏi của bạn, đã được trả lời.</h2>
+          <div class="h2 mb-40">Là gì...</div>
+
+          <div
+            class="d-flex justify-content-between align-items-start resp-flex-row"
+          >
+            <div
+              class="box small bg-light mb-40"
+              style="width: 100%; flex: 0 0 30.5%"
+            >
+              <img
+                class="mb-2 filter-navy js-lazy-image js-lazy-image-handled"
+                data-lazy-effect="none"
+                src="/assets/icon/intro/multiple_checklists-.svg"
+                width="48"
+                height="48"
+              />
+              <h2 class="fs-xl mb-10 lh-normal">Quản lý tác vụ?</h2>
+              <p>
+                Quản lý tác vụ là quá trình xử lý các tác vụ có cấu trúc, số hóa
+                bằng phần mềm chuyên dụng. Task Software là một ví dụ tuyệt vời,
+                nhưng vẫn còn nhiều ví dụ khác.
+              </p>
+            </div>
+            <div
+              class="box small bg-light mb-40"
+              style="width: 100%; flex: 0 0 30.5%"
+            >
+              <img
+                class="mb-2 filter-turquoise js-lazy-image js-lazy-image-handled"
+                data-lazy-effect="none"
+                src="/assets/icon/intro/Laptop.svg"
+                width="48"
+                height="48"
+              />
+              <h2 class="fs-xl mb-10 lh-normal">Phần mềm quản lý công việc?</h2>
+              <p>
+                Phần mềm quản lý công việc có thể giúp bạn hình dung những gì
+                cần phải làm, khi nào. Nó cho bạn biết ai là người chịu trách
+                nhiệm về một nhiệm vụ, khi nào đến hạn và hơn thế nữa.
+              </p>
+            </div>
+            <div
+              class="box small bg-light mb-40"
+              style="width: 100%; flex: 0 0 30.5%"
+            >
+              <img
+                class="mb-2 filter-orange js-lazy-image js-lazy-image-handled"
+                data-lazy-effect="none"
+                src="/assets/icon/intro/ProjectBoard.svg"
+                width="48"
+                height="48"
+              />
+              <h2 class="fs-xl mb-10 lh-normal">Bảng hiệu?</h2>
+              <p>
+                Bảng Kanban là hình ảnh trực quan của các dự án và là tính năng
+                của nhiều công cụ quản lý tác vụ. Nhiệm vụ bắt đầu ở bên trái
+                bảng và di chuyển sang bên phải khi chúng được thực hiện.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="d-flex justify-content-between align-items-start resp-flex-row"
+          >
+            <div
+              class="box small bg-light mb-40"
+              style="width: 100%; flex: 0 0 30.5%"
+            >
+              <img
+                class="mb-2 filter-navy js-lazy-image js-lazy-image-handled"
+                data-lazy-effect="none"
+                src="/assets/icon/intro/timeline-6ecc.svg"
+                width="48"
+                height="48"
+              />
+              <h2 class="fs-xl mb-10 lh-normal">
+                Quản lý dự án thác nước/Agile?
+              </h2>
+              <p>
+                Hai phương pháp quản lý dự án phổ biến nhất. Thác nước là cách
+                quản lý nhiệm vụ tuyến tính, truyền thống, trong khi các công cụ
+                linh hoạt như Task Software?sử dụng cách tiếp cận lặp lại linh
+                hoạt hơn.
+              </p>
+            </div>
+            <div
+              class="box small bg-light mb-40"
+              style="width: 100%; flex: 0 0 30.5%"
+            >
+              <img
+                class="mb-2 filter-purple js-lazy-image js-lazy-image-handled"
+                data-lazy-effect="none"
+                src="/assets/icon/intro/Trending.svg"
+                width="48"
+                height="48"
+              />
+              <h2 class="fs-xl mb-10 lh-normal">
+                Lý do bạn cần phần mềm quản lý công việc?
+              </h2>
+              <p>
+                Phần mềm quản lý công việc trực tuyến giúp bạn làm việc hiệu quả
+                và nhất quán. Về lâu dài, bạn và nhóm của bạn sẽ có thể làm được
+                nhiều việc hơn và cải thiện tiêu chuẩn công việc của bạn.
+              </p>
+            </div>
+            <div
+              class="box small bg-light mb-40"
+              style="width: 100%; flex: 0 0 30.5%"
+            >
+              <img
+                class="mb-2 filter-green js-lazy-image js-lazy-image-handled"
+                data-lazy-effect="none"
+                src="/assets/icon/intro/Vote.svg"
+                width="48"
+                height="48"
+              />
+              <h2 class="fs-xl mb-10 lh-normal">
+                Lợi ích chính của Task Software?
+              </h2>
+              <p>
+                Mọi người sử dụng phần mềm quản lý công việc một cách khác nhau.
+                Chúng tôi nhận thấy rằng người dùng của chúng tôi tận hưởng khả
+                năng tổ chức tốt hơn, cộng tác suôn sẻ hơn và giao tiếp được cải
+                thiện với Stack Software.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-navy">
+        <div class="content align-items-center ta-center">
+          <h2 class="subheading" style="color: rgba(255, 255, 255, 0.5)">
+            Làm việc hiệu quả. Nhận Task Software.
+          </h2>
+          <div class="h2 mb-1" style="color: white">Bắt đầu miễn phí.</div>
+          <a id="blue-teaser-sign-up" href="#" class="button xxlarge mt-4">
+            Nâng cấp bất cứ lúc nào.
+            <span class="icon arrow blue ml-15">
+              <img
+                src="/assets/icon/intro/arrow-right.svg"
+                width="18"
+                height="16"
+                alt=""
+              />
+            </span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </nz-content>
+
+  <nz-footer>
+    <footer
+      class="_bfhk1hxd _ca0qzwfg _u5f3idpf _n3tdidpf _19bvidpf _kqswh2mm _12l21wug _ahbq1wug _1ul91osq _11rm1hrf"
+    >
+      <div
+        class="_ca0qidpf _u5f3idpf _n3tdzwfg _19bvidpf _kqswh2mm _12l21wug _ahbq1wug _1ul91osq _11rm1hrf _19itidpf _1wyb1osq _s7n41q9y"
+      >
+        <div
+          class="_4cvr1fhb _1e0c11p5 _1bah1yb4 _19pk1wug _2hwx1wug _otyr1wug _18u01wug _p12f1osq _vchhusvi _bozgzwfg _y4tizwfg _zulp1tcg _1bsb1osq _qwmh1wqb _yu8o1wqb _d2ik1wqb _exxm1wqb _gltezqdx _pdlmzwfg _3intidpf _4fugidpf _1ynqidpf _1j3nidpf _1mcm1tcg _pnnxzwfg _yv0ei47z row-layout"
+        >
+          <div
+            class="_ahbq1wug _12l21wug _2lx2vrvc _1n261g80 _4cvr1y6m _ae4v1y6m _1e0c11p5 _yv0e9sye _1lmc4yt6 _zulpzwfg _1bsb1osq _i48j1x32 _1quq1fns _1rqtzt30 _12fkxcxm"
+          >
+            <div class="_nd5l1d4v">
+              <div
+                class="_nd5l1d4v _19itidpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _13wnh2mm _1945t94y _1s4p1osq"
+              >
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <a
+                    class="_syazvwuj _1wyboxwj _vwz4rrl5 _4bfu1r31 _1hmsglyw _ajmmnqa1 _6rthidpf _1e0c1ule _s7n41q9y _w8l5176v _17521wug _nn40glyw _1i4x7vkz _z239yfq0 _4x201osq"
+                  >
+                    <img
+                      src="/assets/logo/logo-auth.png"
+                      style="max-width: 200px"
+                      alt=""
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="_nd5lrwmx _1e0c11p5 _yv0e9sye _zulpzwfg _1j8b1x32">
+              <div
+                class="_kqswh2mm _1tket94y _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19pkidpf _2hwxidpf _otyridpf _18u0idpf _19itidpf _1wyb1osq _s7n41q9y _1e0c1ule _syaz1mpp _vchhusvi _1bsb1osq"
+              >
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <h3
+                    class="_1wybdlk8 _1dyzt94y _6rthgktf _1pfhidpf _syazvwuj _o10x10nf _1p1dangw _k48p1fw0 _1eglgktf _1tnt1tcg"
+                  >
+                    Sản phẩm
+                  </h3>
+                </div>
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <ul class="_lswumhro _6rthidpf _2mzu1wth _bozggktf _qtt8glyw">
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Task Software</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Task Align</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Task Service Management</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Task Work Management</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Task Align</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Task Service Management</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Task Work Management</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_1pfh7vkz _6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazrbzz _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _1a3b1r31 _9oik1r31 _1ydc1r31 _4fpr8stv _1bnx8stv _1x288stv _5goinqa1 _jf4cnqa1 _1726nqa1"
+                          style="color: #0065ff"
+                        >
+                          <span>Tất cả về sản phẩm</span>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                class="_kqswh2mm _1tket94y _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19pkidpf _2hwxidpf _otyridpf _18u0idpf _19itidpf _1wyb1osq _s7n41q9y _1e0c1ule _syaz1mpp _vchhusvi _1bsb1osq"
+              >
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <h3
+                    class="_1wybdlk8 _1dyzt94y _6rthgktf _1pfhidpf _syazvwuj _o10x10nf _1p1dangw _k48p1fw0 _1eglgktf _1tnt1tcg"
+                  >
+                    Tài nguyên
+                  </h3>
+                </div>
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <ul class="_lswumhro _6rthidpf _2mzu1wth _bozggktf _qtt8glyw">
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Hỗ trợ kỹ thuật</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Mua và cấp phép</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Cộng đồng Software</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Kiến thức cơ bản</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Thương trường</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Tài khoản của tôi</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_1pfh7vkz _6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazrbzz _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _1a3b1r31 _9oik1r31 _1ydc1r31 _4fpr8stv _1bnx8stv _1x288stv _5goinqa1 _jf4cnqa1 _1726nqa1"
+                          style="color: #0065ff"
+                        >
+                          <span>Tạo phiểu hỗ trợ</span>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                class="_kqswh2mm _1tket94y _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19pkidpf _2hwxidpf _otyridpf _18u0idpf _19itidpf _1wyb1osq _s7n41q9y _1e0c1ule _syaz1mpp _vchhusvi _1bsb1osq"
+              >
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <h3
+                    class="_1wybdlk8 _1dyzt94y _6rthgktf _1pfhidpf _syazvwuj _o10x10nf _1p1dangw _k48p1fw0 _1eglgktf _1tnt1tcg"
+                  >
+                    Mở rộng và Tìm hiểu
+                  </h3>
+                </div>
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <ul class="_lswumhro _6rthidpf _2mzu1wth _bozggktf _qtt8glyw">
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Đối tác</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Đào tạo & Chứng nhận</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Tài liệu</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Dịch vụ doanh nghiệp</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Tài nguyên dành cho nhà phát triển</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_1pfh7vkz _6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazrbzz _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _1a3b1r31 _9oik1r31 _1ydc1r31 _4fpr8stv _1bnx8stv _1x288stv _5goinqa1 _jf4cnqa1 _1726nqa1"
+                          style="color: #0065ff"
+                        >
+                          <span>Xem tất cả tài nguyên</span>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                class="_kqswh2mm _1tket94y _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19pkidpf _2hwxidpf _otyridpf _18u0idpf _19itidpf _1wyb1osq _s7n41q9y _1e0c1ule _syaz1mpp _vchhusvi _1bsb1osq"
+              >
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <h3
+                    class="_1wybdlk8 _1dyzt94y _6rthgktf _1pfhidpf _syazvwuj _o10x10nf _1p1dangw _k48p1fw0 _1eglgktf _1tnt1tcg"
+                  >
+                    Giới thiệu Task Software
+                  </h3>
+                </div>
+                <div
+                  class="_19pkidpf _2hwxidpf _otyridpf _18u0idpf _ca0qidpf _u5f3idpf _n3tdidpf _19bvidpf _19itidpf _1wyb1osq _s7n41q9y"
+                >
+                  <ul class="_lswumhro _6rthidpf _2mzu1wth _bozggktf _qtt8glyw">
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Công ty</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Nghề nghiệp</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Sự kiện</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Blog</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_16btglyw _1up4glyw _4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazvwuj _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _9oik1r31 _1bnx8stv _jf4cnqa1 _1taiglyw"
+                          style="color: #42526e"
+                        >
+                          <span>Quỹ Management</span>
+                        </a>
+                      </div>
+                    </li>
+                    <li
+                      class="_1pfh7vkz _6rthidpf _2mzuglyw _ahbq1fm0 _syaz1kw7 _1wyb1j6v _vwz4bs82"
+                    >
+                      <div class="link-wrapper">
+                        <a
+                          class="_4bfu1r31 _1hmsglyw _ajmmnqa1 _4cvr1h6o _syazrbzz _1e0c116y _10531pdu _f8pji0o6 _30l3i0o6 _1axpaexi _aelyaexi _pb8z1pdu _kj55i0o6 _12lvi0o6 _l8kux7w3 _1wyboxwj _vwz4rrl5 _s7n41q9y _1a3b1r31 _9oik1r31 _1ydc1r31 _4fpr8stv _1bnx8stv _1x288stv _5goinqa1 _jf4cnqa1 _1726nqa1"
+                          style="color: #0065ff"
+                        >
+                          <span>Liên hệ với chúng tôi</span>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </nz-footer>
+</nz-layout>

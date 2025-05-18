@@ -1,0 +1,72 @@
+<div class="css-321lzd">
+  <h5>Đăng ký để tiếp tục</h5>
+</div>
+
+<form class="css-r44k6v" #userForm="ngForm">
+  <div class="css-env1z2">
+    <!-- Tên đăng ký -->
+    <div class="css-cnfgt3">
+      <div class="css-xcejzt">
+        <div class="css-q5x77e">
+          <div class="css-1s25hsw">
+            <input nz-input placeholder="Nhập tên của bạn" [(ngModel)]="user.fullName" id="fullName" name="fullName" type="text" require />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nhập Email -->
+    <div class="css-cnfgt3">
+      <div class="css-xcejzt">
+        <div class="css-q5x77e">
+          <div class="css-1s25hsw">
+            <input nz-input placeholder="Nhập email của bạn" [(ngModel)]="user.emailAddress" id="emailAddress" name="email" type="text" require />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nhập Mật Khẩu -->
+    <div class="css-cnfgt3">
+      <div class="css-xcejzt">
+        <div class="css-q5x77e">
+          <div class="css-1s25hsw">
+            <nz-input-group [nzSuffix]="suffixTemplate">
+              <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Nhập mật khẩu của bạn" id="password" name="password" [(ngModel)]="user.password" require />
+            </nz-input-group>
+            <ng-template #suffixTemplate>
+              <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nhập số điện thoại -->
+    <div class="css-cnfgt3">
+      <div class="css-xcejzt">
+        <div class="css-q5x77e">
+          <div class="css-1s25hsw">
+            <input nz-input placeholder="Nhập số điện thoại của bạn" [(ngModel)]="user.phoneNumber" id="phoneNumber" name="phoneNumber" type="text" require />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Nhập roles ID -->
+    <div class="css-cnfgt3">
+      <div class="css-xcejzt">
+        <div class="css-q5x77e">
+          <div class="">
+            <nz-select id="roleID" name="roleID" [(ngModel)]="user.roleID" required class="css-1cab8vv" nzShowSearch nzAllowClear nzPlaceHolder="Chọn chức danh của mình">
+              <nz-option *ngFor="let role of roles" [nzLabel]="role.roleName" [nzValue]="role.roleID"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="css-1w9zxjf css-1edgkow" type="button" (click)="registerUser()">
+    <span class="css-178ag6o">Đăng ký</span>
+  </button>
+
+</form>

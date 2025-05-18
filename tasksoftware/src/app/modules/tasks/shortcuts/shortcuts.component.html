@@ -1,0 +1,90 @@
+<div class="content">
+  <div class="container-fluid scrollable-table">
+    <div class="container-right">
+      <div class="search">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input type="text" nz-input placeholder="Dòng thời gian tìm kiếm" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+      </div>
+      <div class="role-team">
+        <nz-avatar-group>
+          <nz-avatar style="color:#f56a00; background-color:#fde3cf;" *ngFor="let member of teamData"
+            [nzIcon]="member.picture ? 'user' : undefined" [nzSrc]="member.picture"
+            title="{{member.fullName}}"></nz-avatar>
+        </nz-avatar-group>
+        <div class="team-avatar">
+          <span nz-icon nzType="user-add" nzTheme="outline"></span>
+        </div>
+      </div>
+    </div>
+    <div class="container-left">
+      <button style="background-color: #FFFFFF; border: 1px solid #E5E8EB;">
+        Hôm nay
+      </button>
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="share">
+        <span nz-icon nzType="share-alt" nzTheme="outline"></span>
+        Chia sẻ
+      </button>
+      <nz-dropdown-menu #share="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <li nz-menu-item class="nz-menu-li" (click)="copyUrlToClipboard()">
+            <span nz-icon nzType="link" nzTheme="outline"></span>
+            Sao chép liên kết
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+      <button>
+        <span nz-icon nzType="cloud-upload" nzTheme="outline"></span>
+        Xuất File
+      </button>
+      <button>
+        <span nz-icon nzType="align-center" nzTheme="outline"></span>
+        Bộ lọc
+      </button>
+      <button>
+        <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+        Hơn
+      </button>
+    </div>
+  </div>
+
+  <div class="container-body">
+    <div class="folder-item" *ngFor="let data of backlogs">
+      <div class="folder-thumbail">
+        <div class="folder-text">
+          <svg width="112" height="120" viewBox="0 0 112 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="13" y="13" width="86" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="13" y="31" width="32" height="2" rx="1" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="13" y="36" width="80" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="13" y="55" width="32" height="2" rx="1" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="13" y="60" width="47" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="13" y="79" width="32" height="2" rx="1" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="13" y="84" width="67" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="46" y="102" width="26" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+            <rect x="75" y="102" width="26" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)"></rect>
+          </svg>
+        </div>
+      </div>
+      <p>{{ data.summary }}</p>
+      <div class="text">
+        Được tạo bởi {{ data.userName }} cách đây 1 ngày
+      </div>
+      <div class="item">
+        <div>
+          <img src="/assets/icon/task/10318.svg" alt="">
+          Nhiệm vụ
+        </div>
+        <div>
+          <span>
+            <span nz-icon nzType="team" nzTheme="outline"></span>
+            Giới hạn
+          </span>
+          <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

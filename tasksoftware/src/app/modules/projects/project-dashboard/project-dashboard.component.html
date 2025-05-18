@@ -1,0 +1,303 @@
+<div class="content-app-dashboard">
+  <div class="bg-title">
+    <div class="header-location">
+      <p>
+        Task SoftWare
+        <span style="margin: 8px">
+          <img src="/assets/icon/project/Icon-arrow.svg" alt="" />
+        </span>
+        <a href="">Trang chủ</a>
+      </p>
+    </div>
+    <div class="bg-header-text">
+      <div class="header-text">
+        <h5>Tổng quan dự án</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-body-app">
+    <div class="header-map">
+      <h6>Dự án gần đây</h6>
+      <p routerLink="/project/project-view">Xem tất cả dự án</p>
+    </div>
+
+    <div class="bg-card-app">
+      <div class="bg-card-app-sketch" *ngFor="let project of projects">
+        <a class="ktRddP">
+          <span class="gKKmlt">
+            <img
+              src="/assets/icon/project/10418.svg"
+              width="24px"
+              height="24px"
+            />
+          </span>
+          <div class="cEvSzd">
+            <p class="hVfRVu">
+              <a [routerLink]="['/task/work-summary/' + project.projectID]">{{
+                project.projectName
+              }}</a>
+            </p>
+            <p class="_1wyb1skh">Doanh nghiệp được quản lý theo nhóm</p>
+          </div>
+        </a>
+        <div class="_16jlkb7n">
+          <div class="kqFRrR">
+            <p class="kBaqcC">Đường dẫn nhanh</p>
+          </div>
+          <div class="kqFRrR">
+            <a class="VYfbg">
+              <div class="_1reo15vq _18m915vq _16jlkb7n">
+                <p class="dWOPs">Các vấn đề mở của tôi</p>
+              </div>
+              <div class="=bLkAGQ"></div>
+            </a>
+          </div>
+          <div class="kqFRrR">
+            <a class="VYfbg">
+              <div class="_1reo15vq _18m915vq _16jlkb7n">
+                <p class="dWOPs">Các vấn đề đã hoàn thành</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="fSOZlH">
+          <button class="daPNYp css-8vysra">
+            <span class="css-1gd7hga">
+              <p class="sc-1p2gpiw-4 bgxHlt">1 bảng</p>
+            </span>
+            <span class="css-10dsogl">
+              <span role="img" class="css-1wits42">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  role="presentation"
+                >
+                  <path
+                    d="M8.292 10.293a1.009 1.009 0 000 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 000-1.419.987.987 0 00-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 00-1.406 0z"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                  ></path>
+                </svg>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-body">
+    <nz-tabset>
+      <nz-tab nzTitle="Làm việc trên">
+        <nz-table
+          [nzShowPagination]="false"
+          [nzData]="projects"
+          nzTableLayout="fixed"
+        >
+          <thead>
+            <tr>
+              <th style="text-align: center">Tên dự án</th>
+              <th style="text-align: center">Mã dự án</th>
+              <th style="text-align: center">Loại dự án</th>
+              <th style="text-align: center">Quản lý</th>
+              <th style="text-align: center">Ngày bắt đầu</th>
+              <th style="text-align: center">Tiến trình</th>
+              <th style="text-align: center">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of projects">
+              <td
+                [routerLink]="['/task/work-summary/' + data.projectID]"
+                style="text-align: center; cursor: pointer"
+              >
+                <nz-avatar
+                  nzText="{{ data.projectName.substring(0, 2).toUpperCase() }}"
+                  class="avatar-user"
+                  style="margin-right: 5px"
+                >
+                </nz-avatar>
+                {{ data.projectName }}
+              </td>
+              <td style="text-align: center">TSP-{{ data.projectID }}</td>
+              <td style="text-align: center">{{ data.projectDescription }}</td>
+              <td style="text-align: center">{{ data.leadFullName }}</td>
+              <td style="text-align: center">
+                {{ data.createdDate | date : "dd-MM-yyyy" }}
+              </td>
+              <td style="text-align: center">
+                <nz-progress
+                  [nzPercent]="data.progress"
+                  [nzShowInfo]="false"
+                ></nz-progress>
+              </td>
+              <td style="text-align: center; cursor: pointer">
+                <span
+                  nz-icon
+                  nzType="ellipsis"
+                  nzTheme="outline"
+                  nz-dropdown
+                  nzTrigger="click"
+                  [nzDropdownMenu]="import"
+                ></span>
+              </td>
+
+              <nz-dropdown-menu #import="nzDropdownMenu">
+                <div nz-menu>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span nz-icon nzType="delete" nzTheme="outline"></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Xóa dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span nz-icon nzType="form" nzTheme="outline"></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Chỉnh sửa dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span
+                        nz-icon
+                        nzType="info-circle"
+                        nzTheme="outline"
+                      ></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Thông tin dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span nz-icon nzType="copy" nzTheme="outline"></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Sao chép dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </nz-dropdown-menu>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
+      <nz-tab nzTitle="Đã xem">
+        <nz-empty
+          [nzNotFoundContent]="'Không có dữ liệu các công việc đã xem'"
+        ></nz-empty>
+      </nz-tab>
+      <nz-tab nzTitle="Giao cho tôi">
+        <nz-table
+          [nzShowPagination]="false"
+          [nzData]="projects"
+          nzTableLayout="fixed"
+        >
+          <thead>
+            <tr>
+              <th style="text-align: center">Tên dự án</th>
+              <th style="text-align: center">Mã dự án</th>
+              <th style="text-align: center">Loại dự án</th>
+              <th style="text-align: center">Quản lý</th>
+              <th style="text-align: center">Ngày bắt đầu</th>
+              <th style="text-align: center">Tiến trình</th>
+              <th style="text-align: center">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of projects">
+              <td
+                [routerLink]="['/project/work-summary/' + data.projectID]"
+                style="text-align: center; cursor: pointer"
+              >
+                <nz-avatar
+                  nzText="{{ data.projectName.substring(0, 2).toUpperCase() }}"
+                  class="avatar-user"
+                  style="margin-right: 5px"
+                >
+                </nz-avatar>
+                {{ data.projectName }}
+              </td>
+              <td style="text-align: center">TSP-{{ data.projectID }}</td>
+              <td style="text-align: center">{{ data.projectDescription }}</td>
+              <td style="text-align: center">{{ data.leadFullName }}</td>
+              <td style="text-align: center">
+                {{ data.createdDate | date : "dd-MM-yyyy" }}
+              </td>
+              <td style="text-align: center">
+                <nz-progress
+                  [nzPercent]="data.progress"
+                  [nzShowInfo]="false"
+                ></nz-progress>
+              </td>
+              <td style="text-align: center; cursor: pointer">
+                <span
+                  nz-icon
+                  nzType="ellipsis"
+                  nzTheme="outline"
+                  nz-dropdown
+                  nzTrigger="click"
+                  [nzDropdownMenu]="import"
+                ></span>
+              </td>
+
+              <nz-dropdown-menu #import="nzDropdownMenu">
+                <div nz-menu>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span nz-icon nzType="delete" nzTheme="outline"></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Xóa dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span nz-icon nzType="form" nzTheme="outline"></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Chỉnh sửa dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span
+                        nz-icon
+                        nzType="info-circle"
+                        nzTheme="outline"
+                      ></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Thông tin dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button class="css-1m7bkbm" type="button" nz-menu-item>
+                    <span class="css-12dc8u4">
+                      <span nz-icon nzType="copy" nzTheme="outline"></span>
+                      <span class="css-1uww2tp">
+                        <span class="css-5mekwu">Sao chép dự án</span>
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </nz-dropdown-menu>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-tab>
+      <nz-tab nzTitle="Được gắn dấu sao">
+        <nz-empty
+          [nzNotFoundContent]="
+            'Không có dữ liệu các công việc đã được gắn dấu sao'
+          "
+        ></nz-empty>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</div>

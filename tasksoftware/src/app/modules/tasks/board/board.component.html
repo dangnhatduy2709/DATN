@@ -1,0 +1,870 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="container-right">
+      <div class="search">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input
+            type="text"
+            nz-input
+            placeholder="Tìm kiếm Bảng"
+            [(ngModel)]="searchProject"
+            (ngModelChange)="onSearchChange()"
+          />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+      </div>
+      <div class="role-team">
+        <nz-avatar-group>
+          <nz-avatar
+            style="color: #f56a00; background-color: #fde3cf"
+            *ngFor="let member of teamData"
+            [nzIcon]="member.picture ? 'user' : undefined"
+            [nzSrc]="member.picture"
+            title="{{ member.fullName }}"
+          ></nz-avatar>
+        </nz-avatar-group>
+        <div class="team-avatar" (click)="showsTeamMember()">
+          <span nz-icon nzType="user-add" nzTheme="outline"></span>
+        </div>
+      </div>
+    </div>
+    <div class="container-left">
+      <button
+        nz-button
+        *ngIf="boardFilter || statusFilter || searchProject"
+        (click)="resetFilters()"
+      >
+        Đặt lại bộ lọc
+      </button>
+
+      <!-- Chia sẻ -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="share">
+        <span nz-icon nzType="share-alt" nzTheme="outline"></span>
+        Chia sẻ
+      </button>
+      <nz-dropdown-menu #share="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <li nz-menu-item class="nz-menu-li" (click)="copyUrlToClipboard()">
+            <span nz-icon nzType="link" nzTheme="outline"></span>
+            Sao chép liên kết
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+      <!-- Bộ lọc -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="filter">
+        <span nz-icon nzType="align-center" nzTheme="outline"></span>
+        Bộ lọc
+      </button>
+      <nz-dropdown-menu #filter="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <div class="css-xhdqsk">Lọc theo trạng thái công việc</div>
+          <li
+            nz-menu-item
+            class="nz-menu-li"
+            (click)="filterByStatus('Lowest')"
+          >
+            <img
+              src="/assets/icon/task/lowest.svg"
+              width="24px"
+              height="24px"
+              alt=""
+            />
+            Lowest
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus('Low')">
+            <img
+              src="/assets/icon/task/low.svg"
+              width="24px"
+              height="24px"
+              alt=""
+            />
+            Low
+          </li>
+          <li
+            nz-menu-item
+            class="nz-menu-li"
+            (click)="filterByStatus('Medium')"
+          >
+            <img
+              src="/assets/icon/task/medium.svg"
+              width="24px"
+              height="24px"
+              alt=""
+            />
+            Medium
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus('High')">
+            <img
+              src="/assets/icon/task/high.svg"
+              width="24px"
+              height="24px"
+              alt=""
+            />
+            High
+          </li>
+          <li
+            nz-menu-item
+            class="nz-menu-li"
+            (click)="filterByStatus('Highest')"
+          >
+            <img
+              src="/assets/icon/task/highest.svg"
+              width="24px"
+              height="24px"
+              alt=""
+            />
+            Highest
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <!-- Nhóm theo -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="group">
+        <span nz-icon nzType="menu" nzTheme="outline"></span>
+        Nhóm theo
+      </button>
+      <nz-dropdown-menu #group="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <div class="css-xhdqsk">Lọc theo bảng công việc</div>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByBoard('To Do')">
+            <span nz-icon nzType="file-unknown" nzTheme="outline"></span>
+            Thực hiện
+          </li>
+          <li
+            nz-menu-item
+            class="nz-menu-li"
+            (click)="filterByBoard('In Progress')"
+          >
+            <span nz-icon nzType="file-text" nzTheme="outline"></span>
+            Tiến hành
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByBoard('Test')">
+            <span nz-icon nzType="file-sync" nzTheme="outline"></span>
+            Kiểm tra
+          </li>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByBoard('Done')">
+            <span nz-icon nzType="file-protect" nzTheme="outline"></span>
+            Hoàn thành
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+
+      <!-- Hơn -->
+      <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="hon">
+        <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+        Hơn
+      </button>
+      <nz-dropdown-menu #hon="nzDropdownMenu">
+        <ul nz-menu class="nz-menu-ul">
+          <div class="css-xhdqsk">Tùy chỉnh</div>
+          <li nz-menu-item class="nz-menu-li">
+            <span
+              nz-icon
+              nzType="table"
+              nzTheme="outline"
+              class="drop-span"
+            ></span>
+            Tùy chỉnh các thẻ
+            <span nz-icon nzType="right" nzTheme="outline"></span>
+          </li>
+          <li nz-menu-item class="nz-menu-li">
+            <span nz-icon nzType="split-cells" nzTheme="outline"></span>
+            Mở rộng cột
+          </li>
+          <li nz-menu-item class="nz-menu-li">
+            <span nz-icon nzType="merge-cells" nzTheme="outline"></span>
+            Thu gọn cột
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+    </div>
+  </div>
+  <div class="container-body">
+    <form action="">
+      <!-- To Do -->
+      <div
+        class="content-todo"
+        (dragover)="onDrapOver($event)"
+        (drop)="onDrop($event, 'To Do')"
+      >
+        <div class="todo-header">
+          <div class="todo-header-left">
+            <span nz-icon nzType="holder" nzTheme="outline"></span>
+            <p>Thực hiện</p>
+          </div>
+          <div
+            class="todo-header-right"
+            nz-dropdown
+            nzTrigger="click"
+            [nzDropdownMenu]="action"
+            style="cursor: pointer"
+          >
+            <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+          </div>
+          <nz-dropdown-menu #action="nzDropdownMenu">
+            <ul nz-menu class="nz-menu-ul">
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="edit" nzTheme="outline"></span>
+                Đổi tên bảng
+              </li>
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+                Xóa bảng
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+        <div class="todo-drap">
+          <ul class="tasks">
+            <li
+              class="task"
+              nz-button
+              (click)="showTaskInfor(item)"
+              style="
+                height: 92px;
+                box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
+              "
+              draggable="true"
+              *ngFor="let item of filterTickets('To Do')"
+              (dragstart)="onDragStart(item)"
+            >
+              {{ item.taskType }}
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: 25px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/10318.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                  <span>Khóa-{{ item.taskID }}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <svg
+                    height="16"
+                    width="16"
+                    viewBox="0 0 24 24"
+                    role="presentation"
+                    style="color: #00875a"
+                  >
+                    <path
+                      d="M6.735 12.322a1 1 0 00-1.47 1.356l3.612 3.919c.537.526 1.337.526 1.834.03l.364-.359a2335.638 2335.638 0 003.939-3.883l.04-.04a492.598 492.598 0 003.658-3.643 1 1 0 00-1.424-1.404 518.42 518.42 0 01-3.64 3.625l-.04.04a2049.114 2049.114 0 01-3.775 3.722l-3.098-3.363z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                  <img
+                    src="/assets/icon/task/medium.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                </div>
+              </div>
+            </li>
+            <li>
+              <button class="button-todo">
+                <span nz-icon nzType="plus" nzTheme="outline"></span>
+                Tạo mới
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- In Process -->
+      <div
+        class="content-process"
+        (dragover)="onDrapOver($event)"
+        (drop)="onDrop($event, 'In Progress')"
+      >
+        <div class="process-header">
+          <div class="process-header-left">
+            <span nz-icon nzType="holder" nzTheme="outline"></span>
+            <p>Tiến hành</p>
+          </div>
+          <div
+            class="process-header-right"
+            nz-dropdown
+            nzTrigger="click"
+            [nzDropdownMenu]="process"
+            style="cursor: pointer"
+          >
+            <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+          </div>
+          <nz-dropdown-menu #process="nzDropdownMenu">
+            <ul nz-menu class="nz-menu-ul">
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="edit" nzTheme="outline"></span>
+                Đổi tên bảng
+              </li>
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+                Xóa bảng
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+        <div class="process-drap">
+          <ul class="tasks">
+            <li
+              class="task"
+              style="
+                height: 92px;
+                box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
+              "
+              nz-button
+              (click)="showTaskInfor(item)"
+              draggable="true"
+              *ngFor="let item of filterTickets('In Progress')"
+              (dragstart)="onDragStart(item)"
+            >
+              {{ item.taskType }}
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: 25px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/10318.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                  <span>Khóa-{{ item.taskID }}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/medium.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                </div>
+              </div>
+            </li>
+            <li>
+              <button class="button-process">
+                <span nz-icon nzType="plus" nzTheme="outline"></span>
+                Tạo mới
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Test -->
+      <div
+        class="content-done"
+        (dragover)="onDrapOver($event)"
+        (drop)="onDrop($event, 'Test')"
+      >
+        <div class="done-header">
+          <div class="done-header-left">
+            <span nz-icon nzType="holder" nzTheme="outline"></span>
+            <p>Kiểm tra</p>
+          </div>
+          <div
+            class="done-header-right"
+            nz-dropdown
+            nzTrigger="click"
+            [nzDropdownMenu]="test"
+            style="cursor: pointer"
+          >
+            <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+          </div>
+          <nz-dropdown-menu #test="nzDropdownMenu">
+            <ul nz-menu class="nz-menu-ul">
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="edit" nzTheme="outline"></span>
+                Đổi tên bảng
+              </li>
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+                Xóa bảng
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+        <div class="done-drap">
+          <ul class="tasks">
+            <li
+              class="task"
+              nz-button
+              (click)="showTaskInfor(item)"
+              style="
+                height: 92px;
+                box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
+              "
+              draggable="true"
+              *ngFor="let item of filterTickets('Test')"
+              (dragstart)="onDragStart(item)"
+            >
+              {{ item.taskType }}
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: 25px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/10318.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                  <span>Khóa-{{ item.taskID }}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/medium.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                </div>
+              </div>
+            </li>
+            <li>
+              <button class="button-done">
+                <span nz-icon nzType="plus" nzTheme="outline"></span>
+                Tạo mới
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Done -->
+      <div
+        class="content-done"
+        (dragover)="onDrapOver($event)"
+        (drop)="onDrop($event, 'Done')"
+      >
+        <div class="done-header">
+          <div class="done-header-left">
+            <span nz-icon nzType="holder" nzTheme="outline"></span>
+            <p>Hoàn thành</p>
+          </div>
+          <div
+            class="done-header-right"
+            nz-dropdown
+            nzTrigger="click"
+            [nzDropdownMenu]="done"
+            style="cursor: pointer"
+          >
+            <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+          </div>
+          <nz-dropdown-menu #done="nzDropdownMenu">
+            <ul nz-menu class="nz-menu-ul">
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="edit" nzTheme="outline"></span>
+                Đổi tên bảng
+              </li>
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+                Xóa bảng
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+        <div class="done-drap">
+          <ul class="tasks">
+            <li
+              class="task"
+              nz-button
+              (click)="showTaskInfor(item)"
+              style="
+                height: 92px;
+                box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
+              "
+              draggable="true"
+              *ngFor="let item of filterTickets('Done')"
+              (dragstart)="onDragStart(item)"
+            >
+              {{ item.taskType }}
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: 25px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/10318.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                  <span>Khóa-{{ item.taskID }}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/medium.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                </div>
+              </div>
+            </li>
+            <li>
+              <button class="button-done">
+                <span nz-icon nzType="plus" nzTheme="outline"></span>
+                Tạo mới
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-plus">
+        <span nz-icon nzType="plus" nzTheme="outline"></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Tạo thành viên dự án -->
+<nz-modal
+  [(nzVisible)]="isTeamMember"
+  [nzFooter]="null"
+  nzTitle="Thêm thành viên vào nhóm"
+  [nzWidth]="850"
+>
+  <ng-container *nzModalContent>
+    <div class="header-modal">
+      <p>
+        Phần bắt buộc được đánh dấu bằng một dấu sao
+        <span style="color: red">*</span>
+      </p>
+      <div class="header-issue">
+        <p>Vấn đề</p>
+        <img
+          _ngcontent-ng-c3631520248=""
+          src="/assets/icon/project/Icon.svg"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="form-project">
+      <form>
+        <div class="scrollable-table-form-project">
+          <div class="block-form">
+            <label for=""
+              >Dự án của bạn <span style="color: red">*</span></label
+            >
+            <ng-container *ngFor="let member of TaskData">
+              <input
+                style="width: 97%; color: #000000d9"
+                placeholder="{{ member.projectManagerName }}"
+                nz-input
+                nzSize="large"
+                id="projectName"
+                name="projectName"
+                disabled
+              />
+            </ng-container>
+          </div>
+          <div class="block-form">
+            <label for=""
+              >Quản lý dự án <span style="color: red">*</span></label
+            >
+            <ng-container *ngFor="let member of TaskData">
+              <input
+                style="width: 97%; color: #000000d9"
+                placeholder="{{ member.projectTeamName }}"
+                nz-input
+                nzSize="large"
+                id="projectName"
+                name="projectName"
+                disabled
+              />
+            </ng-container>
+          </div>
+
+          <div class="block-form">
+            <label for=""
+              >Thêm thành viên vào nhóm dự án
+              <span style="color: red">*</span></label
+            >
+            <nz-select
+              id="userID"
+              name="userID"
+              [(ngModel)]="teammenber.userID"
+              style="width: 97%; color: #000000d9"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Chọn thành viên vào nhóm dự án ..."
+            >
+              <nz-option
+                *ngFor="let user of users"
+                [nzLabel]="user.fullName"
+                [nzValue]="user.userID"
+              ></nz-option>
+            </nz-select>
+          </div>
+          <div class="block-form">
+            <label for="">Ngày khởi tạo</label>
+            <nz-date-picker
+              nzSize="large"
+              style="width: 97%"
+              [nzFormat]="dateFormat"
+              [nzPlaceHolder]="'Ngày bắt đầu công việc ...'"
+              [(ngModel)]="teammenber.joinDate"
+              id="createdDate"
+              name="createdDate"
+            ></nz-date-picker>
+          </div>
+        </div>
+        <div class="footer">
+          <button (click)="isTeamMember = false" class="footer-cancel">
+            Hủy
+          </button>
+          <button class="footer-add" (click)="OksTeamMember()">Xác nhận</button>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</nz-modal>
+
+<!-- Xem chi tiết công việc -->
+<nz-modal
+  [(nzVisible)]="isShowInfor"
+  [nzFooter]="null"
+  (nzOnCancel)="cancelTaskInfor()"
+  [nzWidth]="1280"
+  [style]="'margin-top: -25px;'"
+>
+  <ng-container *nzModalContent>
+    <form action="">
+      <div class="content-info" nz-row *ngIf="selectedProject">
+        <div class="key">
+          <img src="/assets/icon/task/10318.svg" width="16px" height="16px" />
+          <span>Khóa-{{ selectedProject.taskID }}</span>
+        </div>
+
+        <div class="layout">
+          <div class="content-left scrollable-table-info" nz-col nzSpan="12">
+            <h5>{{ selectedProject.projectName }}</h5>
+
+            <div class="container-left">
+              <button>
+                <span nz-icon nzType="upload" nzTheme="outline"></span>
+                Đính kèm
+              </button>
+              <button>
+                <span nz-icon nzType="apartment" nzTheme="outline"></span>
+                Hành động
+              </button>
+              <button>
+                <span nz-icon nzType="link" nzTheme="outline"></span>
+                Liên kết
+              </button>
+              <button>
+                <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+              </button>
+            </div>
+
+            <div class="ckd-info">
+              <h6>Mô tả công việc</h6>
+              <textarea
+                rows="4"
+                nz-input
+                style="
+                  border: none;
+                  font-size: 14px;
+                  font-weight: 500;
+                  color: #74808b;
+                  padding: 0;
+                "
+              >
+                {{ selectedProject.description }}
+              </textarea>
+            </div>
+
+            <div class="comment">
+              <h6>Hoạt động</h6>
+              <div class="comment-button">
+                Xem :
+                <button>Tất cả</button>
+                <button>Bình luận</button>
+                <button>Lịch sử</button>
+                <button>Nhật ký công việc</button>
+                <button>Mới nhất</button>
+              </div>
+              <!-- <nz-divider style="margin: 10px 0; height: 2px; background-color: #E5E8EB;"></nz-divider> -->
+
+              <div class="user-content">
+                <nz-avatar
+                  nz-comment-avatar
+                  nzIcon="user"
+                  nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                ></nz-avatar>
+                <span>
+                  <input
+                    nz-input
+                    placeholder="Thêm nhận xét ... "
+                    nzSize="large"
+                    style="width: 550px"
+                  />
+                </span>
+              </div>
+              <small
+                class="_syaz1wmz _1e0c1ule _19pku2gc _o5721q9c _1wyb1crf _vwz41cnx"
+              >
+                <strong>Mẹo:</strong>
+                nhấn
+                <span class="css-17k26hu" style="max-width: 100%">
+                  <span class="css-1q42gk0" style="max-width: calc(200px - 8px)"
+                    >M</span
+                  >
+                </span>
+                để bình luận
+              </small>
+
+              <nz-comment nzAuthor="Han Solo" [nzDatetime]="time">
+                <nz-avatar
+                  nz-comment-avatar
+                  nzIcon="user"
+                  nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                ></nz-avatar>
+                <nz-comment-content>
+                  <p>
+                    We supply a series of design principles, practical patterns
+                    and high quality design resources (Sketch and Axure), to
+                    help people create their product prototypes beautifully and
+                    efficiently.
+                  </p>
+                </nz-comment-content>
+                <nz-comment-action>
+                  <span
+                    nz-tooltip
+                    nzTitle="Like"
+                    nz-icon
+                    nzType="like"
+                    [nzTheme]="likes > 0 ? 'twotone' : 'outline'"
+                  ></span>
+                  <span class="count like">{{ likes }}</span>
+                </nz-comment-action>
+                <nz-comment-action>
+                  <span
+                    nz-tooltip
+                    nzTitle="Dislike"
+                    nz-icon
+                    nzType="dislike"
+                    [nzTheme]="dislikes > 0 ? 'twotone' : 'outline'"
+                  ></span>
+                  <span class="count dislike">{{ dislikes }}</span>
+                </nz-comment-action>
+                <nz-comment-action>Reply to</nz-comment-action>
+              </nz-comment>
+            </div>
+          </div>
+
+          <div class="content-right scrollable-table-info" nz-col nzSpan="12">
+            <h5>Chi tiết công việc</h5>
+
+            <div class="container-right">
+              <button>Thực hiện</button>
+              <button>Hoàn thành</button>
+              <button>Hành động</button>
+            </div>
+
+            <div class="task-details">
+              <div class="details-title">
+                <div class="title-right">Người nhận</div>
+                <div class="title-left">
+                  <nz-avatar
+                    nzIcon="user"
+                    style="background-color: #87d068"
+                  ></nz-avatar>
+                  <span>{{ selectedProject.userID }}</span>
+                </div>
+              </div>
+              <div class="details-title">
+                <div class="title-right">Quản lý</div>
+                <div class="title-left">
+                  <nz-avatar
+                    nzText="{{
+                      selectedProject.fullName.substring(0, 2).toUpperCase()
+                    }}"
+                    class="avatar-user"
+                  >
+                  </nz-avatar>
+                  <span>{{ selectedProject.fullName }}</span>
+                </div>
+              </div>
+
+              <div class="details-title">
+                <div class="title-right">Thuộc nhóm</div>
+                <div class="title-left">
+                  <span>{{ selectedProject.teamName }}</span>
+                </div>
+              </div>
+
+              <div class="details-title">
+                <div class="title-right">Trạng thái</div>
+                <div class="title-left">
+                  <span>{{ selectedProject.status }}</span>
+                </div>
+              </div>
+
+              <div class="details-title">
+                <div class="title-right">Nhãn</div>
+                <div class="title-left">
+                  <span>{{ selectedProject.taskType }}</span>
+                </div>
+              </div>
+
+              <div class="details-title">
+                <div class="title-right">Ngày đáo hạn</div>
+                <div class="title-left">
+                  <span>{{
+                    selectedProject.endDate | date : "dd-MM-yyyy"
+                  }}</span>
+                </div>
+              </div>
+
+              <div class="details-title">
+                <div class="title-right">Số giờ thực hiện</div>
+                <div class="title-left">
+                  <span>{{ selectedProject.actualHoursSpent }} giờ</span>
+                </div>
+              </div>
+
+              <div class="details-title">
+                <div class="title-right">Ngày bắt đầu</div>
+                <div class="title-left">
+                  <span>{{
+                    selectedProject.createdDate | date : "dd-MM-yyyy"
+                  }}</span>
+                </div>
+              </div>
+
+              <div class="details-title">
+                <div class="title-right">Thể loại</div>
+                <div class="title-left">
+                  <span>{{ priorityMap[selectedProject.priority] }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>

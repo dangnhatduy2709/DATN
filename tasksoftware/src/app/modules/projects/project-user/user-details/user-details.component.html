@@ -1,0 +1,202 @@
+<div class="bg-title">
+  <div class="header-location">
+    <p>
+      Danh sách người dùng
+      <span style="margin: 8px;">
+        <img src="/assets/icon/project/Icon-arrow.svg" alt="">
+      </span>
+      <a href="">Chi tiết người dùng</a>
+    </p>
+  </div>
+  <div class="bg-header-text">
+
+    <div class="header-text">
+      <h5>Chi tiết người dùng</h5>
+    </div>
+    <div class="bg-header-text-button">
+      <button>Thêm người dùng</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="action-header-container">
+
+  <div class="action-details" *ngIf="userDetails">
+
+    <div class="bg-background"></div>
+
+    <div class="avatar-detail" *ngIf="userDetails?.fullName">
+      <nz-avatar [nzText]="userDetails.fullName ? userDetails.fullName.substring(0, 2).toUpperCase() : ''" style="
+          color: #0F80DE;
+          background-color: #E4F4FE;
+          display: flex;
+          width: 100px;
+          height: 100px;
+          padding: 8px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          font-size: 36px;
+          font-weight: 700;
+      "></nz-avatar>
+    </div>
+
+    <div style="border-bottom: 1px solid #EBEBEB; height: 1px; align-self: stretch; margin-top: 24px;"></div>
+
+    <div class="user-details">
+
+      <div class="contact-member" style="margin-bottom: 16px;">
+        <div class="contact-member-img">
+          <span nz-icon nzType="contacts" nzTheme="outline"></span>
+        </div>
+        <div class="contact-member-text">
+          <h6>Tên người dùng</h6>
+          <p>{{ userDetails.fullName }}</p>
+        </div>
+      </div>
+
+      <div class="contact-member" style="margin-bottom: 16px;">
+        <div class="contact-member-img">
+          <span nz-icon nzType="idcard" nzTheme="outline"></span>
+        </div>
+        <div class="contact-member-text">
+          <h6>Email</h6>
+          <p>{{ userDetails.emailAddress }}</p>
+        </div>
+      </div>
+
+      <div class="contact-member" style="margin-bottom: 16px;">
+        <div class="contact-member-img">
+          <span nz-icon nzType="idcard" nzTheme="outline"></span>
+        </div>
+        <div class="contact-member-text">
+          <h6>Số điện thoại</h6>
+          <p>{{ userDetails.phoneNumber }}</p>
+        </div>
+      </div>
+
+      <div class="contact-member" style="margin-bottom: 16px;">
+        <div class="contact-member-img">
+          <span nz-icon nzType="solution" nzTheme="outline"></span>
+        </div>
+        <div class="contact-member-text">
+          <h6>Vai trò</h6>
+          <p>{{ userDetails.roleName }}</p>
+        </div>
+      </div>
+
+      <div class="contact-member" style="margin-bottom: 16px;">
+        <div class="contact-member-img">
+          <span nz-icon nzType="field-time" nzTheme="outline"></span>
+        </div>
+        <div class="contact-member-text">
+          <h6>Đăng nhập lần cuối</h6>
+          <p>{{ userDetails.lastLogin}}</p>
+        </div>
+      </div>
+
+      <div class="bg-button">
+        <button class="button-error" (click)="showDelete(userDetails)">
+          <span nz-icon nzType="delete" nzTheme="outline"></span>
+          Xóa tài khoản
+        </button>
+        <button class="button-edit">
+          <span nz-icon nzType="edit" nzTheme="outline"></span>
+          <span>
+            Chỉnh sửa
+          </span>
+        </button>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="action-right">
+
+    <div class="right-card">
+
+      <div class="card-info">
+        <div class="card-text">
+          <div class="card-prject">
+            <h5>Tổng dự án tham gia</h5>
+            <p style="font-size: 16px;"> Số dự án: 1</p>
+          </div>
+          <div class="project-png">
+            <span nz-icon nzType="reconciliation" nzTheme="outline"></span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-info">
+        <div class="card-text">
+          <div class="card-prject">
+            <h5>Tổng công việc hoàn thành</h5>
+            <p style="font-size: 16px;"> Số công việc: {{ tasksToDo }}</p>
+          </div>
+          <div class="project-png">
+            <span nz-icon nzType="form" nzTheme="outline"></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="task-live">
+      <div class="contact">
+        <div style="width: 5px; height: 20px; background-color: #0F80DE;"></div>
+        Những công việc gần đây
+      </div>
+
+      <div class="task-content">
+        <div class="task-header">
+          {{ tasks.length }} <span>Công việc đang thực hiện</span>
+        </div>
+        <div class="task-list" *ngFor="let task of tasks">
+          <div class="task-list-img">
+            <img src="/assets/icon/task/10404.svg" width="32px" height="32px" alt="">
+            <div class="task-list-info">
+              <h5>{{ task.taskType }}</h5>
+              <p>{{ task.taskDescription }}</p>
+            </div>
+          </div>
+          <div class="task-list-roles" style="color:#3da931;">
+            {{ task.status }}
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+<!-- Modal Delete -->
+<nz-modal
+  [(nzVisible)]="isDelete"
+  [nzFooter]="null"
+  nzWidth="480px"
+>
+<ng-container *nzModalContent>
+  <div class="deleteModal">
+    <div class="warring" style="margin-bottom: 10px;">
+      <img src="/assets/icon/project/icon-warring.svg" alt="">
+    </div>
+    <h5>Xóa người dùng</h5>
+    <p>Người dùng bị xóa sẽ biến mất khỏi hệ thống bao gồm tất cả các thông tin đã lưu và các tài nguyên mà dự án đó đang sở hữu. Bạn chắc chắn muốn xóa người dùng?</p>
+  </div>
+  <div class="footer">
+    <button (click)="isDelete = false" class="footer-cancel">Hủy</button>
+    <button class="footer-add" (click)="OkDelete()">Xác nhận</button>
+  </div>
+</ng-container>
+</nz-modal>

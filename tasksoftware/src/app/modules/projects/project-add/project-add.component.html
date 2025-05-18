@@ -1,0 +1,261 @@
+<div class="bg-title">
+  <div class="header-location">
+    <p>
+      <span routerLink="/project/project-view">Xem tất cả dự án</span>
+      <span style="margin: 8px;">
+        <img src="/assets/icon/project/Icon-arrow.svg" alt="">
+      </span>
+      <a routerLink="/project/dashboard">Tạo dự án</a>
+    </p>
+  </div>
+  <div class="bg-header-text">
+
+    <div class="header-text">
+      <h5>Tạo dự án</h5>
+    </div>
+  </div>
+</div>
+
+<div class="main-app-projectadd">
+
+  <div class="container-project">
+    <div class="header-text">
+      <h5>Tạo dự án</h5>
+      <p>Khám phá những gì có thể làm được khi bạn cộng tác với nhóm của mình. Chỉnh sửa chi tiết dự án bất cứ lúc nào
+        trong cài đặt dự án.</p>
+      <p>Phần bắt buộc được đánh dấu bằng một dấu sao <span style="color: red;">*</span> </p>
+    </div>
+    <div class="form-project">
+      <form>
+
+        <div class="block-form">
+          <label for="">Tên dự án <span style="color: red;">*</span></label>
+          <input style="width: 97%;" placeholder="Nhập tên dự án ..." nz-input nzSize="large" id="projectName"
+            name="projectName" [(ngModel)]="project.projectName" />
+        </div>
+        <div class="block-form">
+          <label for="">Quản lý dự án <span style="color: red;">*</span></label>
+          <nz-select id="userID" name="userID" [(ngModel)]="project.userID" nzShowSearch nzAllowClear
+            nzPlaceHolder="Chọn người quản lý dự án ..." style="width: 97%;">
+            <nz-option *ngFor="let user of users" [nzLabel]="user.fullName" [nzValue]="user.userID"></nz-option>
+          </nz-select>
+        </div>
+        <div class="block-form">
+          <label for="">Thành viên nhóm dự án <span style="color: red;">*</span></label>
+          <nz-select id="teamID" name="teamID" [(ngModel)]="project.teamID" nzShowSearch nzAllowClear
+            nzPlaceHolder="Chọn nhóm dự án ..." style="width: 97%;">
+            <nz-option *ngFor="let team of teams" [nzLabel]="team.teamName" [nzValue]="team.teamID"></nz-option>
+          </nz-select>
+        </div>
+        <div class="block-form">
+          <label for=""> Mô tả dự án <span style="color: red;">*</span></label>
+          <input style="width: 97%;" nz-input placeholder="Mô tả dự án ..." nzSize="large" id="projectDescription"
+            name="projectDescription" [(ngModel)]="project.projectDescription" />
+        </div>
+        <div class="block-form">
+          <label for="">Ngày khởi tạo</label>
+          <nz-date-picker nzSize="large" style="width: 97%;" [nzPlaceHolder]="'Ngày tạo dự án ...'"
+            [nzFormat]="dateFormat" [(ngModel)]="project.createdDate" id="createdDate"
+            name="createdDate"></nz-date-picker>
+        </div>
+        <div class="block-form">
+          <label for="">Ngày hết hạn</label> <br>
+          <nz-date-picker nzSize="large" style="width: 97%;" [nzPlaceHolder]="'Ngày hết hạn dự án ...'"
+            [nzFormat]="dateFormat" [(ngModel)]="project.endDate" id="endDate" name="endDate"></nz-date-picker>
+        </div>
+        <!-- <div class="block-form">
+            <label for="">Chìa khóa <span style="color: red;">*</span></label>
+            <input style="width: 97%;" nz-input placeholder="Khóa dự án ..."  nzSize="large" id="projectKey" name="projectKey" [(ngModel)]="project.projectKey" />
+          </div> -->
+
+        <div class="block-form">
+          <label>Thông tin hợp đồng phía khánh hàng tham gia dự án:</label>
+        </div>
+
+        <!-- Tên khánh hàng -->
+        <div class="block-form">
+          <label for="">Tên khách hàng <span style="color: red;">*</span></label>
+          <input style="width: 97%;" placeholder=" Tên khánh hàng ..." nz-input nzSize="large" id="clientContactName"
+            name="clientContactName" [(ngModel)]="project.clientContactName" />
+        </div>
+        <!-- Email khách hàng -->
+        <div class="block-form">
+          <label for="">Email liên hệ <span style="color: red;">*</span></label>
+          <input style="width: 97%;" placeholder="Email khách hàng ..." nz-input nzSize="large" id="clientContactEmail"
+            name="clientContactEmail" [(ngModel)]="project.clientContactEmail" />
+        </div>
+        <!-- Số điện thoại -->
+        <div class="block-form">
+          <label for="">Số điện thoại <span style="color: red;">*</span></label>
+          <input style="width: 97%;" nz-input placeholder="Số điện thoại khách hàng ..." nzSize="large"
+            id="clientContactPhone" name="clientContactPhone" [(ngModel)]="project.clientContactPhone" />
+        </div>
+
+        <div class="footer">
+          <button class="footer-cancel" routerLink="/project/dashboard">Hủy</button>
+          <button class="footer-add" (click)="addProject()">Xác nhận</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="_1bsb1kdj">
+    <svg width="720" height="586" viewBox="0 0 720 586" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="Illustration showing preview of Jira project interface after the project creation is done">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M370.025 17.9079C434.256 22.6735 503.767 7.79394 556.943 40.6745C610.66 73.8893 624.33 136.807 649.809 190.907C678.228 251.252 739.504 312.537 713.872 373.89C688.153 435.452 591.852 436.828 531.607 473.835C474.196 509.102 439.255 580.301 370.025 585.109C300.167 589.961 241.321 540.007 189.315 497.609C141.938 458.986 117.437 406.978 88.5028 355.603C53.1707 292.869 -12.2428 234.212 1.99552 165.015C16.473 94.6556 86.9077 40.1425 159.374 11.1767C225.234 -15.1486 298.243 12.582 370.025 17.9079Z"
+        fill="#2684FF"></path>
+      <g filter="url(#create-project-shadow)">
+        <rect x="20" y="80" width="640" height="400" rx="8" fill="var(--ds-surface, white)"
+          stroke="var(--ds-background-accent-gray-subtler, #EBECF0)" stroke-width="1" filter="create-project-shadow">
+        </rect>
+      </g>
+      <rect x="42" y="142" width="20" height="20" rx="10" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="78" y="148" width="100" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="42" y="178" width="20" height="20" rx="10" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="78" y="184" width="100" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="42" y="214" width="20" height="20" rx="10" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="78" y="220" width="100" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="42" y="250" width="20" height="20" rx="10" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="78" y="256" width="100" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="42" y="286" width="20" height="20" rx="10" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="78" y="292" width="100" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="42" y="322" width="20" height="20" rx="10" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="78" y="328" width="100" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="42" y="358" width="20" height="20" rx="10" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="78" y="364" width="100" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="40" y="100" width="24" height="24" rx="6" fill="#2684FF"></rect>
+      <rect x="204" y="80" width="2" height="400" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="239" y="148" width="16" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="271" y="132" width="2" height="334" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="285" y="148" width="64" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="361" y="132" width="2" height="334" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="377" y="147" width="120" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="513" y="132" width="2" height="334" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="527" y="148" width="64" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="603" y="132" width="2" height="334" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="613" y="148" width="24" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="239" y="186" width="16" height="16" rx="4" fill="var(--ds-background-accent-blue-subtle, #4C9AFF)">
+      </rect>
+      <rect x="377" y="189" width="120" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="527" y="186" width="64" height="16" rx="3" fill="var(--ds-background-accent-gray-subtler, #C1C7D0)">
+      </rect>
+      <rect x="616" y="184" width="20" height="20" rx="10" fill="var(--ds-background-accent-red-subtler, #FF8F73)">
+      </rect>
+      <rect x="239" y="228" width="16" height="16" rx="4" fill="var(--ds-background-accent-blue-subtle, #4C9AFF)">
+      </rect>
+      <rect x="377" y="231" width="70" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="527" y="228" width="64" height="16" rx="3" fill="var(--ds-background-accent-gray-subtler, #C1C7D0)">
+      </rect>
+      <rect x="616" y="226" width="20" height="20" rx="10" fill="var(--ds-background-accent-blue-subtler, #4C9AFF)">
+      </rect>
+      <rect x="239" y="270" width="16" height="16" rx="4" fill="var(--ds-background-accent-blue-subtle, #4C9AFF)">
+      </rect>
+      <rect x="377" y="273" width="120" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="527" y="270" width="64" height="16" rx="3" fill="var(--ds-background-accent-blue-subtler, #B3D4FF)">
+      </rect>
+      <rect x="616" y="268" width="20" height="20" rx="10" fill="var(--ds-background-accent-blue-subtler, #4C9AFF)">
+      </rect>
+      <rect x="239" y="312" width="16" height="16" rx="4" fill="var(--ds-background-accent-blue-subtle, #4C9AFF)">
+      </rect>
+      <rect x="377" y="315" width="120" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="527" y="312" width="64" height="16" rx="3" fill="var(--ds-background-accent-blue-subtler, #B3D4FF)">
+      </rect>
+      <rect x="616" y="310" width="20" height="20" rx="10" fill="var(--ds-background-accent-orange-subtler, #FFC400)">
+      </rect>
+      <rect x="239" y="354" width="16" height="16" rx="4" fill="var(--ds-background-accent-blue-subtle, #4C9AFF)">
+      </rect>
+      <rect x="377" y="357" width="120" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="527" y="354" width="64" height="16" rx="3" fill="var(--ds-background-accent-blue-subtler, #B3D4FF)">
+      </rect>
+      <rect x="616" y="352" width="20" height="20" rx="10" fill="var(--ds-background-accent-red-subtler, #FF8F73)">
+      </rect>
+      <rect x="239" y="396" width="16" height="16" rx="4" fill="var(--ds-background-accent-blue-subtle, #4C9AFF)">
+      </rect>
+      <rect x="377" y="399" width="120" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="527" y="396" width="64" height="16" rx="3" fill="var(--ds-background-accent-green-subtler, #ABF5D1)">
+      </rect>
+      <rect x="616" y="394" width="20" height="20" rx="10" fill="var(--ds-background-accent-blue-subtler, #4C9AFF)">
+      </rect>
+      <rect x="239" y="438" width="16" height="16" rx="4" fill="var(--ds-background-accent-blue-subtle, #4C9AFF)">
+      </rect>
+      <rect x="377" y="441" width="120" height="8" rx="4" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <rect x="527" y="438" width="64" height="16" rx="3" fill="var(--ds-background-accent-green-subtler, #ABF5D1)">
+      </rect>
+      <rect x="616" y="436" width="20" height="20" rx="10" fill="var(--ds-background-accent-orange-subtler, #FFC400)">
+      </rect>
+      <rect x="224" y="102" width="180" height="16" rx="8" fill="var(--ds-background-accent-gray-subtler, #DFE1E6)">
+      </rect>
+      <foreignObject x="522" y="95" width="120" height="30">
+        <div class="css-zpnqvy">
+          <ul aria-label="avatar group" class="css-1n6q81t">
+            <li class="css-1rr4y08">
+              <div role="presentation">
+                <div style="display: inline-block; position: relative; outline: 0px; z-index: 5;">
+                  <span class="css-1lu9wsf">
+                    <img
+                      src="https://secure.gravatar.com/avatar/38b446d3d303d026338579fb257ab637?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FCV-5.png"
+                      alt="" class="css-13ep12v" style="border-radius: 50%;">
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </foreignObject>
+      <rect x="226" y="172" width="420" height="2" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="226" y="214" width="420" height="2" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="226" y="256" width="420" height="2" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="226" y="298" width="420" height="2" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="226" y="340" width="420" height="2" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="226" y="382" width="420" height="2" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <rect x="226" y="424" width="420" height="2" fill="var(--ds-border-disabled, #EBECF0)"></rect>
+      <foreignObject class="vsso4k-0 isWtpg" width="122" height="18" x="72" y="103">
+        <p class="sc-161d86w-0 dEMnaX vsso4k-1 jPFuMz" width="122" height="18">Tiêu đề dự án</p>
+      </foreignObject>
+      <text font-size="14" x="280" y="198" fill="var(--ds-text-subtle, #7A869A)">KEY-1</text><text font-size="14"
+        x="280" y="240" fill="var(--ds-text-subtle, #7A869A)">KEY-2</text><text font-size="14" x="280" y="282"
+        fill="var(--ds-text-subtle, #7A869A)">KEY-3</text><text font-size="14" x="280" y="324"
+        fill="var(--ds-text-subtle, #7A869A)">KEY-4</text><text font-size="14" x="280" y="366"
+        fill="var(--ds-text-subtle, #7A869A)">KEY-5</text><text font-size="14" x="280" y="408"
+        fill="var(--ds-text-subtle, #7A869A)">KEY-6</text><text font-size="14" x="280" y="450"
+        fill="var(--ds-text-subtle, #7A869A)">KEY-7</text><text font-size="12" x="110" y="460" text-anchor="middle"
+        fill="var(--ds-text-subtlest, #6B778C)">Team-managed project
+      </text>
+      <defs>
+        <filter id="create-project-shadow">
+          <feDropShadow dx="2" dy="2" stdDeviation="10" flood-color="#000" flood-opacity="0.2">
+          </feDropShadow>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+
+</div>

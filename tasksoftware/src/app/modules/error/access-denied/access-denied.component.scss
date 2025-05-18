@@ -1,0 +1,28 @@
+.bg-body-error{
+  display: flex;
+  width: 1920px;
+  padding: 310px 645.5px 310px 646.5px;
+  justify-content: center;
+  align-items: center;
+  .error{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .img-error{
+      display: flex;
+      width: 320px;
+      height: 320px;
+      padding: 28.16px 16.135px 28.16px 13.575px;
+      justify-content: center;
+      align-items: center;
+    }
+    .text-error{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+  }
+}
