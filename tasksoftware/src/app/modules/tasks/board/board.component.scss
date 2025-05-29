@@ -489,3 +489,8 @@ span.ant-menu-title-content {
   color: #74808B;
   font-weight: 500;
 }
+::ng-deep .ant-select-selector {
+  height: 34.6px !important;
+  display: flex;
+  align-items: center;
+}

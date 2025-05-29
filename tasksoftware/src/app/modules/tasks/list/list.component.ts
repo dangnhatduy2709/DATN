@@ -173,4 +173,9 @@ export class ListComponent implements OnInit {
     );
   }
 
+  showsTeamMember() : void{
+    console.log(1);
+    
+  }
+
 }

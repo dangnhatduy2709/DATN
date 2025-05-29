@@ -14,7 +14,7 @@
             [nzIcon]="member.picture ? 'user' : undefined" [nzSrc]="member.picture"
             title="{{member.fullName}}"></nz-avatar>
         </nz-avatar-group>
-        <div class="team-avatar">
+        <div class="team-avatar" (click)="showsTeamMember()">
           <span nz-icon nzType="user-add" nzTheme="outline"></span>
         </div>
       </div>

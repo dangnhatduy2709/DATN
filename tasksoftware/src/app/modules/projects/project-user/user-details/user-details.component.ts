@@ -4,6 +4,7 @@ import { UserService } from '../../../../service/user.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Role } from '../../../../models/interface/roles';
 import { RolesService } from '../../../../service/roles.service';
+import { TeamService } from '../../../../service/team.service';
 
 @Component({
   selector: 'app-user-details',
@@ -20,12 +21,14 @@ export class UserDetailsComponent implements OnInit {
   tasksToDo: any;
   roles: Role[] = [];
   dataUpdate: any = {};
+  userJoinProject: any;
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private notification: NzNotificationService,
-    private roleService: RolesService
+    private roleService: RolesService,
+    private teamService: TeamService
   ){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -38,6 +41,17 @@ export class UserDetailsComponent implements OnInit {
   }
 
   fetchRoles() {
+    this.teamService.getUserByProject(this.userID).subscribe(
+      (response) => {     
+        this.userJoinProject = response[0].teamCount;
+      },
+      (error) => {
+        console.error('Error fetching roles:', error);
+      }
+    );
+  }
+
+  getUserProject() {
     this.roleService.getRole().subscribe(
       (response) => {        
         this.roles = response;
@@ -47,6 +61,7 @@ export class UserDetailsComponent implements OnInit {
       }
     );
   }
+
   getUserDetails() {
     this.route.params.subscribe((params) => {
     this.userID = +params['id'];

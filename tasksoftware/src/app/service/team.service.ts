@@ -47,4 +47,8 @@ export class TeamService {
     return this.http.get<any>(`${this.apiUrl}/backlog`);
   }
 
+  getUserByProject(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getUserByProject/${userId}`);
+  }
+
 }

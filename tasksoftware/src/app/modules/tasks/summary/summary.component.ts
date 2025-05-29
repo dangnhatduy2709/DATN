@@ -82,6 +82,8 @@ export class SummaryComponent implements OnInit {
       formatDate(this.task.createdDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
     this.task.endDate = this.task.endDate ? 
       formatDate(this.task.endDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
+      this.task.projectID = this.projectId;
+      console.log(this.task);
     this.taskService.addTask(this.task).subscribe(
       (response) => {
         this.notification.success(

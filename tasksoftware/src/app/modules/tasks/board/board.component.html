@@ -128,6 +128,10 @@
       <nz-dropdown-menu #group="nzDropdownMenu">
         <ul nz-menu class="nz-menu-ul">
           <div class="css-xhdqsk">Lọc theo bảng công việc</div>
+          <li nz-menu-item class="nz-menu-li" (click)="filterByBoard('No Assign')">
+            <span nz-icon nzType="file-unknown" nzTheme="outline"></span>
+            Không chỉ định
+          </li>
           <li nz-menu-item class="nz-menu-li" (click)="filterByBoard('To Do')">
             <span nz-icon nzType="file-unknown" nzTheme="outline"></span>
             Thực hiện
@@ -691,22 +695,29 @@
             </ng-container>
           </div>
 
-          <nz-select
-            id="userID"
-            name="userID"
-            [(ngModel)]="teammenber.userIDs"
-            style="width: 97%; color: #000000d9"
-            nzShowSearch
-            nzAllowClear
-            nzPlaceHolder="Chọn thành viên vào nhóm dự án ..."
-            nzMode="multiple"
-          >
-            <nz-option
-              *ngFor="let user of users"
-              [nzLabel]="user.fullName"
-              [nzValue]="user.userID"
-            ></nz-option>
-          </nz-select>
+          <div class="block-form">
+            <label for=""
+              >Thêm thành viên vào nhóm dự án <span style="color: red">*</span></label
+            >
+            <nz-select
+              id="userID"
+              name="userID"
+              [(ngModel)]="teammenber.userIDs"
+              style="width: 97%; color: #000000d9"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Chọn thành viên vào nhóm dự án ..."
+              nzMode="multiple"
+            >
+              <nz-option
+                *ngFor="let user of users"
+                [nzLabel]="user.fullName"
+                [nzValue]="user.userID"
+                style="height: 100%;"
+              ></nz-option>
+            </nz-select>
+          </div>
+
           <div class="block-form">
             <label for="">Ngày khởi tạo</label>
             <nz-date-picker

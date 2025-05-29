@@ -53,7 +53,7 @@ export class AvatarComponent implements OnInit {
   projects: any[] = [];
   boardFilter: string | null = null;
   statusFilter: any | null = null;
-
+  userId: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,7 +76,6 @@ export class AvatarComponent implements OnInit {
         }
       );
     });
-    this.fetchUser();
     this.fetchTeams();
     this.getProjectData();
     this.fetchProjectTeamData();
@@ -100,20 +99,22 @@ export class AvatarComponent implements OnInit {
       this.projectService.getProjectById(this.projectID).subscribe(
         (data) => {
           this.TaskData = data;
+          this.userId = this.TaskData[0].userId;
           this.projects = data;
           this.applyFilters();
+          this.fetchUser();
         },
         (error) => {
           console.error('Lỗi khi lấy dự án theo ID:', error);
         }
       );
+
     } else {
       console.error('projectId không được định nghĩa. Không thể lấy dự án theo ID.');
     }
   }
 
   showsTeamMember(): void {
-    console.log(1);
     this.isTeamMember = true;
   }
 
@@ -161,7 +162,8 @@ export class AvatarComponent implements OnInit {
   fetchUser() {
     this.userService.getUsers().subscribe(
       (response) => {
-        this.users = response;
+        const excludedUserId = this.TaskData[0].userID;
+        this.users = response.filter((item: any) => item.userID !== excludedUserId);
       },
       (error) => {
         console.error('Error fetching roles:', error);

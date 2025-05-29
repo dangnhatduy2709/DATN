@@ -73,6 +73,7 @@ export class ProjectTeamComponent implements OnInit {
   okAddTeam() {
     this.teamService.addTeam(this.teamName).subscribe(
       (response) => {
+        this.loadTeamsAndMembers();
         this.fetchTeams();
         this.notification.success(
           'Thêm nhóm thành công',
@@ -178,7 +179,7 @@ export class ProjectTeamComponent implements OnInit {
   }
 
   getMemberCount(team: any): number {
-    return team.members.length;
+    return team.members.filter((member: any) => member.userID != null).length;
   }
 
   onSearchChange(): void {
