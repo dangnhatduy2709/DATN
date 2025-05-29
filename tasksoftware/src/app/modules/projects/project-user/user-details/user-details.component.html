@@ -13,9 +13,9 @@
     <div class="header-text">
       <h5>Chi tiết người dùng</h5>
     </div>
-    <div class="bg-header-text-button">
+    <!-- <div class="bg-header-text-button">
       <button>Thêm người dùng</button>
-    </div>
+    </div> -->
   </div>
 </div>
 
@@ -102,7 +102,7 @@
           <span nz-icon nzType="delete" nzTheme="outline"></span>
           Xóa tài khoản
         </button>
-        <button class="button-edit">
+        <button class="button-edit" (click)="showUpdate(userDetails)">
           <span nz-icon nzType="edit" nzTheme="outline"></span>
           <span>
             Chỉnh sửa
@@ -199,4 +199,38 @@
     <button class="footer-add" (click)="OkDelete()">Xác nhận</button>
   </div>
 </ng-container>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isUpdate" [nzFooter]="null" nzWidth="480px">
+  <ng-container *nzModalContent>
+    <div class="block-form">
+      <label for="">Họ và tên <span style="color: red;">*</span></label>
+      <input type="text" placeholder="Họ và tên ..." nz-input nzSize="large" 
+        [(ngModel)]="dataUpdate.fullName" id="fullName" name="fullName" require />
+    </div>
+    <div class="block-form mt-10">
+      <label for="">Email <span style="color: red;">*</span></label>
+      <input type="email" placeholder="Email ..." nz-input nzSize="large" 
+        [(ngModel)]="dataUpdate.emailAddress" id="emailAddress" name="emailAddress" require/>
+    </div>
+    <div class="block-form mt-10">
+      <label for="">Số điện thoại <span style="color: red;">*</span></label>
+      <input type="text" placeholder="Phone ..." nz-input nzSize="large" 
+        [(ngModel)]="dataUpdate.phoneNumber" id="phoneNumber" name="phoneNumber" />
+    </div>
+    <div class="block-form mt-10">
+      <label for="">Chọn quyền <span style="color: red;">*</span></label>
+      <div>
+        <nz-select id="roleID" name="roleID" [(ngModel)]="dataUpdate.roleID" required class="css-1cab8vv" style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Chọn chức danh của mình">
+          <nz-option *ngFor="let role of roles" [nzLabel]="role.roleName" [nzValue]="role.roleID"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    
+
+    <div class="footer">
+      <button (click)="isUpdate = false" class="footer-cancel">Hủy</button>
+      <button class="footer-add" (click)="OnUpdate()">Xác nhận</button>
+    </div>
+  </ng-container>
 </nz-modal>

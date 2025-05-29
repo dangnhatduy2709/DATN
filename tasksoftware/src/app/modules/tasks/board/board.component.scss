@@ -60,12 +60,11 @@
 
     form {
       display: flex;
-      justify-content: flex-start;
-      gap: 24px;
+      justify-content: space-between;
 
       .content-todo {
-        min-width: 270px;
-        max-width: 270px;
+        min-width: 200px;
+        max-width: 200px;
         border-radius: 6px;
         background-color: #FFFFFF;
         padding: 10px 10px 10px 10px;
@@ -115,8 +114,8 @@
       }
 
       .content-process {
-        min-width: 270px;
-        max-width: 270px;
+        min-width: 200px;
+        max-width: 200px;
         border-radius: 6px;
         background-color: #FFFFFF;
         padding: 10px 10px 10px 10px;
@@ -166,8 +165,8 @@
       }
 
       .content-done {
-        min-width: 270px;
-        max-width: 270px;
+        min-width: 200px;
+        max-width: 200px;
         border-radius: 6px;
         background-color: #FFFFFF;
         padding: 10px 10px 10px 10px;

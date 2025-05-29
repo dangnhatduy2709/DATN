@@ -49,8 +49,19 @@
         </div>
         <div class="block-form">
           <label for=""> Mô tả dự án <span style="color: red;">*</span></label>
-          <input style="width: 97%;" nz-input placeholder="Mô tả dự án ..." nzSize="large" id="projectDescription"
-            name="projectDescription" [(ngModel)]="project.projectDescription" />
+          <!-- <input style="width: 97%;" nz-input placeholder="Mô tả dự án ..." nzSize="large" id="projectDescription"
+            name="projectDescription" [(ngModel)]="project.projectDescription" /> -->
+            <textarea
+              style="width: 97%;"
+              nz-input
+              placeholder="Mô tả dự án ..."
+              nzSize="large"
+              id="projectDescription"
+              name="projectDescription"
+              [(ngModel)]="project.projectDescription"
+              rows="5">
+            </textarea>
+            <div style="font-size: 12px; color: #828181; padding-left: 4px;">Vui lòng nhập tối đa 25 kí tự</div>
         </div>
         <div class="block-form">
           <label for="">Ngày khởi tạo</label>

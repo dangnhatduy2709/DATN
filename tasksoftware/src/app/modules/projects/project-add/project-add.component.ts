@@ -67,13 +67,12 @@ export class ProjectAddComponent implements OnInit {
   }
 
   addProject() {
-    const formattedCreatedDate = formatDate(
-      this.project.createdDate,
-      'yyyy-MM-dd HH:mm:ss',
-      'en-US'
-    );
-    this.project.createdDate = formattedCreatedDate;
-    this.project.endDate = formattedCreatedDate;
+    this.project.createdDate = this.project.createdDate
+      ? formatDate(this.project.createdDate, 'yyyy-MM-dd HH:mm:ss', 'en-US')
+      : '1970-01-01 00:00:00';
+    this.project.endDate = this.project.endDate
+      ? formatDate(this.project.endDate, 'yyyy-MM-dd HH:mm:ss', 'en-US')
+      : '1970-01-01 00:00:00';
 
     this.projectService.addProject(this.project).subscribe(
       (response) => {

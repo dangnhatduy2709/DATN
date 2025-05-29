@@ -14,7 +14,7 @@
       <h3>Danh sách người dùng</h3>
     </div>
     <div class="bg-header-text-button">
-      <button>Thêm người dùng</button>
+      <button (click)="showModalCreate()">Thêm người dùng</button>
     </div>
   </div>
 </div>
@@ -22,11 +22,29 @@
 
 <div class="scrollable-table-form-body">
   <div class="content-body">
-    <div class="header-map">
+    <div class="header-map" style="margin-bottom: 8px;">
       <h6>Danh sách người dùng</h6>
-      <p>
-        <img src="/assets/icon/project/Icon.svg" alt="">
-      </p>
+      <div style="display: flex; gap: 134px; align-items: center;">
+        <div class="header-search">
+          <nz-input-group
+            [nzSuffix]="suffixIconSearch"
+            style="width: 225px; border-radius: 8px; height: 33px"
+          >
+            <input
+              type="text"
+              nz-input
+              placeholder="Tìm kiếm thông tin của bạn"
+              [formControl]="searchControl"
+            />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+          </ng-template>
+        </div>
+        <p>
+          <img src="/assets/icon/project/Icon.svg" alt="">
+        </p>
+      </div>
     </div>
 
     <nz-table [nzShowPagination]="false" [nzData]="users" nzTableLayout="fixed" style="height: 360px;">
@@ -111,6 +129,50 @@
     <div class="footer">
       <button (click)="isDelete = false" class="footer-cancel">Hủy</button>
       <button class="footer-add" (click)="OkDelete()">Xác nhận</button>
+    </div>
+  </ng-container>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isCreate" [nzFooter]="null" nzWidth="480px">
+  <ng-container *nzModalContent>
+    <div class="block-form">
+      <label for="">Họ và tên <span style="color: red;">*</span></label>
+      <input type="text" placeholder="Họ và tên ..." nz-input nzSize="large" 
+        [(ngModel)]="dataSubmitUser.fullName" id="fullName" name="fullName" require />
+    </div>
+    <div class="block-form mt-10">
+      <label for="">Email <span style="color: red;">*</span></label>
+      <input type="email" placeholder="Email ..." nz-input nzSize="large" 
+        [(ngModel)]="dataSubmitUser.emailAddress" id="emailAddress" name="emailAddress" require/>
+    </div>
+    <div class="block-form mt-10">
+      <label for="">Password <span style="color: red;">*</span></label>
+      <nz-input-group [nzSuffix]="suffixTemplate">
+        <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Nhập mật khẩu của bạn" id="password" name="password" [(ngModel)]="dataSubmitUser.password" require />
+      </nz-input-group>
+      <ng-template #suffixTemplate>
+        <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></span>
+      </ng-template>
+        
+    </div>
+    <div class="block-form mt-10">
+      <label for="">Số điện thoại <span style="color: red;">*</span></label>
+      <input type="text" placeholder="Phone ..." nz-input nzSize="large" 
+        [(ngModel)]="dataSubmitUser.phoneNumber" id="phoneNumber" name="phoneNumber" />
+    </div>
+    <div class="block-form mt-10">
+      <label for="">Chọn quyền <span style="color: red;">*</span></label>
+      <div>
+        <nz-select id="roleID" name="roleID" [(ngModel)]="dataSubmitUser.roleID" required class="css-1cab8vv" style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Chọn chức danh của mình">
+          <nz-option *ngFor="let role of roles" [nzLabel]="role.roleName" [nzValue]="role.roleID"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    
+
+    <div class="footer">
+      <button (click)="isCreate = false" class="footer-cancel">Hủy</button>
+      <button class="footer-add" (click)="OnSubmit()">Xác nhận</button>
     </div>
   </ng-container>
 </nz-modal>

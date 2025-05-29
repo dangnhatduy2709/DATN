@@ -78,9 +78,10 @@ export class SummaryComponent implements OnInit {
     this.isTask = true
   }
   OkAddTask() {
-    const formattedCreatedDate = formatDate(this.task.createdDate, 'yyyy-MM-dd HH:mm:ss', 'en-US');
-    this.task.createdDate = formattedCreatedDate;
-    this.task.endDate = formattedCreatedDate;
+    this.task.createdDate = this.task.createdDate ? 
+      formatDate(this.task.createdDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
+    this.task.endDate = this.task.endDate ? 
+      formatDate(this.task.endDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
     this.taskService.addTask(this.task).subscribe(
       (response) => {
         this.notification.success(
@@ -136,6 +137,8 @@ export class SummaryComponent implements OnInit {
       this.projectService.getProjectById(this.projectId).subscribe(
         (data) => {
           this.projectData = data;
+          this.TaskData = data;
+          console.log(this.TaskData);
         },
         (error) => {
           console.error('Lỗi khi lấy dự án theo ID:', error);
@@ -159,6 +162,7 @@ export class SummaryComponent implements OnInit {
     });
   }
   handleChange({ file, fileList }: NzUploadChangeParam): void {
+    console.log(file);
     const status = file.status;
     if (status !== 'uploading') {
       console.log(file, fileList);
