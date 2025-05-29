@@ -183,6 +183,101 @@
   </div>
   <div class="container-body">
     <form action="">
+      <div
+        class="content-todo"
+        (dragover)="onDrapOver($event)"
+        (drop)="onDrop($event, 'No Assign')"
+      >
+        <div class="todo-header">
+          <div class="todo-header-left">
+            <span nz-icon nzType="holder" nzTheme="outline"></span>
+            <p>Không chỉ định</p>
+          </div>
+          <div
+            class="todo-header-right"
+            nz-dropdown
+            nzTrigger="click"
+            [nzDropdownMenu]="action"
+            style="cursor: pointer"
+          >
+            <span nz-icon nzType="ellipsis" nzTheme="outline"></span>
+          </div>
+          <nz-dropdown-menu #action="nzDropdownMenu">
+            <ul nz-menu class="nz-menu-ul">
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="edit" nzTheme="outline"></span>
+                Đổi tên bảng
+              </li>
+              <li nz-menu-item class="nz-menu-li">
+                <span nz-icon nzType="delete" nzTheme="outline"></span>
+                Xóa bảng
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </div>
+        <div class="todo-drap">
+          <ul class="tasks">
+            <li
+              class="task"
+              nz-button
+              (click)="showTaskInfor(item)"
+              style="
+                height: 92px;
+                box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
+              "
+              draggable="true"
+              *ngFor="let item of filterTickets('No Assign')"
+              (dragstart)="onDragStart(item)"
+            >
+              {{ item.taskType }}
+
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: 25px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <img
+                    src="/assets/icon/task/10318.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                  <span>Khóa-{{ item.taskID }}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                  <svg
+                    height="16"
+                    width="16"
+                    viewBox="0 0 24 24"
+                    role="presentation"
+                    style="color: #00875a"
+                  >
+                    <path
+                      d="M6.735 12.322a1 1 0 00-1.47 1.356l3.612 3.919c.537.526 1.337.526 1.834.03l.364-.359a2335.638 2335.638 0 003.939-3.883l.04-.04a492.598 492.598 0 003.658-3.643 1 1 0 00-1.424-1.404 518.42 518.42 0 01-3.64 3.625l-.04.04a2049.114 2049.114 0 01-3.775 3.722l-3.098-3.363z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                  <img
+                    src="/assets/icon/task/medium.svg"
+                    width="16px"
+                    height="16px"
+                  />
+                </div>
+              </div>
+            </li>
+            <li>
+              <button class="button-todo">
+                <span nz-icon nzType="plus" nzTheme="outline"></span>
+                Tạo mới
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <!-- To Do -->
       <div
         class="content-todo"
@@ -552,7 +647,7 @@
         <span style="color: red">*</span>
       </p>
       <div class="header-issue">
-        <p>Vấn đề</p>
+        <a href="./project/project-team">Xem thành viên</a>
         <img
           _ngcontent-ng-c3631520248=""
           src="/assets/icon/project/Icon.svg"
@@ -596,27 +691,22 @@
             </ng-container>
           </div>
 
-          <div class="block-form">
-            <label for=""
-              >Thêm thành viên vào nhóm dự án
-              <span style="color: red">*</span></label
-            >
-            <nz-select
-              id="userID"
-              name="userID"
-              [(ngModel)]="teammenber.userID"
-              style="width: 97%; color: #000000d9"
-              nzShowSearch
-              nzAllowClear
-              nzPlaceHolder="Chọn thành viên vào nhóm dự án ..."
-            >
-              <nz-option
-                *ngFor="let user of users"
-                [nzLabel]="user.fullName"
-                [nzValue]="user.userID"
-              ></nz-option>
-            </nz-select>
-          </div>
+          <nz-select
+            id="userID"
+            name="userID"
+            [(ngModel)]="teammenber.userIDs"
+            style="width: 97%; color: #000000d9"
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Chọn thành viên vào nhóm dự án ..."
+            nzMode="multiple"
+          >
+            <nz-option
+              *ngFor="let user of users"
+              [nzLabel]="user.fullName"
+              [nzValue]="user.userID"
+            ></nz-option>
+          </nz-select>
           <div class="block-form">
             <label for="">Ngày khởi tạo</label>
             <nz-date-picker

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../service/user.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Role } from '../../../../models/interface/roles';
+import { RolesService } from '../../../../service/roles.service';
 
 @Component({
   selector: 'app-user-details',
@@ -14,12 +16,16 @@ export class UserDetailsComponent implements OnInit {
   tasks: any[] = [];
   userID : any;
   isDelete = false;
+  isUpdate = false;
   tasksToDo: any;
+  roles: Role[] = [];
+  dataUpdate: any = {};
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private notification: NzNotificationService,
+    private roleService: RolesService
   ){}
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -28,6 +34,18 @@ export class UserDetailsComponent implements OnInit {
     this.getUserDetails();
     this.getTasks();
     this.calculateTasksToDo();
+    this.fetchRoles();
+  }
+
+  fetchRoles() {
+    this.roleService.getRole().subscribe(
+      (response) => {        
+        this.roles = response;
+      },
+      (error) => {
+        console.error('Error fetching roles:', error);
+      }
+    );
   }
   getUserDetails() {
     this.route.params.subscribe((params) => {
@@ -82,5 +100,33 @@ export class UserDetailsComponent implements OnInit {
       }
     );
     this.isDelete = false;
+  }
+
+  showUpdate(data: any) : void {
+    this.dataUpdate = JSON.parse(JSON.stringify(data));
+    this.isUpdate = true;
+  }
+
+  OnUpdate() {
+    this.userService.updateUser(this.dataUpdate).subscribe(
+      (response) => {
+        this.notification.success(
+          'Bạn đã thêm người dùng thành công!',
+          'Chúc mừng bạn đã thêm người dùng thành công!'
+        );
+        this.getUserDetails();
+        this.getTasks();
+        this.calculateTasksToDo();
+        this.fetchRoles();
+        this.isUpdate = false;
+      },
+      (error) => {
+        this.notification.error(
+          'Đăng ký thất bại',
+          'Vui lòng kiểm tra lại thông tin đăng ký.'
+        );
+      }
+    );
+    
   }
 }

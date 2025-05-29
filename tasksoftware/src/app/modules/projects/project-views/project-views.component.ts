@@ -3,7 +3,8 @@ import { ProjectService } from '../../../service/project.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-views',
@@ -21,6 +22,7 @@ export class ProjectViewsComponent implements OnInit {
   dateFormat = 'dd-MM-yyyy';
   editedProject: any = {};
   selectedProject: any;
+  searchControl = new FormControl('');
 
 
   project = {
@@ -50,6 +52,11 @@ export class ProjectViewsComponent implements OnInit {
       this.projectID = params['id'];
     });
     this.getProejct();
+    this.searchControl.valueChanges
+      .pipe(debounceTime(300))
+      .subscribe(value => {
+        this.onSearch(value ?? '');
+      });
   }
 
   public isLibraryHidden: boolean = false;
@@ -59,8 +66,18 @@ export class ProjectViewsComponent implements OnInit {
   }
 
   showDelete(data: any): void {
-    this.projectID = data.projectID;
+    this.projectID = data.projectMainID;
     this.isDelete = true;
+  }
+
+  onSearch(keyword: string | null) {
+    const lower = (keyword ?? '').toLowerCase().trim();    
+    if (lower == '') this.getProejct();
+    this.projects = this.projects.filter(item =>
+      Object.values(item).some(value =>
+        value?.toString().toLowerCase().includes(lower)
+      )
+    );
   }
 
   OkDelete() {

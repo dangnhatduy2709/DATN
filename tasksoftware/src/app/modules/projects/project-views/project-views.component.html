@@ -90,8 +90,23 @@
 </div>
 
 <div class="content-body">
-  <div class="header-map">
-    <h6></h6>
+  <div class="header-map" style="justify-content: flex-end; gap: 134px; align-items: center;">
+    <div class="header-search">
+      <nz-input-group
+        [nzSuffix]="suffixIconSearch"
+        style="width: 225px; border-radius: 8px; height: 33px"
+      >
+        <input
+          type="text"
+          nz-input
+          placeholder="Tìm kiếm thông tin của bạn"
+          [formControl]="searchControl"
+        />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+    </div>
     <p>
       <img src="/assets/icon/project/Icon.svg" alt="">
     </p>
@@ -119,7 +134,7 @@
           </nz-avatar>
           {{ project.projectName }}
         </td>
-        <td>TSP-{{ project.projectID }}</td>
+        <td>TSP-{{ project.projectMainID }}</td>
         <td>{{ project.clientContactName }}</td>
         <td>{{ project.clientContactEmail }}</td>
         <td>{{ project.clientContactPhone }}</td>

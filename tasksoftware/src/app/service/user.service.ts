@@ -19,6 +19,9 @@ export class UserService {
     return this.http.post<any>(`${this.userUrl}/register/`, user);
   }
 
+  updateUser(user: any): Observable<any> {
+    return this.http.put<any>(`${this.userUrl}/${user.userID}`, user);
+  }
   login(user: { emailAddress: string; password: string }) {
     return this.http.post<any>(`${this.userUrl}/login`, user).pipe(
       tap((response) => {

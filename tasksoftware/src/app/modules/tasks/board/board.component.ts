@@ -29,7 +29,7 @@ export class AvatarComponent implements OnInit {
   dateFormat = 'yyyy-MM-dd';
   teammenber = {
     teamID: '',
-    userID: '',
+    userIDs: [],
     joinDate: ''
   };
   priorityMap: { [key: number]: string } = {
@@ -113,12 +113,14 @@ export class AvatarComponent implements OnInit {
   }
 
   showsTeamMember(): void {
+    console.log(1);
     this.isTeamMember = true;
   }
 
   OksTeamMember(): void {
-    const formattedCreatedDate = formatDate(this.teammenber.joinDate, 'yyyy-MM-dd HH:mm:ss', 'en-US');
-    this.teammenber.joinDate = formattedCreatedDate;
+    this.teammenber.joinDate = this.teammenber.joinDate ? 
+      formatDate(this.teammenber.joinDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
+    this.teammenber.teamID  = this.TaskData[0].teamID;
     this.teamService.addTeammenber(this.teammenber).subscribe(
       (response) => {
         this.notification.success(

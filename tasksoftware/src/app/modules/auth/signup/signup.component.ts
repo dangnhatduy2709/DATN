@@ -40,9 +40,9 @@ export class SignupComponent implements OnInit {
   }
 
   fetchRoles() {
-    this.roleService.getRoles().subscribe(
+    this.roleService.getRole().subscribe(
       (response) => {
-        this.roles = response.data;
+        this.roles = response;
       },
       (error) => {
         console.error('Error fetching roles:', error);

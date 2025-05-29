@@ -232,7 +232,7 @@
             <label for=""
               >Dự án của bạn <span style="color: red">*</span></label
             >
-            <nz-select
+            <!-- <nz-select
               id="userID"
               name="userID"
               [(ngModel)]="task.projectID"
@@ -246,13 +246,24 @@
                 [nzLabel]="member.projectName"
                 [nzValue]="member.projectID"
               ></nz-option>
-            </nz-select>
+            </nz-select> -->
+            <ng-container *ngFor="let member of TaskData">
+              <input
+                style="width: 97%; color: #000000d9"
+                placeholder="{{ member.projectManagerName }}"
+                nz-input
+                nzSize="large"
+                id="projectName"
+                name="projectName"
+                disabled
+              />
+            </ng-container>
           </div>
           <div class="block-form">
             <label for=""
               >Quản lý dự án <span style="color: red">*</span></label
             >
-            <nz-select
+            <!-- <nz-select
               id="userID"
               name="userID"
               [(ngModel)]="task.userID"
@@ -266,7 +277,18 @@
                 [nzLabel]="member.projectManagerName"
                 [nzValue]="member.userID"
               ></nz-option>
-            </nz-select>
+            </nz-select> -->
+            <ng-container *ngFor="let member of TaskData">
+              <input
+                style="width: 97%; color: #000000d9"
+                placeholder="{{ member.projectTeamName }}"
+                nz-input
+                nzSize="large"
+                id="projectName"
+                name="projectName"
+                disabled
+              />
+            </ng-container>
           </div>
           <div class="block-form">
             <label for=""> Các loại vấn đề </label>
@@ -369,7 +391,6 @@
               [nzMultiple]="true"
               nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
               (nzChange)="handleChange($event)"
-              [nzWithCredentials]="'97%'"
             >
               <p
                 class="ant-upload-hint"
