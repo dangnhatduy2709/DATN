@@ -128,7 +128,11 @@
       <nz-dropdown-menu #group="nzDropdownMenu">
         <ul nz-menu class="nz-menu-ul">
           <div class="css-xhdqsk">Lọc theo bảng công việc</div>
-          <li nz-menu-item class="nz-menu-li" (click)="filterByBoard('No Assign')">
+          <li
+            nz-menu-item
+            class="nz-menu-li"
+            (click)="filterByBoard('No Assign')"
+          >
             <span nz-icon nzType="file-unknown" nzTheme="outline"></span>
             Không chỉ định
           </li>
@@ -697,7 +701,8 @@
 
           <div class="block-form">
             <label for=""
-              >Thêm thành viên vào nhóm dự án <span style="color: red">*</span></label
+              >Thêm thành viên vào nhóm dự án
+              <span style="color: red">*</span></label
             >
             <nz-select
               id="userID"
@@ -713,7 +718,7 @@
                 *ngFor="let user of users"
                 [nzLabel]="user.fullName"
                 [nzValue]="user.userID"
-                style="height: 100%;"
+                style="height: 100%"
               ></nz-option>
             </nz-select>
           </div>
@@ -930,9 +935,16 @@
                   <span>{{ selectedProject.taskType }}</span>
                 </div>
               </div>
-
               <div class="details-title">
-                <div class="title-right">Ngày đáo hạn</div>
+                <div class="title-right">Ngày bắt đầu</div>
+                <div class="title-left">
+                  <span>{{
+                    selectedProject.createdDate | date : "dd-MM-yyyy"
+                  }}</span>
+                </div>
+              </div>
+              <div class="details-title">
+                <div class="title-right">Ngày gia hạn</div>
                 <div class="title-left">
                   <span>{{
                     selectedProject.endDate | date : "dd-MM-yyyy"
@@ -944,15 +956,6 @@
                 <div class="title-right">Số giờ thực hiện</div>
                 <div class="title-left">
                   <span>{{ selectedProject.actualHoursSpent }} giờ</span>
-                </div>
-              </div>
-
-              <div class="details-title">
-                <div class="title-right">Ngày bắt đầu</div>
-                <div class="title-left">
-                  <span>{{
-                    selectedProject.createdDate | date : "dd-MM-yyyy"
-                  }}</span>
                 </div>
               </div>
 
