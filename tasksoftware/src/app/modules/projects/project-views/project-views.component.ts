@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-project-views',
@@ -39,12 +40,14 @@ export class ProjectViewsComponent implements OnInit {
     userID: '',
   };
   projectID: any;
+  users: any;
 
   constructor(
     private projectService: ProjectService,
     private notification: NzNotificationService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +55,7 @@ export class ProjectViewsComponent implements OnInit {
       this.projectID = params['id'];
     });
     this.getProejct();
+    this.fetchUser();
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
       .subscribe(value => {
@@ -68,6 +72,17 @@ export class ProjectViewsComponent implements OnInit {
   showDelete(data: any): void {
     this.projectID = data.projectMainID;
     this.isDelete = true;
+  }
+
+  fetchUser() {
+    this.userService.getUsers().subscribe(
+      (response) => {
+        this.users = response;
+      },
+      (error) => {
+        console.error('Thông tin dữ liệu người dùng bị lỗi:', error);
+      }
+    );
   }
 
   onSearch(keyword: string | null) {
@@ -103,6 +118,7 @@ export class ProjectViewsComponent implements OnInit {
   showUpdate(selectedProject: any): void {
     this.selectedProject = selectedProject;
     this.editedProject = { ...selectedProject };
+    console.log(this.editedProject);
     this.isUpdate = true;
   }
 

@@ -78,12 +78,21 @@ export class SummaryComponent implements OnInit {
     this.isTask = true
   }
   OkAddTask() {
+    if (this.task.taskType == null || this.task.taskType == '') {
+      this.notification.error('Lỗi', 'Vui lòng nhập tên công việc.');
+      return;
+    }
+
+    if (this.task.description == null || this.task.description == '') {
+      this.notification.error('Lỗi', 'Vui lòng mô tả chi tiết.');
+      return;
+    }
+
     this.task.createdDate = this.task.createdDate ? 
-      formatDate(this.task.createdDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
+      formatDate(this.task.createdDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en-US');
     this.task.endDate = this.task.endDate ? 
-      formatDate(this.task.endDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
+      formatDate(this.task.endDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en-US');
       this.task.projectID = this.projectId;
-      console.log(this.task);
     this.taskService.addTask(this.task).subscribe(
       (response) => {
         this.notification.success(
@@ -140,7 +149,6 @@ export class SummaryComponent implements OnInit {
         (data) => {
           this.projectData = data;
           this.TaskData = data;
-          console.log(this.TaskData);
         },
         (error) => {
           console.error('Lỗi khi lấy dự án theo ID:', error);

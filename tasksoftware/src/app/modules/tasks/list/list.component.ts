@@ -6,6 +6,8 @@ import { TeamService } from '../../../service/team.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ProjectService } from '../../../service/project.service';
 import { saveAs } from 'file-saver';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +21,7 @@ import { saveAs } from 'file-saver';
 export class ListComponent implements OnInit {
   checked = false;
   indeterminate = false;
-
+  isUpdate = false;
   setOfCheckedId = new Set<number>();
   projectId: any;
   projectData: any;
@@ -29,8 +31,8 @@ export class ListComponent implements OnInit {
   users: any[] = [];
   isTeamMember = false;
   priorityMap: { [key: number]: string } = {
-    1: 'Lowest',
-    2: 'Low',
+    1: 'Low',
+    2: 'Lowest',
     3: 'Medium',
     4: 'High',
     5: 'Highest'
@@ -47,6 +49,22 @@ export class ListComponent implements OnInit {
   tasks: any[] = [];
   filterApplied: boolean = false;
   isDelete = false;
+  taskUpdate = {
+    projectID: '',
+    taskType: '',
+    summary: '',
+    userID: '',
+    status: 'To Do',
+    createdDate: '',
+    endDate: '',
+    priority: '',
+    description: '',
+    taskDescription: 'Create marketing materials for campaign',
+    actualHoursSpent: '',
+    taskManagerID: '',
+    teamName: '',
+    fullName: ''
+  };
 
   constructor(
     private taskServices: TaskService,
@@ -55,6 +73,8 @@ export class ListComponent implements OnInit {
     private teamService: TeamService,
     private projectService: ProjectService,
     private notification: NzNotificationService,
+    private msg: NzMessageService,
+    
   ) { }
 
   ngOnInit(): void {
@@ -83,7 +103,7 @@ export class ListComponent implements OnInit {
         (data) => {
           this.projectData = data;
           this.tasks = data;
-          this.filteredTasks = data;
+          this.filteredTasks = data.filter((item: any) => item.projectID != null);
         },
         (error) => {
           console.error('Lỗi khi lấy dự án theo ID:', error);
@@ -178,4 +198,45 @@ export class ListComponent implements OnInit {
     
   }
 
+  showUpdate(id: any): void {
+    this.TaskId = id;
+    this.isUpdate = true;
+    this.taskUpdate = this.filteredTasks.find((item: any) => item.taskID == id);
+  }
+
+  OnUpdate() : void {
+    console.log(this.taskUpdate);
+    this.taskServices.updateTaskData(this.TaskId, this.taskUpdate).subscribe(
+      (data: any) => {
+        this.notification.success(
+          'Xóa công việc thành công',
+          'Danh sách công việc đã được cập nhật.'
+        );
+        this.getTaskProjectData();
+        this.isUpdate = false;
+      },
+      (error) => {
+        console.error(error);
+        this.notification.error(
+          'Xóa công việc thất bại',
+          'Có lỗi xảy ra, vui lòng thử lại.'
+        );
+        this.isUpdate = false;
+        this.getTaskProjectData();
+      }
+    );
+  }
+
+  handleChange({ file, fileList }: NzUploadChangeParam): void {
+    console.log(file);
+    const status = file.status;
+    if (status !== 'uploading') {
+      console.log(file, fileList);
+    }
+    if (status === 'done') {
+      this.msg.success(`${file.name} file uploaded successfully.`);
+    } else if (status === 'error') {
+      this.msg.error(`${file.name} file upload failed.`);
+    }
+  }
 }
