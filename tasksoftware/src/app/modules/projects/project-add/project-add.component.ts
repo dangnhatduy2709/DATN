@@ -67,12 +67,24 @@ export class ProjectAddComponent implements OnInit {
   }
 
   addProject() {
+    const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+
+    if (!this.project.clientContactEmail || !emailRegex.test(this.project.clientContactEmail)) {
+      this.notification.error('Lỗi', 'Email không hợp lệ.');
+      return;
+    }
+
+    if (!this.project.clientContactPhone || !phoneRegex.test(this.project.clientContactPhone)) {
+      this.notification.error('Lỗi', 'Số điện thoại phải gồm 10 chữ số.');
+      return;
+    }
     this.project.createdDate = this.project.createdDate
       ? formatDate(this.project.createdDate, 'yyyy-MM-dd HH:mm:ss', 'en-US')
-      : '1970-01-01 00:00:00';
+      : formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en-US');
     this.project.endDate = this.project.endDate
       ? formatDate(this.project.endDate, 'yyyy-MM-dd HH:mm:ss', 'en-US')
-      : '1970-01-01 00:00:00';
+      : formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en-US');
 
     this.projectService.addProject(this.project).subscribe(
       (response) => {

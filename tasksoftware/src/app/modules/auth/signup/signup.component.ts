@@ -50,6 +50,23 @@ export class SignupComponent implements OnInit {
     );
   }
   registerUser() {
+    const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+
+    if (this.user.fullName == null || this.user.fullName == '') {
+      this.notification.error('Lỗi', 'Vui lòng nhập tên người dùng.');
+      return;
+    }
+
+    if (!this.user.emailAddress || !emailRegex.test(this.user.emailAddress)) {
+      this.notification.error('Lỗi', 'Email không hợp lệ.');
+      return;
+    }
+
+    if (!this.user.phoneNumber || !phoneRegex.test(this.user.phoneNumber)) {
+      this.notification.error('Lỗi', 'Số điện thoại phải gồm 10 chữ số.');
+      return;
+    }
     this.userService.registerUser(this.user).subscribe(
       (response) => {
         this.notification.success(

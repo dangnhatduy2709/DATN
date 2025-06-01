@@ -291,7 +291,7 @@
             </ng-container>
           </div>
           <div class="block-form">
-            <label for=""> Tên công việc </label>
+            <label for=""> Tên công việc <span style="color: red">*</span></label>
             <input
               style="width: 97%"
               nz-input
@@ -304,16 +304,16 @@
             />
           </div>
           <div class="block-form">
-            <label for=""> Tóm tắt <span style="color: red">*</span></label>
+            <label for=""> Mô tả chi tiết <span style="color: red">*</span></label>
             <textarea
               rows="5"
               style="width: 97%"
               nz-input
-              id="summary"
-              name="summary"
+              id="description"
+              name="description"
               nz-input
-              placeholder="Nhập mô tả tóm tắt công việc ..."
-              [(ngModel)]="task.summary"
+              placeholder="Nhập mô tả chi tiết công việc ..."
+              [(ngModel)]="task.description"
               nzSize="large"
             ></textarea>
           </div>
@@ -368,22 +368,7 @@
               Tìm hiểu về mức độ ưu tiên
             </p>
           </div>
-          <div class="block-form">
-            <label for="">
-              Mô tả chi tiết <span style="color: red">*</span></label
-            >
-            <textarea
-              rows="5"
-              style="width: 97%"
-              nz-input
-              id="description"
-              name="description"
-              nz-input
-              placeholder="Nhập mô tả chi tiết công việc ..."
-              [(ngModel)]="task.description"
-              nzSize="large"
-            ></textarea>
-          </div>
+          
           <div class="block-form">
             <label for="">Tệp tin đính kèm</label>
             <nz-upload

@@ -39,6 +39,8 @@ export class TaskService {
     return this.http.get(`${this.taskUrl}/api/downloadExcel`,{ responseType: 'blob' });
   }
 
-
+  updateTaskData(taskId: string, taskData: any): Observable<any> {
+    return this.http.put<any>(`${this.taskUrl}/updatetaskdata/${taskId}`, taskData);
+  }
 
 }

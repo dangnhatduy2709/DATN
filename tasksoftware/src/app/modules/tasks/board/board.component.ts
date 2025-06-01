@@ -120,7 +120,8 @@ export class AvatarComponent implements OnInit {
 
   OksTeamMember(): void {
     this.teammenber.joinDate = this.teammenber.joinDate ? 
-      formatDate(this.teammenber.joinDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') : '1970-01-01 00:00:00';
+      formatDate(this.teammenber.joinDate, 'yyyy-MM-dd HH:mm:ss', 'en-US') :
+      formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss', 'en-US');
     this.teammenber.teamID  = this.TaskData[0].teamID;
     this.teamService.addTeammenber(this.teammenber).subscribe(
       (response) => {
@@ -163,7 +164,18 @@ export class AvatarComponent implements OnInit {
     this.userService.getUsers().subscribe(
       (response) => {
         const excludedUserId = this.TaskData[0].userID;
-        this.users = response.filter((item: any) => item.userID !== excludedUserId);
+        const listData = this.teams[0].members;
+
+        const uniqueList = Array.from(
+          new Map(this.teamData.map((item: any) => [item.userID, item])).values()
+        );
+
+        const excludedIds = new Set([
+          excludedUserId,
+          ...uniqueList.map((item: any) => item.userID)
+        ]);
+
+        this.users = response.filter((item: any) => !excludedIds.has(item.userID));
       },
       (error) => {
         console.error('Error fetching roles:', error);
