@@ -113,7 +113,7 @@
                 <h5 style="padding: 8px; font-size: 16px; font-weight: 700">
                   Dự án gần đây
                 </h5>
-                <li nz-menu-item routerLink="/project/project-user">
+                <li nz-menu-item routerLink="/project/dashboard">
                   <div
                     style="
                       display: flex;
@@ -188,13 +188,13 @@
 
             <nz-dropdown-menu #users="nzDropdownMenu">
               <ul nz-menu>
-                <li nz-menu-item routerLink="/project/project-user">
-                  <span
+                <li nz-menu-item routerLink="/project/project-team">
+                  <a
                     nz-icon
                     nzType="user-add"
                     nzTheme="outline"
                     style="font-size: 18px"
-                  ></span>
+                  ></a>
                   Thêm thành viên vào nhóm
                 </li>
                 <li nz-menu-item routerLink="/project/project-team">
@@ -209,7 +209,7 @@
 
                 <li nz-menu-divider></li>
 
-                <li nz-menu-item>
+                <li nz-menu-item routerLink="/project/project-team">
                   <span
                     nz-icon
                     nzType="file-search"

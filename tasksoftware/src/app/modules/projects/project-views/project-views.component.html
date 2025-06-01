@@ -128,11 +128,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let project of projects">
-        <td>
+        <td >
           <nz-avatar nzText="{{ project.projectName.substring(0, 2).toUpperCase() }}" class="avatar-user"
             style="margin-right: 5px;">
           </nz-avatar>
-          {{ project.projectName }}
+          <a style="color: black;" [routerLink]="['/task/work-summary/' + project.projectID]">{{ project.projectName }}</a>
         </td>
         <td>TSP-{{ project.projectMainID }}</td>
         <td>{{ project.clientContactName }}</td>

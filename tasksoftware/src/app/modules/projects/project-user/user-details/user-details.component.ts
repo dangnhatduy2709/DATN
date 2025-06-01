@@ -88,9 +88,7 @@ export class UserDetailsComponent implements OnInit {
       );
   }
   calculateTasksToDo(): void {
-    this.tasksToDo = this.tasks.filter(task => task.status === 'To Do').length;
-    console.log('Tasks:', this.tasks);
-    console.log('Tasks To Do:', this.tasksToDo);
+    this.tasksToDo = this.tasks.filter(task => task.status === 'Done').length;
   }
   showDelete(data: any):void {
     this.userID = data.userID;
