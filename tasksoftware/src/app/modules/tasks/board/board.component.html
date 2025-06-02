@@ -132,6 +132,7 @@
             nz-menu-item
             class="nz-menu-li no-assign"
             (click)="filterByBoard('No Assign')"
+            style="color: #333 !important;"
           >
             <span nz-icon nzType="file-unknown" nzTheme="outline"></span>
             Không chỉ định
@@ -716,7 +717,7 @@
             >
               <nz-option
                 *ngFor="let user of users"
-                [nzLabel]="user.fullName"
+                [nzLabel]="getUserLabel(user)"
                 [nzValue]="user.userID"
                 style="height: 100%"
               ></nz-option>

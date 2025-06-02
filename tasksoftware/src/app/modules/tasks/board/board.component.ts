@@ -285,4 +285,7 @@ export class AvatarComponent implements OnInit {
     this.isShowInfor = true;
   }
 
+  getUserLabel(user: any): string {
+    return `${user.userID} - ${user.fullName} - ${user.emailAddress}`;
+  }
 }
