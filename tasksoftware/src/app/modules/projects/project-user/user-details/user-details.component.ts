@@ -22,6 +22,7 @@ export class UserDetailsComponent implements OnInit {
   roles: Role[] = [];
   dataUpdate: any = {};
   userJoinProject: any;
+  tasksNoAssign: any;
 
   constructor(
     private userService: UserService,
@@ -39,6 +40,7 @@ export class UserDetailsComponent implements OnInit {
     this.calculateTasksToDo();
     this.fetchRoles();
     this.getUserProject();
+    this.calculateTasksNoAssign();
   }
 
   fetchRoles() {
@@ -120,7 +122,23 @@ export class UserDetailsComponent implements OnInit {
     this.isUpdate = true;
   }
 
+  calculateTasksNoAssign() : void {
+    this.tasksNoAssign = this.tasks.filter(task => task.status === 'No Assign').length;
+  }
+
   OnUpdate() {
+    const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+    const phoneRegex = /^[0-9]{10}$/;
+
+    if (!this.dataUpdate.emailAddress || !emailRegex.test(this.dataUpdate.emailAddress)) {
+      this.notification.error('Lỗi', 'Email không hợp lệ.');
+      return;
+    }
+
+    if (!this.dataUpdate.phoneNumber || !phoneRegex.test(this.dataUpdate.phoneNumber)) {
+      this.notification.error('Lỗi', 'Số điện thoại phải gồm 10 chữ số.');
+      return;
+    }
     this.userService.updateUser(this.dataUpdate).subscribe(
       (response) => {
         this.notification.success(

@@ -4,6 +4,8 @@ import { UserService } from '../../../service/user.service';
 import { ProjectService } from '../../../service/project.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { DatePipe } from '@angular/common';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,12 +17,14 @@ import { DatePipe } from '@angular/common';
 export class ProjectDashboardComponent implements OnInit {
   userData: any;
   projects: any[] = [];
+  projectData: any[] = [];
   isDelete = false;
   isUpdate = false;
   editedProject: any = {};
   selectedProject: any;
   projectID: any;
   dateFormat = 'dd-MM-yyyy';
+  searchControl = new FormControl('');
   constructor(
     private i18n: NzI18nService,
     private userService: UserService,
@@ -32,6 +36,22 @@ export class ProjectDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
     this.getProejct();
+
+    this.searchControl.valueChanges
+      .pipe(debounceTime(300))
+      .subscribe(value => {
+        this.onSearch(value ?? '');
+      });
+  }
+
+  onSearch(keyword: string | null) {
+    const lower = (keyword ?? '').toLowerCase().trim();    
+    if (lower == '') this.getProejct();
+    this.projects = this.projects.filter(item =>
+      Object.values(item).some(value =>
+        value?.toString().toLowerCase().includes(lower)
+      )
+    );
   }
 
   getUserInfo(): void {
@@ -50,6 +70,8 @@ export class ProjectDashboardComponent implements OnInit {
     this.projectService.getProejct().subscribe(
       (response: any[]) => {
         this.projects = response;
+        this.projectData = response;
+        
       },
       (error) => {
         console.error('Thông tin dữ liệu dự án lỗi:', error);

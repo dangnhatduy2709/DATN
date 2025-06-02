@@ -23,7 +23,7 @@
     </div>
 
     <div class="bg-card-app">
-      <div class="bg-card-app-sketch" *ngFor="let project of projects">
+      <div class="bg-card-app-sketch" *ngFor="let project of projectData">
         <a class="ktRddP">
           <span class="gKKmlt">
             <img
@@ -89,6 +89,22 @@
   </div>
 
   <div class="content-body">
+    <div class="header-search" style="display: flex; justify-content: flex-end; margin-right: 156px;">
+      <nz-input-group
+        [nzSuffix]="suffixIconSearch"
+        style="width: 225px; border-radius: 8px; height: 33px"
+      >
+        <input
+          type="text"
+          nz-input
+          placeholder="Tìm kiếm thông tin"
+          [formControl]="searchControl"
+        />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+      </ng-template>
+    </div>
     <nz-tabset>
       <nz-tab nzTitle="Làm việc trên">
         <nz-table
@@ -100,7 +116,7 @@
             <tr>
               <th style="text-align: center">Tên dự án</th>
               <th style="text-align: center">Mã dự án</th>
-              <th style="text-align: center">Loại dự án</th>
+              <th style="text-align: center">Mô tả dự án</th>
               <th style="text-align: center">Quản lý</th>
               <th style="text-align: center">Ngày bắt đầu</th>
               <th style="text-align: center">Tiến trình</th>

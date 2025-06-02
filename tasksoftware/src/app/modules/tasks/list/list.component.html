@@ -230,10 +230,12 @@
         <tr *ngFor="let data of rowSelectionTable.data" style="cursor: pointer">
           <td nzLeft [nzChecked]="setOfCheckedId.has(data.id)"></td>
           <td>{{ data.taskType }}</td>
-          <td>TS-{{ data.projectID }}</td>
+          <td>Khóa-{{ data.taskID }}</td>
           <!-- <td>{{ data.summary }}</td> -->
           <td>
-            <nz-tag nzColor="success">{{ data.status }}</nz-tag>
+            <nz-tag [ngStyle]="getTagColor(data.status)">
+              {{ data.status }}
+            </nz-tag>
           </td>
           <!-- <td>{{ data.age }}</td> -->
           <td>{{ data.description }}</td>

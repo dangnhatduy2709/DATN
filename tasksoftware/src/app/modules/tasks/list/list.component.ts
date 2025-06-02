@@ -114,6 +114,18 @@ export class ListComponent implements OnInit {
       );
     }
   }
+
+  getTagColor(status: string): object {
+    if (status === 'No Assign') {
+      return { 'background-color': '#deebff', color: 'red' };
+    } 
+    else if (status === 'Done') {
+      return { 'background-color': '#e3fcef', color: '#006644' };
+    } else {
+      return { 'background-color': '#deebff', color: 'rgba(177, 174, 7, 0.976470588)' };
+    }
+  }
+
   onSearchChange(): void {
     const searchTermLower = this.searchTask.toLowerCase();
     this.filteredTasks = this.tasks.filter(
