@@ -12,11 +12,9 @@ import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 @Component({
   selector: 'app-list',
   standalone: false,
-  providers: [
-    DatePipe,
-  ],
+  providers: [DatePipe],
   templateUrl: './list.component.html',
-  styleUrl: './list.component.scss'
+  styleUrl: './list.component.scss',
 })
 export class ListComponent implements OnInit {
   checked = false;
@@ -35,13 +33,13 @@ export class ListComponent implements OnInit {
     2: 'Lowest',
     3: 'Medium',
     4: 'High',
-    5: 'Highest'
+    5: 'Highest',
   };
   dateFormat = 'yyyy-MM-dd';
   teammenber = {
     teamID: '',
     userID: '',
-    joinDate: ''
+    joinDate: '',
   };
 
   searchTask: string = '';
@@ -63,7 +61,7 @@ export class ListComponent implements OnInit {
     actualHoursSpent: '',
     taskManagerID: '',
     teamName: '',
-    fullName: ''
+    fullName: '',
   };
 
   constructor(
@@ -73,12 +71,11 @@ export class ListComponent implements OnInit {
     private teamService: TeamService,
     private projectService: ProjectService,
     private notification: NzNotificationService,
-    private msg: NzMessageService,
-    
-  ) { }
+    private msg: NzMessageService
+  ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.projectId = params['id'];
     });
     this.getTaskProjectData();
@@ -103,44 +100,61 @@ export class ListComponent implements OnInit {
         (data) => {
           this.projectData = data;
           this.tasks = data;
-          this.filteredTasks = data.filter((item: any) => item.projectID != null);
+          this.filteredTasks = data.filter(
+            (item: any) => item.projectID != null
+          );
         },
         (error) => {
           console.error('Lỗi khi lấy dự án theo ID:', error);
         }
       );
     } else {
-      console.error('projectId không được định nghĩa. Không thể lấy dự án theo ID.');
+      console.error(
+        'projectId không được định nghĩa. Không thể lấy dự án theo ID.'
+      );
     }
   }
   onSearchChange(): void {
     const searchTermLower = this.searchTask.toLowerCase();
-    this.filteredTasks = this.tasks.filter(task =>
-      task.taskType?.toLowerCase().includes(searchTermLower) ||
-      task.id?.toString().includes(searchTermLower) ||
-      task.summary?.toLowerCase().includes(searchTermLower) ||
-      task.status?.toLowerCase().includes(searchTermLower) ||
-      task.taskDescription?.toLowerCase().includes(searchTermLower)
+    this.filteredTasks = this.tasks.filter(
+      (task) =>
+        task.taskType?.toLowerCase().includes(searchTermLower) ||
+        task.id?.toString().includes(searchTermLower) ||
+        task.summary?.toLowerCase().includes(searchTermLower) ||
+        task.status?.toLowerCase().includes(searchTermLower) ||
+        task.taskDescription?.toLowerCase().includes(searchTermLower)
     );
   }
   filterTasks(criterion: string): void {
     switch (criterion) {
       case 'alphabetical-asc':
-        this.filteredTasks = [...this.tasks].sort((a, b) => a.taskType?.localeCompare(b.taskType));
+        this.filteredTasks = [...this.tasks].sort((a, b) =>
+          a.taskType?.localeCompare(b.taskType)
+        );
         break;
       case 'alphabetical-desc':
-        this.filteredTasks = [...this.tasks].sort((a, b) => b.taskType?.localeCompare(a.taskType));
+        this.filteredTasks = [...this.tasks].sort((a, b) =>
+          b.taskType?.localeCompare(a.taskType)
+        );
         break;
       case 'updated-latest':
-        this.filteredTasks = [...this.tasks].sort((a, b) => new Date(b.createdDate)?.getTime() - new Date(a.createdDate).getTime());
+        this.filteredTasks = [...this.tasks].sort(
+          (a, b) =>
+            new Date(b.createdDate)?.getTime() -
+            new Date(a.createdDate).getTime()
+        );
         break;
       case 'updated-oldest':
-        this.filteredTasks = [...this.tasks].sort((a, b) => new Date(a.createdDate)?.getTime() - new Date(b.createdDate).getTime());
+        this.filteredTasks = [...this.tasks].sort(
+          (a, b) =>
+            new Date(a.createdDate)?.getTime() -
+            new Date(b.createdDate).getTime()
+        );
         break;
     }
   }
   filterByStatus(priority: any): void {
-    this.filteredTasks = this.tasks.filter(task => {
+    this.filteredTasks = this.tasks.filter((task) => {
       return task.priority === priority;
     });
     this.filterApplied = true;
@@ -187,15 +201,11 @@ export class ListComponent implements OnInit {
     dummy.select();
     document.execCommand('copy');
     document.body.removeChild(dummy);
-    this.notification.success(
-      'Sao chép liên kết thành công',
-      ''+ url
-    );
+    this.notification.success('Sao chép liên kết thành công', '' + url);
   }
 
-  showsTeamMember() : void{
+  showsTeamMember(): void {
     console.log(1);
-    
   }
 
   showUpdate(id: any): void {
@@ -204,12 +214,12 @@ export class ListComponent implements OnInit {
     this.taskUpdate = this.filteredTasks.find((item: any) => item.taskID == id);
   }
 
-  OnUpdate() : void {
+  OnUpdate(): void {
     console.log(this.taskUpdate);
     this.taskServices.updateTaskData(this.TaskId, this.taskUpdate).subscribe(
       (data: any) => {
         this.notification.success(
-          'Xóa công việc thành công',
+          'Sửa công việc thành công',
           'Danh sách công việc đã được cập nhật.'
         );
         this.getTaskProjectData();
@@ -218,7 +228,7 @@ export class ListComponent implements OnInit {
       (error) => {
         console.error(error);
         this.notification.error(
-          'Xóa công việc thất bại',
+          'Sửa công việc thất bại',
           'Có lỗi xảy ra, vui lòng thử lại.'
         );
         this.isUpdate = false;

@@ -10,12 +10,12 @@ import { TeamService } from '../../../../service/team.service';
   selector: 'app-user-details',
   standalone: false,
   templateUrl: './user-details.component.html',
-  styleUrl: './user-details.component.scss'
+  styleUrl: './user-details.component.scss',
 })
 export class UserDetailsComponent implements OnInit {
   userDetails: any = {};
   tasks: any[] = [];
-  userID : any;
+  userID: any;
   isDelete = false;
   isUpdate = false;
   tasksToDo: any;
@@ -29,20 +29,21 @@ export class UserDetailsComponent implements OnInit {
     private notification: NzNotificationService,
     private roleService: RolesService,
     private teamService: TeamService
-  ){}
+  ) {}
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.userID = params['id'];
     });
     this.getUserDetails();
     this.getTasks();
     this.calculateTasksToDo();
     this.fetchRoles();
+    this.getUserProject();
   }
 
   fetchRoles() {
     this.teamService.getUserByProject(this.userID).subscribe(
-      (response) => {     
+      (response) => {
         this.userJoinProject = response[0].teamCount;
       },
       (error) => {
@@ -53,7 +54,7 @@ export class UserDetailsComponent implements OnInit {
 
   getUserProject() {
     this.roleService.getRole().subscribe(
-      (response) => {        
+      (response) => {
         this.roles = response;
       },
       (error) => {
@@ -64,37 +65,36 @@ export class UserDetailsComponent implements OnInit {
 
   getUserDetails() {
     this.route.params.subscribe((params) => {
-    this.userID = +params['id'];
-    this.userService.getUserDetails(this.userID).subscribe(
-      (data: any) => {
-        this.userDetails = data;
-      },
-      (error) => {
-        console.error('Error fetching user details:', error);
-      }
-    );
-  });
-  }
-  getTasks(): void {
-    this.userService.getUserTasks(this.userID)
-      .subscribe(
-        (data) => {
-          this.tasks = data;
-          this.calculateTasksToDo();
+      this.userID = +params['id'];
+      this.userService.getUserDetails(this.userID).subscribe(
+        (data: any) => {
+          this.userDetails = data;
         },
         (error) => {
-          console.error(error);
+          console.error('Error fetching user details:', error);
         }
       );
+    });
+  }
+  getTasks(): void {
+    this.userService.getUserTasks(this.userID).subscribe(
+      (data) => {
+        this.tasks = data;
+        this.calculateTasksToDo();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
   calculateTasksToDo(): void {
-    this.tasksToDo = this.tasks.filter(task => task.status === 'Done').length;
+    this.tasksToDo = this.tasks.filter((task) => task.status === 'Done').length;
   }
-  showDelete(data: any):void {
+  showDelete(data: any): void {
     this.userID = data.userID;
     this.isDelete = true;
   }
-  OkDelete(){
+  OkDelete() {
     this.userService.deleteUser(this.userID).subscribe(
       (data: any) => {
         this.notification.success(
@@ -115,7 +115,7 @@ export class UserDetailsComponent implements OnInit {
     this.isDelete = false;
   }
 
-  showUpdate(data: any) : void {
+  showUpdate(data: any): void {
     this.dataUpdate = JSON.parse(JSON.stringify(data));
     this.isUpdate = true;
   }
@@ -140,6 +140,5 @@ export class UserDetailsComponent implements OnInit {
         );
       }
     );
-    
   }
 }

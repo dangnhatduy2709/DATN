@@ -130,7 +130,7 @@
           <div class="css-xhdqsk">Lọc theo bảng công việc</div>
           <li
             nz-menu-item
-            class="nz-menu-li"
+            class="nz-menu-li no-assign"
             (click)="filterByBoard('No Assign')"
           >
             <span nz-icon nzType="file-unknown" nzTheme="outline"></span>
@@ -192,17 +192,17 @@
   <div class="container-body">
     <form action="">
       <div
-        class="content-todo"
+        class="content-assign"
         (dragover)="onDrapOver($event)"
         (drop)="onDrop($event, 'No Assign')"
       >
-        <div class="todo-header">
-          <div class="todo-header-left">
+        <div class="assign-header">
+          <div class="assign-header-left">
             <span nz-icon nzType="holder" nzTheme="outline"></span>
             <p>Không chỉ định</p>
           </div>
           <div
-            class="todo-header-right"
+            class="assign-header-right"
             nz-dropdown
             nzTrigger="click"
             [nzDropdownMenu]="action"
@@ -223,7 +223,7 @@
             </ul>
           </nz-dropdown-menu>
         </div>
-        <div class="todo-drap">
+        <div class="assign-drap">
           <ul class="tasks">
             <li
               class="task"
@@ -277,7 +277,7 @@
               </div>
             </li>
             <li>
-              <button class="button-todo">
+              <button class="button-assign">
                 <span nz-icon nzType="plus" nzTheme="outline"></span>
                 Tạo mới
               </button>
@@ -288,12 +288,12 @@
 
       <!-- To Do -->
       <div
-        class="content-todo"
+        class="content-process"
         (dragover)="onDrapOver($event)"
         (drop)="onDrop($event, 'To Do')"
       >
-        <div class="todo-header">
-          <div class="todo-header-left">
+        <div class="process-header">
+          <div class="process-header-left">
             <span nz-icon nzType="holder" nzTheme="outline"></span>
             <p>Thực hiện</p>
           </div>
@@ -319,7 +319,7 @@
             </ul>
           </nz-dropdown-menu>
         </div>
-        <div class="todo-drap">
+        <div class="process-drap">
           <ul class="tasks">
             <li
               class="task"
@@ -373,7 +373,7 @@
               </div>
             </li>
             <li>
-              <button class="button-todo">
+              <button class="button-process">
                 <span nz-icon nzType="plus" nzTheme="outline"></span>
                 Tạo mới
               </button>
@@ -468,12 +468,12 @@
 
       <!-- Test -->
       <div
-        class="content-done"
+        class="content-process"
         (dragover)="onDrapOver($event)"
         (drop)="onDrop($event, 'Test')"
       >
-        <div class="done-header">
-          <div class="done-header-left">
+        <div class="process-header">
+          <div class="process-header-left">
             <span nz-icon nzType="holder" nzTheme="outline"></span>
             <p>Kiểm tra</p>
           </div>
@@ -499,7 +499,7 @@
             </ul>
           </nz-dropdown-menu>
         </div>
-        <div class="done-drap">
+        <div class="process-drap">
           <ul class="tasks">
             <li
               class="task"
@@ -541,7 +541,7 @@
               </div>
             </li>
             <li>
-              <button class="button-done">
+              <button class="button-process">
                 <span nz-icon nzType="plus" nzTheme="outline"></span>
                 Tạo mới
               </button>
@@ -552,12 +552,12 @@
 
       <!-- Done -->
       <div
-        class="content-done"
+        class="content-todo"
         (dragover)="onDrapOver($event)"
         (drop)="onDrop($event, 'Done')"
       >
-        <div class="done-header">
-          <div class="done-header-left">
+        <div class="todo-header">
+          <div class="todo-header-left">
             <span nz-icon nzType="holder" nzTheme="outline"></span>
             <p>Hoàn thành</p>
           </div>
@@ -583,7 +583,7 @@
             </ul>
           </nz-dropdown-menu>
         </div>
-        <div class="done-drap">
+        <div class="todo-drap">
           <ul class="tasks">
             <li
               class="task"
@@ -625,7 +625,7 @@
               </div>
             </li>
             <li>
-              <button class="button-done">
+              <button class="button-todo">
                 <span nz-icon nzType="plus" nzTheme="outline"></span>
                 Tạo mới
               </button>
