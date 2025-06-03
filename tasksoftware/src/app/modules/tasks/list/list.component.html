@@ -430,9 +430,9 @@
             <label for="">Tệp tin đính kèm</label>
             <nz-upload
               nzType="drag"
+              [nzCustomRequest]="customUpload"
               [nzMultiple]="true"
-              nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              (nzChange)="handleChange($event)"
+              nzShowUploadList="true"
             >
               <p
                 class="ant-upload-hint"
