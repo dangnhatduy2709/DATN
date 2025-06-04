@@ -15,6 +15,10 @@ export class TaskService {
     return this.http.get<any>(`${this.taskUrl}`);
   }
 
+  getAllTask(): Observable<any> {
+    return this.http.get<any>(`${this.taskUrl}/thongke`);
+  }
+
   getTaskProjectById(projectID: any): Observable<any> {
     return this.http.get<any>(`${this.taskUrl}/tasks/` + projectID);
   }

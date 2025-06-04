@@ -70,6 +70,7 @@ export class AvatarComponent implements OnInit {
       this.taskService.getTaskProjectById(this.projectID).subscribe(
         (data) => {
           this.tasks = data;
+          console.log(this.tasks);
         },
         (error) => {
           console.error('Có lỗi khi gọi API:', error);
