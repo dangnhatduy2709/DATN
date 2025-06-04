@@ -7,7 +7,9 @@ import Chart from 'chart.js/auto';
 import { formatDate } from '@angular/common';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
+import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-summary',
@@ -27,6 +29,7 @@ export class SummaryComponent implements OnInit {
   TaskData: any;
   teamData: any;
   teamID: any;
+  uploadedFileName: any;
 
   task = {
     projectID: '',
@@ -52,6 +55,7 @@ export class SummaryComponent implements OnInit {
     private taskService: TaskService,
     private userService: UserService,
     private notification: NzNotificationService,
+    private http: HttpClient
   ) {
   }
 
@@ -171,18 +175,6 @@ export class SummaryComponent implements OnInit {
       );
     });
   }
-  handleChange({ file, fileList }: NzUploadChangeParam): void {
-    console.log(file);
-    const status = file.status;
-    if (status !== 'uploading') {
-      console.log(file, fileList);
-    }
-    if (status === 'done') {
-      this.msg.success(`${file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      this.msg.error(`${file.name} file upload failed.`);
-    }
-  }
 
   drawChart() {
     const ctx = this.elementRef.nativeElement.querySelector('#myChart');
@@ -247,4 +239,29 @@ export class SummaryComponent implements OnInit {
       }
     });
   }
+
+  customUpload = (item: NzUploadXHRArgs): Subscription => {
+    const formData = new FormData();
+    formData.append('file', item.file as any);
+
+    const req = new HttpRequest('POST', 'http://localhost:3000/upload', formData, {
+      reportProgress: true,
+    });
+
+    const sub = this.http.request(req).subscribe({
+      next: (event) => {
+        if (event.type === HttpEventType.Response) {
+          // Khi upload hoàn thành, event.body chứa response JSON từ server
+          const res = event.body as any;          
+          this.uploadedFileName = res.file.filename; // lấy filename server trả về
+          item.onSuccess?.(res, item.file, null as any);
+        }
+      },
+      error: (err) => {
+        item.onError?.(err, item.file);
+      }
+    });
+
+    return sub; // ✅ Quan trọng: return Subscription
+  };
 }

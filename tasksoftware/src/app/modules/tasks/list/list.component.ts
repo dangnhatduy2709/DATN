@@ -7,7 +7,9 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ProjectService } from '../../../service/project.service';
 import { saveAs } from 'file-saver';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
+import { Subscription } from 'rxjs';
+import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 
 @Component({
   selector: 'app-list',
@@ -28,6 +30,7 @@ export class ListComponent implements OnInit {
   TaskId: any;
   users: any[] = [];
   isTeamMember = false;
+  uploadedFileName: any;
   priorityMap: { [key: number]: string } = {
     1: 'Low',
     2: 'Lowest',
@@ -71,7 +74,8 @@ export class ListComponent implements OnInit {
     private teamService: TeamService,
     private projectService: ProjectService,
     private notification: NzNotificationService,
-    private msg: NzMessageService
+    private msg: NzMessageService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -249,16 +253,27 @@ export class ListComponent implements OnInit {
     );
   }
 
-  handleChange({ file, fileList }: NzUploadChangeParam): void {
-    console.log(file);
-    const status = file.status;
-    if (status !== 'uploading') {
-      console.log(file, fileList);
-    }
-    if (status === 'done') {
-      this.msg.success(`${file.name} file uploaded successfully.`);
-    } else if (status === 'error') {
-      this.msg.error(`${file.name} file upload failed.`);
-    }
-  }
+  customUpload = (item: NzUploadXHRArgs): Subscription => {
+    const formData = new FormData();
+    formData.append('file', item.file as any);
+
+    const req = new HttpRequest('POST', 'http://localhost:3000/upload', formData, {
+      reportProgress: true,
+    });
+
+    const sub = this.http.request(req).subscribe({
+      next: (event) => {
+        if (event.type === HttpEventType.Response) {
+          const res = event.body as any;          
+          this.uploadedFileName = res.file.filename;
+          item.onSuccess?.(res, item.file, null as any);
+        }
+      },
+      error: (err) => {
+        item.onError?.(err, item.file);
+      }
+    });
+
+    return sub;
+  };
 }
