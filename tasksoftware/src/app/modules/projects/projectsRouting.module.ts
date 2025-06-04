@@ -9,6 +9,7 @@ import { ProjectTeamComponent } from './project-team/project-team.component';
 import { ProjectUserComponent } from './project-user/project-user.component';
 import { UserDetailsComponent } from './project-user/user-details/user-details.component';
 import { ProjectSettingComponent } from './project-setting/project-setting.component';
+import { ProjectStatisticalComponent } from './project-statistical/project-statistical.component';
 
 
 
@@ -34,6 +35,7 @@ export const routes: Routes = [
 
       { path: 'project-setting', component: ProjectSettingComponent },
 
+      { path: 'project-statistical', component: ProjectStatisticalComponent}
     ],
   },
 ];

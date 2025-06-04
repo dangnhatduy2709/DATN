@@ -1,0 +1,82 @@
+<div class="bg-title">
+  <div class="header-location">
+    <p>
+      <a routerLink="/project/dashboard"> Trang chủ</a>
+    </p>
+  </div>
+  <div class="bg-header-text">
+
+    <div class="header-text">
+      <h5>Thống kê</h5>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="header-map">
+    <!-- <h6>
+      <span>
+        <img src="/assets/icon/project/light-bulb.svg" width="24px" height="24px" alt="">
+      </span>
+      Các mẫu được đề xuất cho các nhóm như của bạn
+    </h6> -->
+    <!-- <button (click)="toggleLibrary()">
+      {{ isLibraryHidden ? 'Hiện thư viện' : 'Ẩn thư viện' }}
+      <span nz-icon [nzType]="isLibraryHidden ? 'caret-up' : 'caret-down'" nzTheme="outline"></span>
+    </button> -->
+  </div>
+
+  <div class="container-map" >
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/kanban.svg" alt="">
+        <p>Thống kê tổng số công việc hoàn thành</p>
+        <h6>{{ done }}</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/scrum.svg" alt="">
+        <p>Thống kê tổng số công việc đang tiến hành</p>
+        <h6>{{ inprogress }}</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/bug.svg" alt="">
+        <p>Thống kê tổng số công việc đang thực hiện</p>
+        <h6>{{ todo }}</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/blank-project.svg" alt="">
+        <p>Thống kê tổng số công việc đang kiểm tra</p>
+        <h6>{{ test }}</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/personal-task-planner.svg" alt="">
+        <p>Tổng số dự án hiện có</p>
+        <h6>{{ projects }}</h6>
+      </div>
+    </button>
+
+    <button class="map-item">
+      <div class="item">
+        <img src="/assets/img/project-management.svg" alt="">
+        <p>Tổng nhân viên hiện tại</p>
+        <h6>{{ users }}</h6>
+      </div>
+    </button>
+
+  </div>
+
+</div>
