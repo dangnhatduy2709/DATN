@@ -26,7 +26,7 @@ import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
 // Components
-import { AvatarComponent } from './board/board.component';
+import { BoardComponent } from './board/board.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FormComponent } from './form/form.component';
 import { IssuesComponent } from './issues/issues.component';
@@ -46,7 +46,7 @@ import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
-    AvatarComponent,
+    BoardComponent,
     CalendarComponent,
     FormComponent,
     IssuesComponent,
@@ -87,7 +87,7 @@ import { ListComponent } from './list/list.component';
 
   ],
   exports: [
-    AvatarComponent,
+    BoardComponent,
     CalendarComponent,
     FormComponent,
     IssuesComponent,
