@@ -8,7 +8,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { TimlineComponent } from './timline/timline.component';
 import { TasksComponent } from './tasks.component';
 import { IssuesComponent } from './issues/issues.component';
-import { AvatarComponent } from './board/board.component';
+import { BoardComponent } from './board/board.component';
 
 
 export const routes: Routes = [
@@ -32,7 +32,7 @@ export const routes: Routes = [
 
       { path: 'work-calendar/:id', component: CalendarComponent },
 
-      { path: 'work-avatar/:id', component: AvatarComponent },
+      { path: 'work-avatar/:id', component: BoardComponent },
     ],
   },
 ];

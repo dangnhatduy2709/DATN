@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { UserService } from '../../../service/user.service';
 import { TeamService } from '../../../service/team.service';
+import { CommentService } from '../../../service/comment.service';
 import { ProjectService } from '../../../service/project.service';
 import { ActivatedRoute } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -16,7 +17,7 @@ import { formatDistance } from 'date-fns';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
-export class AvatarComponent implements OnInit {
+export class BoardComponent implements OnInit {
   isTeamMember = false;
   teamID: any;
   teamData: any;
@@ -26,6 +27,7 @@ export class AvatarComponent implements OnInit {
   users: any[] = [];
   teams: any[] = [];
   roles: any[] = [];
+  messageText: string = '';
   dateFormat = 'yyyy-MM-dd';
   teammenber = {
     teamID: '',
@@ -47,6 +49,7 @@ export class AvatarComponent implements OnInit {
   selectedProject: any;
   currentItem: any;
   tasks: any[] = [];
+  dataMessage: any[] = [];
 
   searchProject: string = '';
   filteredProject: any[] = [];
@@ -62,7 +65,8 @@ export class AvatarComponent implements OnInit {
     private projectService: ProjectService,
     private notification: NzNotificationService,
     private taskService: TaskService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private commentService: CommentService
   ) { }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -277,9 +281,11 @@ export class AvatarComponent implements OnInit {
 
   showTaskInfor(selectedProject: any): void {
     this.selectedProject = selectedProject;
+    
     if (this.selectedProject) {
       setTimeout(() => {
         this.editedProject = { ...selectedProject };
+        this.getCommentByTaskID(this.selectedProject.taskID);
         this.isShowInfor = true;
       }, 0);
     }
@@ -288,5 +294,56 @@ export class AvatarComponent implements OnInit {
 
   getUserLabel(user: any): string {
     return `${user.userID} - ${user.fullName} - ${user.emailAddress}`;
+  }
+
+  getCommentByTaskID(taskID: any) {
+    this.commentService.getCommentByTaskID(taskID).subscribe(
+      (response) => {
+        this.dataMessage = response.map((comment: any) => ({
+          ...comment,
+          sent_at: new Date(comment.sent_at)// "2025-06-05T22:25:49"
+        }));
+        console.log(this.dataMessage);
+        
+      },
+      (error) => {
+        console.log(error);
+        
+      }
+    );
+  }
+
+  sendMessage() {
+    if (this.messageText.trim()) {
+      const userID = localStorage.getItem('userID')
+      if (!userID) {
+        this.notification.error('Không tìm thấy thông tin người dùng', 'Vui lòng đăng nhập lại.');
+        return;
+      }
+      let message = {
+        userID: +userID,
+        taskID: this.selectedProject.taskID,
+        message: this.messageText,
+      }
+      this.commentService.create(message).subscribe(
+        (response) => {
+          this.getCommentByTaskID(this.selectedProject.taskID);
+        },
+        (error) => {
+          // console.log('teammenber.teamID:', this.teammenber.teamID);
+          this.notification.error(
+            'Lỗi thao tác',
+            'Vui lòng thử lại.'
+          );
+        }
+      );
+      this.messageText = ''; // Reset input sau khi gửi
+    }
+  }
+
+  getFormattedDate(date: string | null): string | undefined {
+    if (!date) return undefined;
+    const d = new Date(date);
+    return isNaN(d.getTime()) ? undefined : d.toLocaleString('vi-VN', { hour12: false });
   }
 }

@@ -821,14 +821,27 @@
                   nzIcon="user"
                   nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                 ></nz-avatar>
-                <span>
+                <div style="position: relative;" >
                   <input
                     nz-input
-                    placeholder="Thêm nhận xét ... "
+                    placeholder="Thêm nhận xét ..."
                     nzSize="large"
-                    style="width: 550px"
+                    style="width: 550px; padding-right: 40px;"
+                    [(ngModel)]="messageText"
+                    name="message"
+                    (keydown.enter)="sendMessage()"
                   />
-                </span>
+
+                  <!-- Icon send -->
+                  <i
+                    *ngIf="messageText && messageText.trim().length > 0"
+                    class="send-icon"
+                    nz-icon
+                    nzType="send"
+                    nzTheme="outline"
+                    (click)="sendMessage()"
+                  ></i>
+                </div>
               </div>
               <small
                 class="_syaz1wmz _1e0c1ule _19pku2gc _o5721q9c _1wyb1crf _vwz41cnx"
@@ -843,42 +856,41 @@
                 để bình luận
               </small>
 
-              <nz-comment nzAuthor="Han Solo" [nzDatetime]="time">
-                <nz-avatar
-                  nz-comment-avatar
-                  nzIcon="user"
-                  nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                ></nz-avatar>
-                <nz-comment-content>
-                  <p>
-                    We supply a series of design principles, practical patterns
-                    and high quality design resources (Sketch and Axure), to
-                    help people create their product prototypes beautifully and
-                    efficiently.
-                  </p>
-                </nz-comment-content>
-                <nz-comment-action>
-                  <span
-                    nz-tooltip
-                    nzTitle="Like"
-                    nz-icon
-                    nzType="like"
-                    [nzTheme]="likes > 0 ? 'twotone' : 'outline'"
-                  ></span>
-                  <span class="count like">{{ likes }}</span>
-                </nz-comment-action>
-                <nz-comment-action>
-                  <span
-                    nz-tooltip
-                    nzTitle="Dislike"
-                    nz-icon
-                    nzType="dislike"
-                    [nzTheme]="dislikes > 0 ? 'twotone' : 'outline'"
-                  ></span>
-                  <span class="count dislike">{{ dislikes }}</span>
-                </nz-comment-action>
-                <nz-comment-action>Reply to</nz-comment-action>
-              </nz-comment>
+              <div *ngFor="let comment of dataMessage">
+                <nz-comment [nzAuthor]="comment.fullName" [nzDatetime]="getFormattedDate(comment.sent_at)">
+                  <nz-avatar
+                    nz-comment-avatar
+                    nzIcon="user"
+                    nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                  ></nz-avatar>
+                  <nz-comment-content>
+                    <p>
+                      {{ comment.message}}
+                    </p>
+                  </nz-comment-content>
+                  <nz-comment-action>
+                    <span
+                      nz-tooltip
+                      nzTitle="Like"
+                      nz-icon
+                      nzType="like"
+                      [nzTheme]="likes > 0 ? 'twotone' : 'outline'"
+                    ></span>
+                    <span class="count like">{{ likes }}</span>
+                  </nz-comment-action>
+                  <nz-comment-action>
+                    <span
+                      nz-tooltip
+                      nzTitle="Dislike"
+                      nz-icon
+                      nzType="dislike"
+                      [nzTheme]="dislikes > 0 ? 'twotone' : 'outline'"
+                    ></span>
+                    <span class="count dislike">{{ dislikes }}</span>
+                  </nz-comment-action>
+                  <nz-comment-action>Reply to</nz-comment-action>
+                </nz-comment>
+              </div>
             </div>
           </div>
 
