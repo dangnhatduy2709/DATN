@@ -123,6 +123,7 @@
         <th>Ngày bắt đầu</th>
         <th>Ngày kết thúc</th>
         <th>Quản lý dự án</th>
+        <th>Tên nhóm</th>
         <th>Thao tác</th>
       </tr>
     </thead>
@@ -141,6 +142,7 @@
         <td>{{ project.createdDate | date: 'dd-MM-yyyy'}}</td>
         <td>{{ project.endDate | date: 'dd-MM-yyyy'}}</td>
         <td>{{ project.leadFullName }}</td>
+        <td>{{ project.teamFullName }}</td>
         <td style="display: flex; justify-content: space-between; align-items: center; cursor: pointer; height: 55px;">
           <span nz-icon nzType="delete" nzTheme="outline" (click)="showDelete(project)"></span>
           <span nz-icon nzType="form" nzTheme="outline" (click)="showUpdate(project)"></span>
@@ -204,11 +206,11 @@
             <input style="width: 97%;" nz-input nzSize="large" id="projectLead" name="projectLead"
               [(ngModel)]="editedProject.teamFullName" />
           </div>
-          <div class="block-form">
+          <!-- <div class="block-form">
             <label for=""> Tiến trình :</label>
             <input style="width: 97%;" nz-input nzSize="large" id="progress" name="progress"
               [(ngModel)]="editedProject.progress" />
-          </div>
+          </div> -->
           <div class="block-form">
             <label for=""> Mô tả dự án</label>
             <input style="width: 97%;" nz-input nzSize="large" id="projectDescription" name="projectDescription"

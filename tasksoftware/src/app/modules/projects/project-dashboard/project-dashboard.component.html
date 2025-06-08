@@ -119,6 +119,7 @@
               <th style="text-align: center">Mô tả dự án</th>
               <th style="text-align: center">Quản lý</th>
               <th style="text-align: center">Ngày bắt đầu</th>
+              <th style="text-align: center">Tên nhóm</th>
               <th style="text-align: center">Tiến trình</th>
               <th style="text-align: center">Thao tác</th>
             </tr>
@@ -143,6 +144,7 @@
               <td style="text-align: center">
                 {{ data.createdDate | date : "dd-MM-yyyy" }}
               </td>
+              <td style="text-align: center">{{ data.teamFullName }}</td>
               <td style="text-align: center">
                 <nz-progress
                   [nzPercent]="data.progress"
@@ -359,9 +361,25 @@
               [(ngModel)]="editedProject.projectName" />
           </div>
           <div class="block-form">
-            <label for=""> Quản lý dự án :</label>
+            <!-- <label for=""> Quản lý dự án :</label>
             <input style="width: 97%;" nz-input nzSize="large" id="leadFullName" name="leadFullName"
-              [(ngModel)]="editedProject.leadFullName" />
+              [(ngModel)]="editedProject.leadFullName" /> -->
+            <label for=""> Quản lý dự án :</label>
+            <nz-select
+              id="leadFullName"
+              name="leadFullName"
+              [(ngModel)]="editedProject.userID"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Chọn thành viên hoặc nhóm cho dự án ..."
+              style="width: 97%"
+            >
+              <nz-option
+                *ngFor="let user of users"
+                [nzLabel]="user.fullName"
+                [nzValue]="user.userID"
+              ></nz-option>
+          </nz-select>
           </div>
           <div class="block-form">
             <label for=""> Nhóm dự án :</label>

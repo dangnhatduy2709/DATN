@@ -50,17 +50,18 @@
     <nz-table [nzShowPagination]="false" [nzData]="users" nzTableLayout="fixed" style="height: 360px;">
       <thead>
         <tr>
+          <th>Mã người dùng</th>
           <th style="text-align: center;" [nzWidth]="'250px'">Họ tên</th>
           <th [nzWidth]="'250px'">Email</th>
           <th>Số điện thoại</th>
           <th>Chức vụ</th>
           <th>Ngày bắt đầu</th>
-          <th>Trạng thái</th>
           <th style="text-align: center;">Thao tác</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of users">
+          <td>{{ data.userID }}</td>
           <td style="display: flex; gap: 10px; align-items: center;">
             <nz-avatar style="width: 32px; height: 32px;" nzText="{{ data.fullName.substring(0, 2).toUpperCase() }}"
               class="avatar-user">
@@ -71,7 +72,6 @@
           <td>{{ data.phoneNumber }}</td>
           <td>{{ data.roleName }}</td>
           <td>{{ data.createdDate | date: 'dd-MM-yyyy'}}</td>
-          <td><nz-progress [nzPercent]="data.progress" [nzShowInfo]="false"></nz-progress></td>
           <td style="text-align: center; cursor: pointer;">
             <span nz-icon nzType="ellipsis" nzTheme="outline" nz-dropdown nzTrigger="click" [nzDropdownMenu]="import"
               style="text-align: center;"></span>
