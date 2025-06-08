@@ -125,8 +125,6 @@ export class ProjectViewsComponent implements OnInit {
   OkUpdate() {
     if (this.selectedProject) {
       const projectID = this.selectedProject.projectID;
-      console.log(this.selectedProject);
-      return;
       this.editedProject.createdDate = this.datePipe.transform(this.editedProject.createdDate, 'yyyy-MM-dd');
       this.editedProject.endDate = this.datePipe.transform(this.editedProject.endDate, 'yyyy-MM-dd');
       this.projectService.updateProject(projectID, this.editedProject).subscribe(

@@ -74,7 +74,6 @@ export class BoardComponent implements OnInit {
       this.taskService.getTaskProjectById(this.projectID).subscribe(
         (data) => {
           this.tasks = data;
-          console.log(this.tasks);
         },
         (error) => {
           console.error('Có lỗi khi gọi API:', error);
@@ -91,6 +90,7 @@ export class BoardComponent implements OnInit {
       this.projectService.getProjectTeamID(teamID).subscribe(
         (data) => {
           this.teamData = data.projectTeam;
+          
         },
         (error) => {
           console.error('Error fetching project team data:', error);
@@ -103,7 +103,7 @@ export class BoardComponent implements OnInit {
     if (this.projectID) {
       this.projectService.getProjectById(this.projectID).subscribe(
         (data) => {
-          this.TaskData = data;
+          this.TaskData = data;          
           this.userId = this.TaskData[0].userId;
           this.projects = data;
           this.applyFilters();
@@ -202,7 +202,7 @@ export class BoardComponent implements OnInit {
     this.applyFilters();
   }
 
-  applyFilters() {
+  applyFilters() {    
     const searchTermLower = this.searchProject.toLowerCase();
     this.filteredProject = this.tasks.filter(task =>
       (!this.boardFilter || task.status === this.boardFilter) &&
@@ -281,6 +281,7 @@ export class BoardComponent implements OnInit {
 
   showTaskInfor(selectedProject: any): void {
     this.selectedProject = selectedProject;
+    console.log(this.tasks);
     
     if (this.selectedProject) {
       setTimeout(() => {

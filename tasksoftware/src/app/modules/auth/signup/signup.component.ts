@@ -19,10 +19,12 @@ export class SignupComponent implements OnInit {
     emailAddress: '',
     phoneNumber: '',
     roleID: '',
+    repeatPassword: ''
   };
   showPassword = false;
   selectedValue: any;
   passwordVisible = false;
+  passwordRepeatVisible = false;
   roles: Role[] = [];
 
   constructor(
@@ -65,6 +67,11 @@ export class SignupComponent implements OnInit {
 
     if (!this.user.phoneNumber || !phoneRegex.test(this.user.phoneNumber)) {
       this.notification.error('Lỗi', 'Số điện thoại phải gồm 10 chữ số.');
+      return;
+    }
+
+    if (this.user.password !== this.user.repeatPassword) {
+      this.notification.error('Lỗi', 'Vui lòng nhập lại password.');
       return;
     }
     this.userService.registerUser(this.user).subscribe(

@@ -42,6 +42,33 @@
       </div>
     </div>
 
+    <div class="css-cnfgt3">
+      <div class="css-xcejzt">
+        <div class="css-q5x77e">
+          <div class="css-1s25hsw">
+            <nz-input-group [nzSuffix]="suffixTemplateRepeat" class="mt-2">
+              <input 
+                [type]="passwordRepeatVisible ? 'text' : 'password'" 
+                nz-input 
+                placeholder="Nhập lại mật khẩu" 
+                id="repeatPassword" 
+                name="repeatPassword" 
+                [(ngModel)]="user.repeatPassword" 
+                required
+              />
+            </nz-input-group>
+            <ng-template #suffixTemplateRepeat>
+              <span 
+                nz-icon 
+                [nzType]="passwordRepeatVisible ? 'eye-invisible' : 'eye'" 
+                (click)="passwordRepeatVisible = !passwordRepeatVisible">
+              </span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Nhập số điện thoại -->
     <div class="css-cnfgt3">
       <div class="css-xcejzt">
@@ -53,7 +80,7 @@
       </div>
     </div>
     <!-- Nhập roles ID -->
-    <div class="css-cnfgt3">
+    <!-- <div class="css-cnfgt3">
       <div class="css-xcejzt">
         <div class="css-q5x77e">
           <div class="">
@@ -63,7 +90,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <button class="css-1w9zxjf css-1edgkow" type="button" (click)="registerUser()">
     <span class="css-178ag6o">Đăng ký</span>

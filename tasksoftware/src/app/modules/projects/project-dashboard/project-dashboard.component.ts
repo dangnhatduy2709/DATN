@@ -24,6 +24,7 @@ export class ProjectDashboardComponent implements OnInit {
   selectedProject: any;
   projectID: any;
   dateFormat = 'dd-MM-yyyy';
+  users: any;
   searchControl = new FormControl('');
   constructor(
     private i18n: NzI18nService,
@@ -36,7 +37,7 @@ export class ProjectDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
     this.getProejct();
-
+    this.fetchUser();
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
       .subscribe(value => {
@@ -51,6 +52,17 @@ export class ProjectDashboardComponent implements OnInit {
       Object.values(item).some(value =>
         value?.toString().toLowerCase().includes(lower)
       )
+    );
+  }
+
+  fetchUser() {
+    this.userService.getUsers().subscribe(
+      (response) => {
+        this.users = response;
+      },
+      (error) => {
+        console.error('Thông tin dữ liệu người dùng bị lỗi:', error);
+      }
     );
   }
 

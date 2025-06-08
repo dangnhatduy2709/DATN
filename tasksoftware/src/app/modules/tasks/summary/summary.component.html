@@ -318,7 +318,7 @@
             ></textarea>
           </div>
           <div class="block-form">
-            <label for="">Ngày khởi tạo</label>
+            <label for="">Ngày khởi tạo <span style="color: red">*</span></label>
             <nz-date-picker
               nzSize="large"
               style="width: 97%"
@@ -337,7 +337,26 @@
               [(ngModel)]="task.endDate"
               id="endDate"
               name="endDate"
-            ></nz-date-picker>
+            />
+          </div>
+
+          <div class="block-form">
+            <label for="">Mức độ quan trọng <span style="color: red">*</span></label>
+            <input
+              nz-input
+              nzSize="large"
+              style="width: 97%"
+              placeholder="Vui lòng nhập mức độ quan trọng tính theo %..."
+              [(ngModel)]="task.importance"
+              id="importance"
+              name="importance"
+              type="number"
+              min="0"
+              max="100"
+              maxlength="3"
+              (input)="onImportanceInput($event)"
+              (keypress)="allowOnlyDigits($event)"
+            />
           </div>
           <div class="block-form">
             <label for="">Sự ưu tiên <span style="color: red">*</span></label>
@@ -375,7 +394,11 @@
               nzType="drag"
               [nzCustomRequest]="customUpload"
               [nzMultiple]="true"
-              nzShowUploadList="true"
+              [nzShowUploadList]="{
+                showPreviewIcon: false,
+                showRemoveIcon: true
+              }"
+              (nzRemove)="handleRemoveFile($event)"
             >
               <p
                 class="ant-upload-hint"

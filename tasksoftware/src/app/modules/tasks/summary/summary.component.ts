@@ -7,9 +7,9 @@ import Chart from 'chart.js/auto';
 import { formatDate } from '@angular/common';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-summary',
@@ -43,7 +43,8 @@ export class SummaryComponent implements OnInit {
     description: '',
     taskDescription: 'Create marketing materials for campaign',
     actualHoursSpent: '',
-    taskManagerID: ''
+    taskManagerID: '',
+    importance: 0
   };
 
   constructor(
@@ -81,6 +82,12 @@ export class SummaryComponent implements OnInit {
   showAddTask() {
     this.isTask = true
   }
+
+  handleRemoveFile(file: any): boolean {
+    const uploadFile = file as NzUploadFile;
+    return true;
+  }
+
   OkAddTask() {
     if (this.task.taskType == null || this.task.taskType == '') {
       this.notification.error('Lỗi', 'Vui lòng nhập tên công việc.');
@@ -89,6 +96,16 @@ export class SummaryComponent implements OnInit {
 
     if (this.task.description == null || this.task.description == '') {
       this.notification.error('Lỗi', 'Vui lòng mô tả chi tiết.');
+      return;
+    }
+
+    if (this.task.createdDate == null || this.task.createdDate == '') {
+      this.notification.error('Lỗi', 'Vui lòng nhập ngày khởi tạo.');
+      return;
+    }
+
+    if (this.task.endDate == null || this.task.endDate == '') {
+      this.notification.error('Lỗi', 'Vui lòng nhập ngày hết hạn.');
       return;
     }
 
@@ -264,4 +281,24 @@ export class SummaryComponent implements OnInit {
 
     return sub; // ✅ Quan trọng: return Subscription
   };
+
+  onImportanceInput(event: any): void {
+    const value = event.target.value;
+
+    const numericValue = value.replace(/[^0-9]/g, '');
+
+    if (numericValue.length > 3) {
+      event.target.value = numericValue.slice(0, 3);
+    }
+
+    const finalValue = parseInt(event.target.value, 10);
+    this.task.importance = finalValue > 100 ? 100 : finalValue;
+  }
+
+  allowOnlyDigits(event: KeyboardEvent): void {
+    const charCode = event.charCode;
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  }
 }

@@ -63,7 +63,7 @@
           <li
             nz-menu-item
             class="nz-menu-li"
-            (click)="filterByStatus('Lowest')"
+            (click)="filterByStatus(2)"
           >
             <img
               src="/assets/icon/task/lowest.svg"
@@ -73,7 +73,7 @@
             />
             Lowest
           </li>
-          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus('Low')">
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus(1)">
             <img
               src="/assets/icon/task/low.svg"
               width="24px"
@@ -85,7 +85,7 @@
           <li
             nz-menu-item
             class="nz-menu-li"
-            (click)="filterByStatus('Medium')"
+            (click)="filterByStatus(3)"
           >
             <img
               src="/assets/icon/task/medium.svg"
@@ -95,7 +95,7 @@
             />
             Medium
           </li>
-          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus('High')">
+          <li nz-menu-item class="nz-menu-li" (click)="filterByStatus(4)">
             <img
               src="/assets/icon/task/high.svg"
               width="24px"
@@ -107,7 +107,7 @@
           <li
             nz-menu-item
             class="nz-menu-li"
-            (click)="filterByStatus('Highest')"
+            (click)="filterByStatus(5)"
           >
             <img
               src="/assets/icon/task/highest.svg"
@@ -231,7 +231,7 @@
               nz-button
               (click)="showTaskInfor(item)"
               style="
-                height: 92px;
+                height: 136px;
                 box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
               "
               draggable="true"
@@ -239,7 +239,7 @@
               (dragstart)="onDragStart(item)"
             >
               {{ item.taskType }}
-
+              <div>Người nhận: <br> {{ item.NameManager }}</div>
               <div
                 style="
                   display: flex;
@@ -327,7 +327,7 @@
               nz-button
               (click)="showTaskInfor(item)"
               style="
-                height: 92px;
+                height: 136px;
                 box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
               "
               draggable="true"
@@ -335,6 +335,7 @@
               (dragstart)="onDragStart(item)"
             >
               {{ item.taskType }}
+              <div>Người nhận: <br> {{ item.NameManager }}</div>
 
               <div
                 style="
@@ -421,7 +422,7 @@
             <li
               class="task"
               style="
-                height: 92px;
+                height: 136px;
                 box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
               "
               nz-button
@@ -431,6 +432,7 @@
               (dragstart)="onDragStart(item)"
             >
               {{ item.taskType }}
+              <div>Người nhận: <br> {{ item.NameManager }}</div>
 
               <div
                 style="
@@ -507,7 +509,7 @@
               nz-button
               (click)="showTaskInfor(item)"
               style="
-                height: 92px;
+                height: 136px;
                 box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
               "
               draggable="true"
@@ -515,6 +517,7 @@
               (dragstart)="onDragStart(item)"
             >
               {{ item.taskType }}
+              <div>Người nhận: <br> {{ item.NameManager }}</div>
 
               <div
                 style="
@@ -591,7 +594,7 @@
               nz-button
               (click)="showTaskInfor(item)"
               style="
-                height: 92px;
+                height: 136px;
                 box-shadow: 0 1px 1px #091e4240, 0 0 1px 1px #091e4221;
               "
               draggable="true"
@@ -599,7 +602,7 @@
               (dragstart)="onDragStart(item)"
             >
               {{ item.taskType }}
-
+              <div>Người nhận: <br> {{ item.NameManager }}</div>
               <div
                 style="
                   display: flex;
@@ -857,7 +860,7 @@
               </small>
 
               <div *ngFor="let comment of dataMessage">
-                <nz-comment [nzAuthor]="comment.fullName" [nzDatetime]="getFormattedDate(comment.sent_at)">
+                <nz-comment [nzAuthor]="comment.userID + ' - ' + comment.fullName" [nzDatetime]="getFormattedDate(comment.sent_at)">
                   <nz-avatar
                     nz-comment-avatar
                     nzIcon="user"
@@ -911,7 +914,7 @@
                     nzIcon="user"
                     style="background-color: #87d068"
                   ></nz-avatar>
-                  <span>{{ selectedProject.userID }}</span>
+                  <span>{{ selectedProject.NameManager }}</span>
                 </div>
               </div>
               <div class="details-title">
